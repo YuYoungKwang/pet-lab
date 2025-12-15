@@ -1,10 +1,19 @@
-import logo from './logo.svg';
+import { Routes, Route} from 'react-router';
 import './App.css';
+import Header from './components/common/Header';
 import Login from './pages/Login';
-
 function App() {
   return (
-    <Login/>
+    <div>
+      <Header/>
+      <Routes>
+        {/* <Route path="/" element={<MainPage/>}/>
+        <Route path="/funding" element={<MainPage/>}/>
+        <Route path="/mypage" element={<MainPage/>}/>
+        <Route path="/login" element={<MainPage/>}/>
+        <Route path="/register" element={<Register/>}/> */}
+      </Routes>
+    </div>
   );
 }
 
