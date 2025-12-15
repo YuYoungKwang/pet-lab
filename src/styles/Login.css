@@ -1,0 +1,88 @@
+.bg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 750px;
+    background-color: white;
+}
+
+.board {
+    background-color: white;
+    padding: 40px 10px;
+    border-radius: 12px;
+    width: 450px;
+    box-sizing: border-box;
+}
+
+.board h3 {
+    margin-bottom: 24px;
+    font-size: 24px;
+    text-align: center;
+    color: #333;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 1px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    margin-top: 1vh;
+}
+
+.options label {
+    font-size: 16px;
+    color: #555;
+}
+
+.options a {
+    font-size: 16px;
+    color: #535151;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.options a:hover {
+    text-decoration: underline;
+}
+
+.options p {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.login-func{
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+button {
+    flex: 1;
+    padding: 10px 0;
+    border: none;
+    border-radius: 6px;
+    background-color: #535151;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button.signup {
+    background-color: #535151;
+    margin-left: 10px;
+}
+
+button:hover {
+    opacity: 0.9;
+}
