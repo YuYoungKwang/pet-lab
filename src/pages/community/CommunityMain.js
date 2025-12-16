@@ -1,14 +1,21 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import { useState, useEffect } from "react";
 import PostListPage from "./PostListPage";
 import PostWritePage from "./PostWritePage";
 import PostDetailPage from "./PostDetailPage";
 import "./Community.css";
 
 
-export default function CommunityMain() {
-    const [posts, setPosts] = useState([]);
 
+export default function CommunityMain() {
+    const [posts, setPosts] = useState(() => {
+    const saved = localStorage.getItem("community_posts");
+    return saved ? JSON.parse(saved) : [];
+    });
+
+    useEffect(() => {
+        localStorage.setItem("community_posts", JSON.stringify(posts));
+    }, [posts]);
 
     const createPost = ({ title, content, category }) => {
     const newPost = {
@@ -42,22 +49,20 @@ export default function CommunityMain() {
 
 
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<PostListPage posts={posts} />} />
-                <Route path="/board/:category" element={<PostListPage posts={posts} />} />
-                <Route path="/write" element={<PostWritePage onSubmit={createPost} />} />
-                <Route
-                    path="/post/:id"
-                    element={
-                        <PostDetailPage
-                            posts={posts}
-                            onAddComment={addComment}
-                            onView={increaseView}
-                        />
-                    }
-                />
-            </Routes>
-        </BrowserRouter>
+        <Routes>
+            <Route path="/" element={<PostListPage posts={posts} />} />
+            <Route path="/board/:category" element={<PostListPage posts={posts} />} />
+            <Route path="/write" element={<PostWritePage onSubmit={createPost} />} />
+            <Route
+                path="/post/:id"
+                element={
+                    <PostDetailPage
+                        posts={posts}
+                        onAddComment={addComment}
+                        onView={increaseView}
+                    />
+                }
+            />
+        </Routes>
     );
 }
