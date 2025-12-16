@@ -1,0 +1,9 @@
+.banner {
+    position: relative;
+    width: 70%;
+    height: 280px;
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

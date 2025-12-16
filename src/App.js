@@ -4,6 +4,7 @@ import Header from './components/common/Header';
 import Footer from './components/common/Footer';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import MainPage from './pages/MainPage';
 function App() {
   return (
     <div>
@@ -14,6 +15,7 @@ function App() {
         <Route path="/mypage" element={<MainPage/>}/>
         <Route path="/login" element={<MainPage/>}/>
         <Route path="/register" element={<Register/>}/> */}
+        <Route path="/" element={<MainPage/>}/>
         <Route path="/register" element={<Register/>}/>
         <Route path="/login" element={<Login/>}/>
       </Routes>

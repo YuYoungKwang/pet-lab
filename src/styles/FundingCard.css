@@ -1,0 +1,16 @@
+.funding-card {
+    width: 220px;
+    border: 1px solid #ddd;
+}
+
+.image-box {
+    height: 160px;
+    border-bottom: 1px solid #ddd;
+    position: relative;
+}
+
+.heart {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+}

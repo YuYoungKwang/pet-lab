@@ -1,0 +1,8 @@
+.funding-section {
+    margin-top: 50px;
+}
+
+.funding-grid {
+    display: flex;
+    gap: 20px;
+}

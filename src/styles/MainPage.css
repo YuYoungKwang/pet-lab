@@ -1,0 +1,8 @@
+.main-container {
+    padding: 40px 60px;
+}
+
+.top-area {
+    display: flex;
+    gap: 20px;
+}
