@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import PostListPage from "./PostListPage";
 import PostWritePage from "./PostWritePage";
 import PostDetailPage from "./PostDetailPage";
-import "./Community.css";
+import "../../styles/Community.css";
 
 
 
