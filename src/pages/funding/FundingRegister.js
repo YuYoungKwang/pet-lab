@@ -74,6 +74,8 @@ function FundingRegister() {
                 <input type="file" accept="image/*" style={{ display: "none" }} onChange={(e) => setThumbnailImage(e.target.files[0]?.name || "")} />
                 <span className="funding-refister-file-selector">이미지파일</span>
                 </label>
+                <br></br>
+                <br></br>
                 {thumbnailImage == "" || thumbnailImage == null ? 
                 <div></div>:<div className="funding-register-img-thumb-container">
                     <img src={`/images/funding/${thumbnailImage}`} alt={thumbnailImage} className="funding-register-img-thumb" />
@@ -106,13 +108,17 @@ function FundingRegister() {
                 <h2>프로젝트 소개</h2>
                 <h4>프로젝트 설명</h4>
                 <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
-
+                
                 <h4>소개 이미지</h4>
-                <input type="file" accept="image/*" multiple onChange={(e) => {
+                <label>
+                <input type="file" accept="image/*" style={{ display: "none" }} multiple onChange={(e) => {
                     const files = Array.from(e.target.files).map(f => f.name);
                     setIntroImages(prev => [...prev, ...files]); // 배열로 병합
                 }} />
-
+                <span className="funding-refister-file-selector">이미지파일</span>
+                </label>
+                <br></br>
+                <br></br>
                 <div className="image-list">
                     {introImages.map((img, i) => (
                         <div key={i} className="funding-register-img-thumb-container">
@@ -132,10 +138,15 @@ function FundingRegister() {
                 <textarea value={rewards.rewardExplain} onChange={(e) => setRewards((p) => ({ ...p, rewardExplain: e.target.value }))} />
 
                 <h4>리워드 이미지</h4>
-                <input type="file" accept="image/*" multiple onChange={(e) => {
+                <label>
+                <input type="file" accept="image/*" style={{ display: "none" }} multiple onChange={(e) => {
                     const files = Array.from(e.target.files).map((f) => f.name);
                     setRewards((p) => ({ ...p, images: [...p.images, ...files] }));
                 }} />
+                <span className="funding-refister-file-selector">이미지파일</span>
+                </label>
+                <br></br>
+                <br></br>
                 <div className="image-list">
                     {rewards.images.map((img, i) => (
                         <div key={i} className="funding-register-img-thumb-container">
@@ -174,7 +185,7 @@ function FundingRegister() {
                         <hr />
                     </div>
                 ))}
-                <button onClick={() => setRewardSelects((p) => [...p, { title: "", description: "", price: 0 }])}>리워드 추가</button>
+                <span className="funding-refister-file-selector" onClick={() => setRewardSelects((p) => [...p, { title: "", description: "", price: 0 }])}>리워드 추가</span>
             </div>
 
             <div className="funding-register-section">
@@ -199,10 +210,15 @@ function FundingRegister() {
                 <textarea value={team.description} onChange={(e) => setTeam((p) => ({ ...p, description: e.target.value }))} />
 
                 <h4>팀 이미지</h4>
-                <input type="file" accept="image/*" multiple onChange={(e) => {
+                <label>
+                <input type="file" accept="image/*" style={{ display: "none" }} multiple onChange={(e) => {
                     const files = Array.from(e.target.files).map((f) => f.name);
                     setTeam((p) => ({ ...p, images: [...p.images, ...files] }));
                 }} />
+                <span className="funding-refister-file-selector">이미지파일</span>
+                </label>
+                <br></br>
+                <br></br>
                 <div className="image-list">
                     {team.images.map((img, i) => (
                         <div key={i} className="funding-register-img-thumb-container">
