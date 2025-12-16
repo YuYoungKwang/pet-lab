@@ -1,0 +1,64 @@
+.community-container {
+max-width: 960px;
+margin: 40px auto;
+padding: 0 16px;
+}
+
+
+.community-title {
+font-weight: 700;
+font-size: 22px;
+margin-bottom: 20px;
+}
+
+
+.community-card {
+border-radius: 8px;
+padding: 20px;
+}
+
+
+.community-table tr {
+cursor: pointer;
+border-bottom: 1px solid #e5e5e5;
+}
+
+
+.community-table tr:hover {
+background-color: #fafafa;
+}
+
+
+.community-table td.date {
+text-align: right;
+color: #888;
+}
+
+
+.write-btn {
+width: 140px;
+margin-top: 20px;
+margin-left: auto;
+display: block;
+}
+
+
+.detail-header {
+display: flex;
+justify-content: space-between;
+margin-bottom: 16px;
+}
+
+
+.detail-content {
+padding: 16px 0;
+border-top: 1px solid #eee;
+border-bottom: 1px solid #eee;
+margin-bottom: 20px;
+}
+
+
+.comment {
+padding: 6px 0;
+border-bottom: 1px solid #f1f1f1;
+}
