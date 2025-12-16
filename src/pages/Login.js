@@ -9,8 +9,31 @@ function Login() {
     const [saveId, setSaveId] = useState(false);
 
     const handleLogin = () => {
-        console.log('로그인 시도 :', { id, password, saveId });
-    };
+    console.log('로그인 시도 :', { id, password, saveId });
+
+    // 로컬스토리지에서 저장된 값 불러오기
+    const savedId = localStorage.getItem('users');
+    console.log(saveId);  // {id: 'fdasfda', password: '123', saveId: false}
+    const savedPassword = localStorage.getItem('userPassword');
+
+    if (!id || !password) {
+        alert('아이디와 비밀번호를 입력해주세요.');
+        return;
+    }
+
+    if (id === savedId ) {// && password === savedPassword) {
+        if (saveId) {
+            localStorage.setItem('savedId', id); // 아이디 저장 옵션
+        }
+        alert('로그인 성공!');
+        navigate('/mypage'); // 로그인 성공 시 mypage로 이동
+    } else {
+        alert('아이디 또는 비밀번호가 올바르지 않습니다. 다시 입력해주세요.');
+        setPassword(""); // 비밀번호 입력창 초기화
+    }
+};
+
+    
 
     const handleFindClick = (e) => {
         e.preventDefault();
@@ -54,6 +77,7 @@ function Login() {
                     <p>
                         <button onClick={handleLogin}>로그인</button>
                         <button className="signup" onClick={()=>{navigate('/register')}}>회원가입</button>
+
                     </p>
                 </div>
             </div>
