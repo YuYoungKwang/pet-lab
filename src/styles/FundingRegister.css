@@ -1,0 +1,84 @@
+.funding-register-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 16px;
+}
+
+.funding-register-section {
+    margin-bottom: 24px;
+    background-color: #f8f8f8;
+}
+
+.funding-register-section h2 {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.funding-register-img-thumb {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 8px;
+}
+
+.funding-register-img-thumb-container {
+    position: relative;
+    display: inline-block;
+}
+
+.funding-register-img-thumb-container button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: red;
+    color: white;
+    font-size: 10px;
+    padding: 2px 4px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.funding-register-btn {
+    background-color: #535151;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 16px;
+}
+
+.funding-register-textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 12px 14px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background-color: #fff;
+}
+
+.funding-register-textarea:focus {
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+.funding-refister-file-selector{
+    font-size: 16px;
+    cursor: pointer;
+    padding: 3px 5px; /* 배경 변화용 여백 */
+    border-radius: 4px; /* 모서리 살짝 둥글게 */
+    transition: all 0.2s ease-in-out;
+    border: 1px solid #000;
+}
+
+/* 마우스 오버 효과 */
+.funding-refister-file-selector:hover {
+    background-color: #000; /* 검정 배경 */
+    color: #fff;            /* 흰색 글자 */
+}
