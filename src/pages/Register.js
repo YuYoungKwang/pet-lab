@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BrowserRouter, Navigate, Link ,Route ,Router, Routes, useNavigate } from "react-router";
-import '../styles/Register.css';
-import purchase from "./modal/purchase";
+// import '../styles/Register.css';
+import purchase from "./modal/Purchase";
 
 function Register() {
     const [agreements, setAgreements] = useState({
@@ -42,6 +42,7 @@ function Register() {
             return;
         }
         alert("동의가 완료되었습니다. 다음 단계로 이동합니다.");
+        navigate("/signup");
     };
     
     

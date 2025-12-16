@@ -4,6 +4,8 @@ import Header from './components/common/Header';
 import Footer from './components/common/Footer';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import SignUpPage from './pages/SignUpPage';
+
 function App() {
   return (
     <div>
@@ -16,6 +18,7 @@ function App() {
         <Route path="/register" element={<Register/>}/> */}
         <Route path="/register" element={<Register/>}/>
         <Route path="/login" element={<Login/>}/>
+        <Route path="/signup" element={<SignUpPage />} />
       </Routes>
       <Footer/>
     </div>
