@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { BrowserRouter, Navigate, Link ,Route ,Router, Routes, useNavigate } from "react-router";
-
+import '../styles/Register.css';
+import purchase from "./modal/purchase";
 
 function Register() {
     const [agreements, setAgreements] = useState({
@@ -70,7 +71,7 @@ function Register() {
                         <input type="checkbox" checked={agreements.purchase} onChange={() => handleChange("purchase")} />
                         구매회원 이용약관 (필수)
                     </label>
-                    <button type="button" className="link-button">약관보기</button>
+                    <button type="button" className="link-button">약관보기</button>        
                 </div>
                 <hr />
                 <div>
@@ -115,6 +116,9 @@ function Register() {
                     <button onClick={handleSubmit} className="submit-button">
                         동의하고 회원가입
                     </button>
+
+
+                    
                 </div>
             </div>
         </div>
