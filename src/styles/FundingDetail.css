@@ -2,7 +2,8 @@
 .funding-detail-page {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 24px;
+    padding: 150px;
+    padding-top: 50px;
     font-family: Arial, sans-serif
 }
 
@@ -14,8 +15,7 @@
 }
 
 .funding-header-thumb {
-    width: 60%;
-    height: 320px;
+    width: 50%;
     object-fit: cover;
     border-radius: 8px;
     background: #eee
@@ -91,8 +91,7 @@
 .intro-images img,
 .team-images img,
 .reward-images img {
-    width: 180px;
-    height: 120px;
+    width: 700px;
     object-fit: cover;
     border-radius: 6px;
     background: #eee
@@ -106,7 +105,6 @@
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 16px;
-    height: fit-content;
     background: #fafafa
 }
 
@@ -116,7 +114,7 @@
 }
 
 .funding-sidebar p {
-    font-size: 14px;
+    font-size: 12px;
     line-height: 1.5;
     margin-bottom: 12px
 }

@@ -4,7 +4,9 @@ import "../../styles/FundingDetail.css";
 
 const IMG_BASE = "/images/funding"; // ✅ 모든 이미지 경로 통일
 
-export default function FundingDetail() {
+function FundingDetail() {
+    const contentRef = useRef();
+
     const [funding, setFunding] = useState(null);
     const { fundingId } = useParams();
 
@@ -65,10 +67,6 @@ export default function FundingDetail() {
                     <section>
                         <h2>프로젝트 소개</h2>
                         <p>{funding.description}</p>
-                    </section>
-
-                    <section>
-                        <h2>소개 이미지</h2>
                         <div className="intro-images">
                             {funding.introImages.map((img, i) => (
                                 <img key={i} src={`${IMG_BASE}/${img}`} alt={img} />
@@ -115,10 +113,29 @@ export default function FundingDetail() {
                 {/* 사이드바 */}
                 <aside className="funding-sidebar">
                     <h2>후원 리워드</h2>
-                    <p>{funding.rewards.rewardExplain}</p>
+                    <br/>
+                    <br/>
+                    {
+                        funding.rewardSelects.map((v, i) => {
+                            let tempDescription = v.description.split("\n");
+
+                            return (
+                                <div>
+                                    <hr/>
+                                    <label>
+                                        <h5>{v.title}</h5>
+                                        {tempDescription.map((v)=>{return <p>{v}</p>;})}
+                                        <h4>{v.price} ₩</h4>
+                                    </label>
+                                </div>
+                            );
+                        })
+                    }
                     <button>후원하기</button>
                 </aside>
             </div>
         </div>
     );
 }
+
+export default FundingDetail
