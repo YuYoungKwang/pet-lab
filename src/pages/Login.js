@@ -1,21 +1,29 @@
 import { useState, useEffect } from "react";
-import "../styles/Login.css";
 import { useNavigate } from "react-router-dom";
+import "../styles/Login.css";
 
 function Login() {
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
     const [saveId, setSaveId] = useState(false);
 
+    const navigate = useNavigate();
+
     useEffect(() => {
+        // 아이디 저장
         const savedId = localStorage.getItem("savedId");
         if (savedId) {
             setId(savedId);
             setSaveId(true);
         }
-    }, []);
 
-    const navigate = useNavigate();
+        // 자동 로그인
+        const loginUser = localStorage.getItem("loginUser");
+        if (loginUser) {
+            navigate("/mypage", { replace: true });
+        }
+    }, [navigate]); // ESlint 경고 방지
+
 
     const handleLogin = (e) => {
         e.preventDefault();
