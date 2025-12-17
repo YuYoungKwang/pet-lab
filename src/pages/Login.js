@@ -1,32 +1,43 @@
-import { useState } from "react";
-import '../styles/Login.css';
-import { useNavigate } from "react-router";
-
+import { useState, useEffect } from "react";
+import "../styles/Login.css";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
-    const [id, setId] = useState('');
-    const [password, setPassword] = useState('');
+    const [id, setId] = useState("");
+    const [password, setPassword] = useState("");
     const [saveId, setSaveId] = useState(false);
+
+    useEffect(() => {
+        const savedId = localStorage.getItem("savedId");
+        if (savedId) {
+            setId(savedId);
+            setSaveId(true);
+        }
+    }, []);
+
+    const navigate = useNavigate();
 
     const handleLogin = (e) => {
         e.preventDefault();
 
-        if (!id || !password) {
+        const inputId = id.trim();
+
+        if (!inputId || !password) {
             alert("아이디와 비밀번호를 입력해주세요.");
             return;
         }
 
         const storedUsers = localStorage.getItem("회원정보");
-
         if (!storedUsers) {
             alert("가입된 회원이 없습니다.");
             return;
         }
 
-        const users = JSON.parse(storedUsers);
+        const parsed = JSON.parse(storedUsers);
+        const users = Array.isArray(parsed) ? parsed : [];
 
         const user = users.find(
-            (u) => u.id === id && u.password === password
+            (u) => u.id === inputId && u.password === password
         );
 
         if (!user) {
@@ -36,7 +47,7 @@ function Login() {
         }
 
         if (saveId) {
-            localStorage.setItem("savedId", id);
+            localStorage.setItem("savedId", inputId);
         } else {
             localStorage.removeItem("savedId");
         }
@@ -47,20 +58,16 @@ function Login() {
         navigate("/mypage");
     };
 
-
-
-    
-
     const handleFindClick = (e) => {
         e.preventDefault();
         console.log("아이디/비밀번호 찾기 클릭됨");
     };
 
-    const navigate = useNavigate();
     return (
         <div className="bg">
             <div className="board">
                 <h3>로그인</h3>
+
                 <form onSubmit={handleLogin}>
                     <input
                         type="text"
@@ -95,7 +102,6 @@ function Login() {
                         </div>
 
                         <p>
-                            {/* type="submit" 중요 */}
                             <button type="submit">로그인</button>
                             <button
                                 type="button"
