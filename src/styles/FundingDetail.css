@@ -1,0 +1,146 @@
+/* ===== Page ===== */
+.funding-detail-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+    font-family: Arial, sans-serif
+}
+
+/* ===== Header ===== */
+.funding-header {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 32px
+}
+
+.funding-header-thumb {
+    width: 60%;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 8px;
+    background: #eee
+}
+
+.funding-header-info {
+    flex: 1
+}
+
+.funding-header-info h1 {
+    font-size: 26px;
+    margin-bottom: 12px
+}
+
+.funding-header-info p {
+    margin: 6px 0;
+    color: #333;
+    font-size: 14px
+}
+
+/* ===== Progress ===== */
+.funding-progress-bar {
+    width: 100%;
+    height: 10px;
+    background: #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 8px 0
+}
+
+.funding-progress {
+    height: 100%;
+    background: #4fd1c5
+}
+
+/* ===== Body Layout ===== */
+.funding-body {
+    display: flex;
+    gap: 32px
+}
+
+.funding-main {
+    flex: 1
+}
+
+/* ===== Sections ===== */
+.funding-main section {
+    margin-bottom: 48px
+}
+
+.funding-main h2 {
+    font-size: 20px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 6px
+}
+
+.funding-main p {
+    line-height: 1.6;
+    white-space: pre-line
+}
+
+/* ===== Images ===== */
+.intro-images,
+.team-images,
+.reward-images {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 12px
+}
+
+.intro-images img,
+.team-images img,
+.reward-images img {
+    width: 180px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 6px;
+    background: #eee
+}
+
+/* ===== Sidebar (Sticky) ===== */
+.funding-sidebar {
+    width: 320px;
+    position: sticky;
+    top: 24px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    height: fit-content;
+    background: #fafafa
+}
+
+.funding-sidebar h2 {
+    font-size: 18px;
+    margin-bottom: 12px
+}
+
+.funding-sidebar p {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 12px
+}
+
+/* ===== Button ===== */
+.funding-sidebar button {
+    width: 100%;
+    padding: 14px 0;
+    border: none;
+    border-radius: 8px;
+    background: #ff5757;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer
+}
+
+.funding-sidebar button:hover {
+    background: #ff3d3d
+}
+
+/* ===== Empty ===== */
+.funding-detail-empty {
+    text-align: center;
+    padding: 80px 0;
+    font-size: 18px;
+    color: #666
+}
