@@ -5,16 +5,18 @@ import Footer from './components/common/Footer';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import FundingDetail from './pages/funding/FundingDetail';
+import FundingRegister from './pages/funding/FundingRegister';
 function App() {
   return (
     <div>
       <Header/>
       <Routes>
         {/* <Route path="/" element={<MainPage/>}/>
-        <Route path="/funding" element={<MainPage/>}/>
+        <Route path="/fundingregister" element={<FundingRegister/>}/>
         <Route path="/mypage" element={<MainPage/>}/>
         <Route path="/login" element={<MainPage/>}/>
         <Route path="/register" element={<Register/>}/> */}
+        <Route path="/funding" element={<FundingRegister/>}/>
         <Route path="/register" element={<Register/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/:fundingId" element={<FundingDetail/>}/>
