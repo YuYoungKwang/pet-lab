@@ -24,12 +24,7 @@ export default function SignUpPage() {
     };
 
     const submit = () => {
-        if (
-            !form.id ||
-            !form.password ||
-            !form.name ||
-            !form.email
-        ) {
+        if (!form.id || !form.password || !form.name || !form.email) {
             alert("필수 항목을 입력하세요");
             return;
         }
@@ -52,13 +47,22 @@ export default function SignUpPage() {
             },
         };
 
-        const saved = JSON.parse(localStorage.getItem("users")) || [];
-        saved.push(newUser);
-        localStorage.setItem("users", JSON.stringify(saved));
+        const users = JSON.parse(localStorage.getItem("회원정보")) || [];
+
+        const exists = users.some((user) => user.id === form.id);
+        if (exists) {
+            alert("이미 사용 중인 아이디입니다");
+            return;
+        }
+
+        users.push(newUser);
+
+        localStorage.setItem("회원정보", JSON.stringify(users));
 
         alert("회원가입 완료!");
         navigate("/login");
     };
+
 
     return (
         <Container className="mt-4" style={{ maxWidth: 700 }}>
