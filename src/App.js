@@ -9,41 +9,35 @@ import FundingDetail from './pages/funding/FundingDetail';
 import FundingRegister from './pages/funding/FundingRegister';
 import CategoryPage from "./pages/CategoryPage";
 import SearchResultPage from "./pages/SearchResultPage";
-import fundingList from './data/fundingList';
 import SignUpPage from './pages/SignUpPage';
 import MyPage from './pages/MyPage';
+import fundingList from './data/fundingList';
 import { useState, useEffect } from 'react';
 
 function App() {
   const [loginUser, setLoginUser] = useState(null);
 
-  // 새로고침 시 로그인 유지
   useEffect(() => {
-    const stored = localStorage.getItem("fundingList");
-
-    if (!stored) {
-      localStorage.setItem(
-        "fundingList",
-        JSON.stringify(fundingList)
-      );
-    }
-
+    // 로그인 유지
     const storedUser = localStorage.getItem("loginUser");
-    if (storedUser) {
-      setLoginUser(JSON.parse(storedUser));
+    if (storedUser) setLoginUser(JSON.parse(storedUser));
+
+    // 펀딩 리스트 초기화
+    if (!localStorage.getItem("fundingList")) {
+      localStorage.setItem("fundingList", JSON.stringify(fundingList));
     }
   }, []);
 
   return (
     <div>
-      <Header />
+      <Header loginUser={loginUser} setLoginUser={setLoginUser} />
       <Routes>
         <Route path="/" element={<MainPage />} />
-        <Route path="/funding" element={<FundingRegister />} />
+        <Route path="/funding" element={<FundingRegister loginUser={loginUser} />} />
         <Route path="/register" element={<Register />} />
         <Route path="/search" element={<SearchResultPage />} />
         <Route path="/category/:categoryName" element={<CategoryPage />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login setLoginUser={setLoginUser} />} />
         <Route path="/fundingDetail/:fundingId" element={<FundingDetail />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/mypage" element={<MyPage loginUser={loginUser} />} />

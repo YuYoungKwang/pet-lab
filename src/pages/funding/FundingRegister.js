@@ -1,10 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../../styles/FundingRegister.css";
 import { useNavigate } from "react-router";
 
-function FundingRegister() {
+function FundingRegister({ loginUser }) {
 
-    const navigte = useNavigate();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!loginUser) {
+            navigate("/login", { replace: true }); // 로그인 안되어 있으면 강제 이동
+        }
+    }, [loginUser, navigate]);
+
+    
 
     /* ================= 기본 정보 ================= */
     const [title, setTitle] = useState("");
@@ -22,13 +30,17 @@ function FundingRegister() {
 
     /* ================= 리워드 ================= */
     const [rewards, setRewards] = useState({ rewardExplain: "", images: [] });
-    const [rewardSelects, setRewardSelects] = useState([{ title: "선물 없이 후원하기", description: "", price: 1000}]);
+    const [rewardSelects, setRewardSelects] = useState([{ title: "선물 없이 후원하기", description: "", price: 1000 }]);
 
     /* ================= 기타 ================= */
     const [budget, setBudget] = useState("");
     const [schedule, setSchedule] = useState("");
     const [team, setTeam] = useState({ description: "", images: [] });
     const [safetyInfo, setSafetyInfo] = useState({ policy: "" });
+
+    if (!loginUser) {
+        return null; // 로그인 안되면 화면 표시하지 않음
+    }
 
     /* ================= 제출 ================= */
     const handleSubmit = () => {
@@ -63,7 +75,7 @@ function FundingRegister() {
         localStorage.setItem("fundingList", JSON.stringify(list));
 
         alert("펀딩 등록 완료!");
-        navigte('/fundingDetail/'+newId);
+        navigate('/fundingDetail/' + newId);
     };
 
     const categories = [
@@ -84,7 +96,7 @@ function FundingRegister() {
                 <h4>카테고리</h4>
                 <select value={category} onChange={(e) => setCategory(e.target.value)}>
                     <option></option>
-                    {categories.map((v, i)=>{
+                    {categories.map((v, i) => {
                         return <option key={i} value={v}>{v}</option>
                     })}
                 </select>

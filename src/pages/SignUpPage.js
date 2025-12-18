@@ -17,6 +17,9 @@ export default function SignUpPage() {
         zipcode: "",
         addr1: "",
         addr2: "",
+        favorites: [],      // 좋아요한 펀딩 ID 배열
+        cart: [],           // 장바구니: { fundingId, quantity }
+        orders: [],         // 주문내역: { orderId, items: [{fundingId, quantity}], totalAmount, status, orderDate }
     });
 
     const onChange = (e) => {
