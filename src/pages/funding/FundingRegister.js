@@ -1,7 +1,11 @@
 import { useState } from "react";
 import "../../styles/FundingRegister.css";
+import { useNavigate } from "react-router";
 
 function FundingRegister() {
+
+    const navigte = useNavigate();
+
     /* ================= 기본 정보 ================= */
     const [title, setTitle] = useState("");
     const [category, setCategory] = useState("");
@@ -18,7 +22,7 @@ function FundingRegister() {
 
     /* ================= 리워드 ================= */
     const [rewards, setRewards] = useState({ rewardExplain: "", images: [] });
-    const [rewardSelects, setRewardSelects] = useState([]);
+    const [rewardSelects, setRewardSelects] = useState([{ title: "선물 없이 후원하기", description: "", price: 1000}]);
 
     /* ================= 기타 ================= */
     const [budget, setBudget] = useState("");
@@ -59,6 +63,7 @@ function FundingRegister() {
         localStorage.setItem("fundingList", JSON.stringify(list));
 
         alert("펀딩 등록 완료!");
+        navigte('/fundingDetail/'+newId);
     };
 
     const categories = [
@@ -91,7 +96,7 @@ function FundingRegister() {
                 </label>
                 <br></br>
                 <br></br>
-                {thumbnailImage == "" || thumbnailImage == null ?
+                {thumbnailImage === "" || thumbnailImage === null ?
                     <div></div> : <div className="funding-register-img-thumb-container">
                         <img src={`/images/funding/${thumbnailImage}`} alt={thumbnailImage} className="funding-register-img-thumb" />
                         <button onClick={() =>

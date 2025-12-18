@@ -19,7 +19,7 @@ function App() {
         <Route path="/funding" element={<FundingRegister/>}/>
         <Route path="/register" element={<Register/>}/>
         <Route path="/login" element={<Login/>}/>
-        <Route path="/:fundingId" element={<FundingDetail/>}/>
+        <Route path="/fundingDetail/:fundingId" element={<FundingDetail/>}/>
       </Routes>
       <Footer/>
     </div>

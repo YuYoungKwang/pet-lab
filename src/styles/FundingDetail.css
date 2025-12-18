@@ -105,6 +105,8 @@
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 16px;
+    height: fit-content;
+    overflow: auto;
     background: #fafafa
 }
 
@@ -141,4 +143,9 @@
     padding: 80px 0;
     font-size: 18px;
     color: #666
+}
+
+.funding-register-section textarea{
+    width: 70%;
+    height: fit-content;
 }

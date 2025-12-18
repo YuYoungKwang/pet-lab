@@ -5,7 +5,6 @@ import "../../styles/FundingDetail.css";
 const IMG_BASE = "/images/funding"; // ✅ 모든 이미지 경로 통일
 
 function FundingDetail() {
-    const contentRef = useRef();
 
     const [funding, setFunding] = useState(null);
     const { fundingId } = useParams();
@@ -45,6 +44,7 @@ function FundingDetail() {
 
                 <div className="funding-header-info">
                     <h1>{funding.title}</h1>
+                    <br></br>
                     <p>모인 금액: {funding.currentAmount.toLocaleString()}원</p>
 
                     <div className="funding-progress-bar">
@@ -53,10 +53,12 @@ function FundingDetail() {
                             style={{ width: `${progressRate}%` }}
                         />
                     </div>
-
+                    <br></br>
                     <p>달성률: {progressRate}%</p>
                     <p>목표 금액: {funding.targetAmount.toLocaleString()}원</p>
                     <p>펀딩 기간: {funding.startDate} ~ {funding.endDate}</p>
+                    <p>결제 : 펀딩목표 달성시 {funding.paymentDate}에 결제 진행</p>
+                    <p>배송예정일 : {funding.expectedDeliveryDate}</p>
                 </div>
             </div>
 
