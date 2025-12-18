@@ -10,9 +10,14 @@ import FundingRegister from './pages/funding/FundingRegister';
 import CategoryPage from "./pages/CategoryPage";
 import SearchResultPage from "./pages/SearchResultPage";
 import fundingList from './data/fundingList';
-import { useEffect } from 'react';
-function App() {
+import SignUpPage from './pages/SignUpPage';
+import MyPage from './pages/mypage';
+import { useState, useEffect } from 'react';
 
+function App() {
+  const [loginUser, setLoginUser] = useState(null);
+
+  // 새로고침 시 로그인 유지
   useEffect(() => {
     const stored = localStorage.getItem("fundingList");
 
@@ -22,17 +27,17 @@ function App() {
         JSON.stringify(fundingList)
       );
     }
+
+    const storedUser = localStorage.getItem("loginUser");
+    if (storedUser) {
+      setLoginUser(JSON.parse(storedUser));
+    }
   }, []);
 
   return (
     <div>
       <Header />
       <Routes>
-        {/* <Route path="/" element={<MainPage/>}/>
-        <Route path="/fundingregister" element={<FundingRegister/>}/>
-        <Route path="/mypage" element={<MainPage/>}/>
-        <Route path="/login" element={<MainPage/>}/>
-        <Route path="/register" element={<Register/>}/> */}
         <Route path="/" element={<MainPage />} />
         <Route path="/funding" element={<FundingRegister />} />
         <Route path="/register" element={<Register />} />
@@ -40,6 +45,8 @@ function App() {
         <Route path="/category/:categoryName" element={<CategoryPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/fundingDetail/:fundingId" element={<FundingDetail />} />
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/mypage" element={<MyPage loginUser={loginUser} />} />
       </Routes>
       <Footer />
     </div>

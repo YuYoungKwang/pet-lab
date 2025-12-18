@@ -1,0 +1,58 @@
+import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Container, Card, Form, Button, Stack } from "react-bootstrap";
+
+
+export default function PostDetailPage({ posts, onAddComment, onView }) {
+    const { id } = useParams();
+    const navigate = useNavigate();
+    const post = posts.find((p) => p.id === Number(id));
+    const [comment, setComment] = useState("");
+
+
+    useEffect(() => {
+        if (post) onView(post.id);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+
+    if (!post) return null;
+
+
+    return (
+        <Container className="community-container">
+            <h2 className="community-title">게시글</h2>
+            <Card className="community-card">
+                <div className="detail-header">
+                    <strong>{post.title}</strong>
+                    <span>조회 {post.views}</span>
+                </div>
+                <div className="detail-content">{post.content}</div>
+
+
+                <div className="comment-section">
+                    {post.comments.map((c, i) => (
+                        <div key={i} className="comment">{c}</div>
+                    ))}
+                    <Form.Control
+                        className="mt-2"
+                        placeholder="댓글을 입력하세요"
+                        value={comment}
+                        onChange={(e) => setComment(e.target.value)}
+                    />
+                    <Stack direction="horizontal" gap={2} className="mt-2">
+                        <Button
+                            size="sm"
+                            onClick={() => {
+                            if (!comment) return;
+                            onAddComment(post.id, comment);
+                            setComment("");
+                            }}
+                        >등록</Button>
+                        <Button size="sm" variant="outline-secondary" onClick={() => navigate("/")}>목록</Button>
+                    </Stack>
+                </div>
+            </Card>
+        </Container>
+    );
+}
