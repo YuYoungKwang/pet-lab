@@ -5,8 +5,20 @@ import Footer from './components/common/Footer';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import SignUpPage from './pages/SignUpPage';
+import MyPage from './pages/mypage';
+import { useState, useEffect } from 'react';
 
 function App() {
+  const [loginUser, setLoginUser] = useState(null);
+
+    // 새로고침 시 로그인 유지
+    useEffect(() => {
+        const storedUser = localStorage.getItem("loginUser");
+        if (storedUser) {
+            setLoginUser(JSON.parse(storedUser));
+        }
+    }, []);
+
   return (
     <div>
       <Header/>
@@ -19,6 +31,7 @@ function App() {
         <Route path="/register" element={<Register/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/mypage" element={<MyPage loginUser={loginUser} />} />
       </Routes>
       <Footer/>
     </div>
