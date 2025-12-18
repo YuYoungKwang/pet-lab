@@ -5,7 +5,7 @@ import Footer from './components/common/Footer';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import SignUpPage from './pages/SignUpPage';
-import MyPage from './pages/mypage';
+import MyPage from './pages/MyPage';
 import { useState, useEffect } from 'react';
 
 function App() {

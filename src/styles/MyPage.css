@@ -1,0 +1,123 @@
+/* 전체 컨테이너 설정 */
+.mypage-container {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 30px;
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #333;
+}
+
+/* 헤더 부분 (마이페이지 제목 및 경로) */
+.mypage-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 2px solid #333;
+    padding-bottom: 20px;
+    margin-bottom: 40px;
+}
+
+.mypage-header h1 {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.breadcrumb {
+    margin:1px;
+    margin-bottom: 0;
+    font-size: 14px;
+    color: #666;
+}
+
+/* 상단 주문 현황 섹션 */
+.order-status-box {
+    border: 1px solid #ccc;
+    padding: 30px;
+    margin-bottom: 50px;
+}
+
+.order-status-box h3 {
+    font-size: 18px;
+    margin-bottom: 25px;
+    font-weight: 500;
+}
+
+.order-status-box h3 span {
+    font-size: 14px;
+    color: #a7a4a4;
+    margin-left: 10px;
+}
+
+.status-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.status-item {
+    flex: 1;
+    border: 1px solid #ddd;
+    padding: 20px 10px;
+    text-align: center;
+    background-color: #fff;
+}
+
+.status-label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.status-count {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* 하단 메뉴 그리드 (6개 카드) */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3열 배치 */
+    gap: 25px;
+}
+
+.menu-card {
+    border: 1px solid #ddd;
+    padding: 40px 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 250px;
+    transition: all 0.2s ease;
+}
+
+.menu-card:hover {
+    border-color: #333; /* 마우스 올렸을 때 강조 */
+}
+
+.menu-icon {
+    font-size: 45px;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.menu-card h4 {
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.menu-card h5 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.menu-card p {
+    font-size: 13px;
+    color: #999;
+    line-height: 1.6;
+    word-break: keep-all; /* 한글 단어 끊김 방지 */
+}
