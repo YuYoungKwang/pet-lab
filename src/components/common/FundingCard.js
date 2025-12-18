@@ -1,16 +1,53 @@
+import { useNavigate } from 'react-router';
 import '../../styles/FundingCard.css'
 
-function FundingCard() {
+const IMG_BASE = "/images/funding";
+
+function FundingCard({ funding, onLikeToggle }) {
+    const navigate = useNavigate();
+
+    const end = new Date(funding.endDate);
+    const today = new Date();
+    const Dday = Math.ceil((end - today) / (1000 * 60 * 60 * 24));
+
+    const progressRate = Math.min(
+        100,
+        Math.round((funding.currentAmount / funding.targetAmount) * 100)
+    );
+
+    const toggleLike = (e) => {
+        e.stopPropagation(); // 카드 클릭 이벤트 방지
+        if(onLikeToggle) onLikeToggle(funding.id, !funding.liked);
+    };
+
     return (
-        <div className="funding-card">
+        <div className="funding-card" onClick={()=>{ navigate("/fundingDetail/" + funding.id); }}>
             <div className="image-box">
-                <span className="heart">♡</span>
+                <img 
+                    className="image-box"
+                    src={`${IMG_BASE}/${funding.thumbnailImage}`}
+                    alt="thumbnail"
+                />
+                <span 
+                    className="heart" 
+                    style={{ color: funding.liked ? "red" : "gray", cursor: "pointer", userSelect: "none"}}
+                    onClick={toggleLike}
+                >
+                    ❤
+                </span>
             </div>
 
             <div className="info">
-                <p className="title">제목</p>
-                <p className="meta">D-day · 펀딩상태</p>
-                <p className="rate">달성률 %</p>
+                <p className="title">{funding.title}</p>
+                <p className="meta">D-{Dday}</p>
+                <div className="funding-progress-bar">
+                    <div
+                        className="funding-progress"
+                        style={{ width: `${progressRate}%` }}
+                    />
+                </div>
+                <p className="rate">{progressRate}%</p>
+                <p>좋아요: {funding.likeCount}</p>
             </div>
         </div>
     );

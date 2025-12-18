@@ -1,0 +1,78 @@
+/* CategoryPage 전체 레이아웃 */
+.category-page-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px 100px;
+    background-color: #fff;
+}
+
+/* 메인 콘텐츠 */
+.category-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.category-content h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+.funding-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;       /* 카드 사이 간격 */
+    padding: 0 40px; /* 좌우 여백 조금 넉넉하게 */
+}
+
+/* 페이지네이션 */
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    gap: 8px;
+}
+
+.pagination button {
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.pagination button.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.pagination button:hover {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.no-results {
+    text-align: center;
+    font-size: 16px;
+    color: #888;
+    margin: 40px 0;
+}
+
+@media (max-width: 1024px) {
+    .funding-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 16px;
+        padding: 0 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .funding-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 12px;
+        padding: 0 12px;
+    }
+}
