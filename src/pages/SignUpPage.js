@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Container, Card, Form, Button, Row, Col } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 export default function SignUpPage() {
     const navigate = useNavigate();

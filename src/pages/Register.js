@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import '../styles/Register.css';
 import Purchase from "./modal/Purchase";
 import Finance from "./modal/Finance";

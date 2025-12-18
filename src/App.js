@@ -11,7 +11,7 @@ import CategoryPage from "./pages/CategoryPage";
 import SearchResultPage from "./pages/SearchResultPage";
 import fundingList from './data/fundingList';
 import SignUpPage from './pages/SignUpPage';
-import MyPage from './pages/mypage';
+import MyPage from './pages/MyPage';
 import { useState, useEffect } from 'react';
 
 function App() {
