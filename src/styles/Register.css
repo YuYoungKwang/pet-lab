@@ -1,149 +1,232 @@
-body {
-    font-family: 'Noto Sans KR', sans-serif;
-    background-color: white;
-    margin: 0;
-    padding: 0;
-}
-
-/* 네비게이션 바 */
-.navbar {
-    background-color: #535151;
-    padding: 12px 24px;
-}
-
-.navbar ul {
-    list-style: none;
-    display: flex;
-    gap: 10px;
-    margin: 0;
-    padding: 0;
-}
-
-.navbar li a {
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.navbar li a:hover {
-    text-decoration: underline;
-}
-
-/* 회원가입 컨테이너 */
+/* 레이아웃 공통 */
 .register-container {
-    max-width: 600px;
-    margin:  auto;
-    padding: 24px;
-    background-color: white;
-    border-radius: 12px;
-    
+    max-width: 900px;
+    margin: 60px auto;
+    padding: 0 20px;
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #333;
 }
 
-.agreement-box {
-    margin-top: 12px;
+.register-header-section {
+    text-align: left;
+    margin-bottom: 25px;
 }
 
-.agreement-box h2 {
-    font-size: 18px;
-    margin-bottom: 16px;
+.top-icon {
+    width: 45px;
+    margin-bottom: 15px;
+}
+
+.main-title {
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    letter-spacing: -1px;
+}
+
+.sub-description {
+    font-size: 15px;
+    color: #333;
+}
+
+/* 단계 표시 */
+.steps-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 40px;
+}
+
+.steps-right-box {
+    position: relative;
+}
+
+.steps-right {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.steps-right-box::after {
+    content: "";
+    position: absolute;
+    bottom: -11px;
+    right: 0;
+    width: 100%;
+    height: 0px;
+    background-color: #000;
+}
+
+/* 약관 영역 */
+.agreement-start-text {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* 약관 리스트 칸 구분 (표 형태) */
+.all-check-box {
+    border: 1px solid #ddd;
+    padding: 20px;
+    background-color: #fff;
+    margin-bottom: 0;
+}
+
+.agreement-list {
+    border: 1px solid #ddd;
+    border-top: none;
 }
 
 .agreement-item {
-    margin: 12px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
 }
 
-/* 체크박스 + 텍스트 + (필수) + 버튼을 한 줄에 정렬 */
+.agreement-item:last-child {
+    border-bottom: none;
+}
+
 .agreement-label {
     display: flex;
     align-items: center;
-    gap: 10px;
+    cursor: pointer;
+    flex: 1;
+}
+
+.agreement-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-right: 15px;
+}
+
+.agreement-text {
     font-size: 15px;
 }
 
-/* (필수) 표시 */
-.required {
-    color: white;
-    font-weight: 600;
-    margin-left: 4px;
+.required-tag
+.required-text {
+    color: #bbb;
+    margin-left: 5px;
+    font-size: 14px;
 }
 
-/* 버튼을 (필수) 옆에 두되, 살짝 오른쪽으로 간격 */
-.link-button {
-    margin-left: 12px;
-    padding: 4px 10px;
+.optional-tag {
+    color: #bbb;
+    margin-left: 5px;
+    font-size: 14px;
+}
+
+/* 보기 버튼: 오른쪽 끝 정렬 */
+.view-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 12px;
+    font-weight: bold;
+    color: #333;
+    text-decoration: underline;
+    cursor: pointer;
+    white-space: nowrap;
+    text-align: left;
+    margin-right: 40vh;
+}
+
+/* 하단 버튼 */
+.info-box {
+    margin-top: 35px;
+}
+
+.info-text {
     font-size: 13px;
-    background-color: #535151;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
+    font-weight: bold;
+    margin-bottom: 6px;
+    line-height: 1.5;
+    color: #333;
 }
 
-.link-button:hover {
-    background-color: #535151;
-}
-
-/* 회원가입 제출 버튼 */
 .submit-button {
-    margin-top: 24px;
     display: block;
-    margin: 0 auto;
-    width: fit-content;
-    padding: 10px 20px;
+    width: 220px;
+    margin: 60px auto;
+    padding: 15px;
     background-color: #535151;
     color: white;
     border: none;
-    border-radius: 10px;
     font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
 }
 
-.submit-button:hover {
-    background-color: #535151;
-}
-
-/* 모달 배경 */
+/* ★ 모달 문제 해결 ★ */
 .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    background: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 10000;
 }
 
-/* 모달 박스 */
-.modal-content {
-    background: white;
-    padding: 24px;
-    border-radius: 12px;
+.modal-content-wrapper {
+    background: #fff;
+    width: 90%;
     max-width: 600px;
-    max-height: 80vh;
-    overflow-y: auto;
+    height: 70vh;
+    /* 높이 고정 */
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    /* 헤더-바디 구분 */
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
-/* 모달 닫기 버튼 */
-.close-button {
-    margin-top: 20px;
-    padding: 8px 12px;
-    background: #535151;
-    color: white;
+.modal-header {
+    display: flex;
+    justify-content: center;
+    /* 제목 가운데 정렬 */
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    background: #fff;
+}
+
+.modal-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.modal-close-x {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
     border: none;
-    border-radius: 6px;
+    font-size: 24px;
+    color: #999;
     cursor: pointer;
+    padding: 5px;
+    line-height: 1;
 }
 
-.close-button:hover {
-    background: #535151;
-}
-
-/* 약관 페이지 스타일 */
-.terms-page {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 24px;
-    background-color: white;
-    border-radius: 12px;
+.modal-body {
+    flex: 1;
+    padding: 25px;
+    overflow-y: auto;
+    /* 내용만 스크롤 */
+    font-size: 14px;
+    line-height: 1.6;
+    color: #444;
 }
