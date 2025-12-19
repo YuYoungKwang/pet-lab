@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import '../../styles/FundingNavbar.css';
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router-dom";
 
 function FundingNavbar({ sections }) {
     const navigate = useNavigate();
+    const { fundingId } = useParams();
 
     const [activeId, setActiveId] = useState(sections[0].id);
 
@@ -44,7 +45,7 @@ function FundingNavbar({ sections }) {
                         {sec.label}
                     </li>
                 ))}
-                <li className="community-btn" onClick={() => navigate("/community")}>
+                <li className="community-btn" onClick={() => navigate(`/fundingDetail/${fundingId}/community`)}>
                     커뮤니티
                 </li>
             </ul>

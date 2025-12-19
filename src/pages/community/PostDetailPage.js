@@ -1,17 +1,18 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useOutletContext } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Container, Card, Form, Button, Stack } from "react-bootstrap";
 
 
-export default function PostDetailPage({ posts, onAddComment, onView }) {
+export default function PostDetailPage() {
     const { id } = useParams();
     const navigate = useNavigate();
+    const { posts, addComment, increaseView } = useOutletContext();
     const post = posts.find((p) => p.id === Number(id));
     const [comment, setComment] = useState("");
 
 
     useEffect(() => {
-        if (post) onView(post.id);
+        if (post) increaseView(post.id);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -45,11 +46,11 @@ export default function PostDetailPage({ posts, onAddComment, onView }) {
                             size="sm"
                             onClick={() => {
                             if (!comment) return;
-                            onAddComment(post.id, comment);
+                            addComment(post.id, comment);
                             setComment("");
                             }}
                         >등록</Button>
-                        <Button size="sm" variant="outline-secondary" onClick={() => navigate("/")}>목록</Button>
+                        <Button size="sm" variant="outline-secondary" onClick={() => navigate("..")}>목록</Button>
                     </Stack>
                 </div>
             </Card>

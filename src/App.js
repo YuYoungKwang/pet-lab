@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';
@@ -14,6 +14,10 @@ import MyPage from './pages/MyPage';
 import fundingList from './data/fundingList';
 import { useState, useEffect } from 'react';
 import Profile from './pages/ProFile';
+import CommunityMain from './pages/community/CommunityMain';
+import PostDetailPage from './pages/community/PostDetailPage';
+import PostListPage from './pages/community/PostListPage';
+import PostWritePage from './pages/community/PostWritePage';
 
 function App() {
   const [loginUser, setLoginUser] = useState(null);
@@ -40,6 +44,12 @@ function App() {
         <Route path="/category/:categoryName" element={<CategoryPage />} />
         <Route path="/login" element={<Login setLoginUser={setLoginUser} />} />
         <Route path="/fundingDetail/:fundingId" element={<FundingDetail />} />
+        <Route path="/fundingDetail/:fundingId/community" element={<CommunityMain />}>
+          <Route index element={<Navigate to="board/free" replace />} />
+          <Route path="board/:category" element={<PostListPage />} />
+          <Route path="write" element={<PostWritePage />} />
+          <Route path="post/:id" element={<PostDetailPage />} />
+        </Route>
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/mypage" element={<MyPage loginUser={loginUser} />} />
         <Route path="/profile" element={<Profile loginUser={loginUser}/>} />
