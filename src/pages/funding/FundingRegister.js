@@ -58,17 +58,19 @@ function FundingRegister({ loginUser }) {
                 if (!startDate || !endDate) { alert("펀딩 시작/종료일을 입력해주세요."); return false; }
                 return true;
             case 2:
-                if (!description.trim()) { alert("프로젝트 설명을 입력해주세요."); return false; }
+                if (!description.trim() && !introImages) { alert("프로젝트 설명을 입력해주세요."); return false; }
                 return true;
             case 3:
-                if (!rewardSelects.every(r => r.title && r.description && r.price > 0)) {
+                if (!!rewards.rewardExplain.trim() && !rewards.images) { alert("리워드 설명을 입력해주세요."); return false; }
+                if (!rewardSelects.every(r => r.title && r.price > 0)) {
                     alert("리워드 항목을 모두 입력해주세요.");
                     return false;
                 }
-                if (!budget.trim()) { alert("예산 활용 내용을 입력해주세요."); return false; }
                 return true;
             case 4:
-                if (!team.description.trim()) { alert("팀 설명을 입력해주세요."); return false; }
+                if (!budget.trim()) { alert("예산 활용 내용을 입력해주세요."); return false; }
+                if (!schedule.trim()) { alert("일정 내용을 입력해주세요."); return false; }
+                if (!team.description.trim()&& !team.images) { alert("팀 설명을 입력해주세요."); return false; }
                 if (!safetyInfo.policy.trim()) { alert("신뢰와 안전 정책을 입력해주세요."); return false; }
                 return true;
             default: return true;
@@ -164,11 +166,15 @@ function FundingRegister({ loginUser }) {
                             <button onClick={() => setThumbnailImage("")}>X</button>
                         </div>
                     )}
-
+                    <h4>목표 금액</h4>
                     <input type="number" value={targetAmount} onChange={(e) => setTargetAmount(+e.target.value)} placeholder="목표 금액" />
+                    <h4>펀딩 시작일</h4>
                     <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+                    <h4>펀딩 종료일</h4>
                     <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+                    <h4>결제일</h4>
                     <input type="date" value={paymentDate} onChange={(e) => setPaymentDate(e.target.value)} />
+                    <h4>배송 예정일</h4>
                     <input type="date" value={expectedDeliveryDate} onChange={(e) => setExpectedDeliveryDate(e.target.value)} />
 
                     <div className="button-group">
@@ -254,8 +260,7 @@ function FundingRegister({ loginUser }) {
                     ))}
                     <button className="add-reward" onClick={() => setRewardSelects(p => [...p, { title: "", description: "", price: 0 }])}>리워드 추가</button>
 
-                    <h4>예산 활용 내용</h4>
-                    <textarea value={budget} onChange={(e) => setBudget(e.target.value)} placeholder="예산 설명" />
+                    
 
                     <div className="button-group">
                         <button onClick={prevStep}>이전</button>
@@ -264,11 +269,14 @@ function FundingRegister({ loginUser }) {
                 </div>
             )}
 
-            {/* ======= Step 4: 팀 & 안전정보 ======= */}
+            {/* ======= Step 4: 그외정보 ======= */}
             {step === 4 && (
                 <div className="funding-register-section">
-                    <h2>팀 & 안전 정보</h2>
 
+                    <h4>예산 활용 내용</h4>
+                    <textarea value={budget} onChange={(e) => setBudget(e.target.value)} placeholder="예산 설명" />
+                    <h4>일정 내용</h4>
+                    <textarea value={schedule} onChange={(e) => setSchedule(e.target.value)} placeholder="일정 설명" />
                     <h4>팀 소개</h4>
                     <textarea value={team.description} onChange={(e) => setTeam(p => ({ ...p, description: e.target.value }))} placeholder="팀 설명" />
 
