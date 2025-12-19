@@ -45,51 +45,47 @@ export default function SignUpPage() {
             return;
         }
 
+        // 공통 정규식: 영문과 숫자가 최소 하나씩 포함되어 있는지 확인
+        const comboCheck = /^(?=.*[a-zA-Z])(?=.*[0-9]).+$/;
+
         // 2. 아이디 유효성 검사 (8~20자, 영문+숫자 조합 필수)
-        const idSpaceCheck = /\s/g;
-        const idComboCheck = /^(?=.*[a-zA-Z])(?=.*[0-9]).+$/;
         const idCharCheck = /^[a-zA-Z0-9]+$/;
-
-        if (idSpaceCheck.test(form.id)) {
-            alert("아이디에 공백을 포함할 수 없습니다");
-            return;
-        }
-        if (form.id.length < 8 || form.id.length > 20) {
-            alert("아이디는 8자 이상 20자 이하로 입력하세요");
-            return;
-        }
-        if (!idComboCheck.test(form.id) || !idCharCheck.test(form.id)) {
-            alert("아이디는 영문과 숫자를 조합하여 입력해야 합니다 (한글/특수문자 불가)");
+        if (form.id.length < 8 || form.id.length > 20 || !comboCheck.test(form.id) || !idCharCheck.test(form.id)) {
+            alert("아이디는 영문과 숫자를 조합하여 8~20자로 입력해야 합니다 (한글/특수문자 불가)");
             return;
         }
 
-        // 3. 비밀번호 유효성 검사
+        // 3. [수정된 부분] 비밀번호 유효성 검사 (8~20자, 영문+숫자 조합 필수)
         if (form.password.length < 8 || form.password.length > 20) {
             alert("비밀번호는 8자 이상 20자 이하로 입력하세요");
             return;
         }
+        
+        // 비밀번호 조합 체크 추가
+        if (!comboCheck.test(form.password)) {
+            alert("비밀번호는 영문과 숫자를 반드시 조헙해서 사용해야 합니다");
+            return;
+        }
+
         if (form.password !== form.passwordCheck) {
             alert("비밀번호가 일치하지 않습니다");
             return;
         }
 
-        // --- [새로 추가된 유효성 검사] ---
-
-        // 4. 이메일 형식 검사 (예: test@example.com)
+        // 4. 이메일 형식 검사 (기존 유지)
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         if (!emailRegex.test(form.email)) {
             alert("올바른 이메일 형식이 아닙니다 (예: abc@example.com)");
             return;
         }
 
-        // 5. 전화번호 길이 검사 (가운데 3~4자리, 끝 4자리)
+        // 5. 전화번호 길이 검사 (기존 유지)
         if (form.phone2.length < 3 || form.phone3.length !== 4) {
             alert("전화번호 형식이 올바르지 않습니다");
             return;
         }
 
-        // ------------------------------
-
+        // 저장 로직
         const newUser = {
             id: form.id,
             password: form.password,
@@ -138,13 +134,14 @@ export default function SignUpPage() {
                         </Form.Group>
 
                         <Form.Group className="mb-2">
-                            <Form.Label>비밀번호 * (8~20자)</Form.Label>
+                            <Form.Label>비밀번호 * (8~20자, 영문+숫자 조합)</Form.Label>
                             <Form.Control
                                 type="password"
                                 name="password"
                                 value={form.password}
                                 onChange={onChange}
-                                placeholder="8~20자 비밀번호"
+                                placeholder="8~20자 영문/숫자 조합"
+                                maxLength={20}
                             />
                         </Form.Group>
 
@@ -156,6 +153,7 @@ export default function SignUpPage() {
                                 value={form.passwordCheck}
                                 onChange={onChange}
                                 placeholder="비밀번호 재입력"
+                                maxLength={20}
                             />
                         </Form.Group>
 
