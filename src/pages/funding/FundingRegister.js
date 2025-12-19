@@ -2,14 +2,17 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import "../../styles/FundingRegister.css";
 
-function FundingRegister({ loginUser }) {
+function FundingRegister() {
     const navigate = useNavigate();
-
+    const loginUser = JSON.parse(localStorage.getItem("loginUser"));
     useEffect(() => {
+        
         if (!loginUser) {
             navigate("/login", { replace: true });
         }
-    }, [loginUser, navigate]);
+
+        if (!loginUser) return null;
+    }, [navigate]);
 
 
 
@@ -45,7 +48,7 @@ function FundingRegister({ loginUser }) {
     const [team, setTeam] = useState({ description: "", images: [] });
     const [safetyInfo, setSafetyInfo] = useState({ policy: "" });
 
-    if (!loginUser) return null;
+    
 
     /* ======= 단계별 유효성 체크 ======= */
     const validateStep = (step) => {

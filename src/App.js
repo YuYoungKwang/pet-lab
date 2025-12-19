@@ -34,7 +34,7 @@ function App() {
       <Header loginUser={loginUser} setLoginUser={setLoginUser} />
       <Routes>
         <Route path="/" element={<MainPage loginUser={loginUser}/>} />
-        <Route path="/funding" element={<FundingRegister loginUser={loginUser} />} />
+        <Route path="/funding" element={<FundingRegister/>} />
         <Route path="/register" element={<Register />} />
         <Route path="/search" element={<SearchResultPage />} />
         <Route path="/category/:categoryName" element={<CategoryPage />} />
