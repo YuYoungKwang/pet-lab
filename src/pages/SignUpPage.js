@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Container, Card, Form, Button, Row, Col } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 export default function SignUpPage() {
     const navigate = useNavigate();
@@ -17,6 +17,9 @@ export default function SignUpPage() {
         zipcode: "",
         addr1: "",
         addr2: "",
+        favorites: [],      // 좋아요한 펀딩 ID 배열
+        cart: [],           // 장바구니: { fundingId, quantity }
+        orders: [],         // 주문내역: { orderId, items: [{fundingId, quantity}], totalAmount, status, orderDate }
     });
 
     const onChange = (e) => {
@@ -24,12 +27,7 @@ export default function SignUpPage() {
     };
 
     const submit = () => {
-        if (
-            !form.id ||
-            !form.password ||
-            !form.name ||
-            !form.email
-        ) {
+        if (!form.id || !form.password || !form.name || !form.email) {
             alert("필수 항목을 입력하세요");
             return;
         }
@@ -52,13 +50,22 @@ export default function SignUpPage() {
             },
         };
 
-        const saved = JSON.parse(localStorage.getItem("users")) || [];
-        saved.push(newUser);
-        localStorage.setItem("users", JSON.stringify(saved));
+        const users = JSON.parse(localStorage.getItem("회원정보")) || [];
+
+        const exists = users.some((user) => user.id === form.id);
+        if (exists) {
+            alert("이미 사용 중인 아이디입니다");
+            return;
+        }
+
+        users.push(newUser);
+
+        localStorage.setItem("회원정보", JSON.stringify(users));
 
         alert("회원가입 완료!");
         navigate("/login");
     };
+
 
     return (
         <Container className="mt-4" style={{ maxWidth: 700 }}>

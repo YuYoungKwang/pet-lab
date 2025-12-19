@@ -1,0 +1,232 @@
+/* 레이아웃 공통 */
+.register-container {
+    max-width: 900px;
+    margin: 60px auto;
+    padding: 0 20px;
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #333;
+}
+
+.register-header-section {
+    text-align: left;
+    margin-bottom: 25px;
+}
+
+.top-icon {
+    width: 45px;
+    margin-bottom: 15px;
+}
+
+.main-title {
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    letter-spacing: -1px;
+}
+
+.sub-description {
+    font-size: 15px;
+    color: #333;
+}
+
+/* 단계 표시 */
+.steps-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 40px;
+}
+
+.steps-right-box {
+    position: relative;
+}
+
+.steps-right {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.steps-right-box::after {
+    content: "";
+    position: absolute;
+    bottom: -11px;
+    right: 0;
+    width: 100%;
+    height: 0px;
+    background-color: #000;
+}
+
+/* 약관 영역 */
+.agreement-start-text {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* 약관 리스트 칸 구분 (표 형태) */
+.all-check-box {
+    border: 1px solid #ddd;
+    padding: 20px;
+    background-color: #fff;
+    margin-bottom: 0;
+}
+
+.agreement-list {
+    border: 1px solid #ddd;
+    border-top: none;
+}
+
+.agreement-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+}
+
+.agreement-item:last-child {
+    border-bottom: none;
+}
+
+.agreement-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    flex: 1;
+}
+
+.agreement-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-right: 15px;
+}
+
+.agreement-text {
+    font-size: 15px;
+}
+
+.required-tag
+.required-text {
+    color: #bbb;
+    margin-left: 5px;
+    font-size: 14px;
+}
+
+.optional-tag {
+    color: #bbb;
+    margin-left: 5px;
+    font-size: 14px;
+}
+
+/* 보기 버튼: 오른쪽 끝 정렬 */
+.view-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 12px;
+    font-weight: bold;
+    color: #333;
+    text-decoration: underline;
+    cursor: pointer;
+    white-space: nowrap;
+    text-align: left;
+    margin-right: 40vh;
+}
+
+/* 하단 버튼 */
+.info-box {
+    margin-top: 35px;
+}
+
+.info-text {
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 6px;
+    line-height: 1.5;
+    color: #333;
+}
+
+.submit-button {
+    display: block;
+    width: 220px;
+    margin: 60px auto;
+    padding: 15px;
+    background-color: #535151;
+    color: white;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* ★ 모달 문제 해결 ★ */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.modal-content-wrapper {
+    background: #fff;
+    width: 90%;
+    max-width: 600px;
+    height: 70vh;
+    /* 높이 고정 */
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    /* 헤더-바디 구분 */
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: center;
+    /* 제목 가운데 정렬 */
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    background: #fff;
+}
+
+.modal-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.modal-close-x {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #999;
+    cursor: pointer;
+    padding: 5px;
+    line-height: 1;
+}
+
+.modal-body {
+    flex: 1;
+    padding: 25px;
+    overflow-y: auto;
+    /* 내용만 스크롤 */
+    font-size: 14px;
+    line-height: 1.6;
+    color: #444;
+}
