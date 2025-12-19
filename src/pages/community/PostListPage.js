@@ -12,9 +12,12 @@ export default function PostListPage() {
     const [searchKeyword, setSearchKeyword] = useState("");
     const [filter, setFilter] = useState("title");
     const [currentPage, setCurrentPage] = useState(1);
-    // const [category, setCategory] = useState("free");
     const { category = "free" } = useParams();
     const { posts = [], funding } = useOutletContext();
+
+    const loginUser = JSON.parse(localStorage.getItem("loginUser"));
+    const isLogin = !!loginUser; // 로그인 상태 확인
+
 
     const filteredPosts = posts
     .filter((post) => (post.category ?? "free") === category)
@@ -101,6 +104,7 @@ export default function PostListPage() {
                         <thead>
                             <tr>
                                 <th style={{ width: "15%" }}>번호</th>
+                                <th>글쓴이</th>
                                 <th>제목</th>
                                 <th style={{ width: "25%" }}>작성일</th>
                             </tr>
@@ -122,6 +126,7 @@ export default function PostListPage() {
                                         <td>
                                             {(currentPage - 1) * ITEMS_PER_PAGE + idx + 1}
                                         </td>
+                                        <td>{post.author}</td>
                                         <td>{post.title}</td>
                                         <td>{post.date}</td>
                                     </tr>
@@ -147,7 +152,18 @@ export default function PostListPage() {
                     )}
 
                     <div className="d-grid">
-                        <Button onClick={() => navigate("../write")}>글쓰기</Button>
+                        <Button
+                            onClick={() => {
+                                if (!isLogin) {
+                                    alert("로그인 후 이용 가능합니다.");
+                                    navigate("/login");
+                                    return;
+                                }
+                                navigate("../write");
+                            }}
+                        >
+                            글쓰기
+                        </Button>
                     </div>
                 </Card.Body>
             </Card>

@@ -18,6 +18,12 @@ export default function CommunityMain() {
         setFunding(found || null);
     }, [fundingId]);
 
+    
+    const [loginUser, setLoginUser] = useState(() => {
+        const saved = localStorage.getItem("loginUser");
+        return saved ? JSON.parse(saved) : null;
+    }); // 로그인 정보
+
     const [posts, setPosts] = useState(() => {
         const saved = localStorage.getItem("게시글 정보");
         return saved ? JSON.parse(saved) : [];
@@ -32,13 +38,15 @@ export default function CommunityMain() {
         : posts;
 
     const createPost = ({ title, content, category }) => {
+        if (!loginUser) return;
+
         const newPost = {
             id: Date.now(),
             fundingId: Number(fundingId),
             title,
             content,
             category,
-            author: "익명",
+            author: loginUser.id,
             views: 0,
             comments: [],
             date: new Date().toLocaleDateString(),
@@ -47,11 +55,19 @@ export default function CommunityMain() {
     };
 
     const addComment = (postId, text) => {
+        if (!loginUser) return;
         setPosts(prev =>
             prev.map(p =>
                 p.id === postId
-                    ? { ...p, comments: [...p.comments, text] }
-                    : p
+                    ? { ...p, comments: [...p.comments, {
+                                id: Date.now(),
+                                author: loginUser.id, // ⭐ 댓글 작성자
+                                text,
+                                date: new Date().toLocaleString(),
+                            },
+                    ],
+                }
+                : p
             )
         );
     };
