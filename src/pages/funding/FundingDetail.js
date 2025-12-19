@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import FundingHeader from "../../components/common/FundingHeader";
 import FundingNavbar from "../../components/funding/FundingNavbar";
 import "../../styles/FundingDetail.css";
 
 const IMG_BASE = "/images/funding";
 
-function FundingDetail() {
+function FundingDetail({ loginUser }) {
+    const navigate = useNavigate();
     const [funding, setFunding] = useState(null);
     const { fundingId } = useParams();
 
@@ -39,6 +40,15 @@ function FundingDetail() {
         <div className="funding-detail-page">
             {/* 상단 헤더 */}
             <FundingHeader funding={funding} />
+
+            {/* 수정 버튼: 로그인한 사용자가 펀딩 작성자인 경우만 표시 */}
+            {loginUser?.id === funding.createUser && (
+                <div className="edit-button-container">
+                    <button onClick={() => navigate(`/fundingEdit/${funding.id}`)}>
+                        수정
+                    </button>
+                </div>
+            )}
 
             {/* 네비바 */}
             <FundingNavbar sections={sections} />

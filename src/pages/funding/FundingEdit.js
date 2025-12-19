@@ -1,15 +1,47 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import "../../styles/FundingRegister.css";
 
-function FundingRegister({ loginUser }) {
+function FundingEdit({ loginUser }) {
     const navigate = useNavigate();
-
+    const { fundingId } = useParams(); // ⭐ 핵심
+    console.log(fundingId);
     useEffect(() => {
         if (!loginUser) {
             navigate("/login", { replace: true });
         }
-    }, [loginUser, navigate]);
+        const data = localStorage.getItem("fundingList");
+        if (!data) return null;
+        const list = JSON.parse(data);
+        const target = list.find(f => f.id === Number(fundingId));
+
+        if (!target) {
+            alert("존재하지 않는 펀딩입니다.");
+            navigate("/");
+            return;
+        }
+
+        setTitle(target.title);
+        setCategory(target.category);
+        setThumbnailImage(target.thumbnailImage);
+        setTargetAmount(target.targetAmount);
+        setStartDate(target.startDate);
+        setEndDate(target.endDate);
+        setPaymentDate(target.paymentDate);
+        setExpectedDeliveryDate(target.expectedDeliveryDate);
+
+        setDescription(target.description);
+        setIntroImages(target.introImages || []);
+
+        setRewards(target.rewards);
+        setRewardSelects(target.rewardSelects);
+
+        setBudget(target.budget);
+        setSchedule(target.schedule);
+        setTeam(target.team);
+        setSafetyInfo(target.safetyInfo);
+
+    }, [fundingId, loginUser, navigate]);
 
 
 
@@ -90,48 +122,56 @@ function FundingRegister({ loginUser }) {
     }
 
     const handleSubmit = () => {
-        // 마지막 단계 전체 유효성 검사
         for (let s = 1; s <= 4; s++) {
             if (!validateStep(s)) return;
         }
+
         const list = JSON.parse(localStorage.getItem("fundingList")) || [];
-        const maxId = list.length ? Math.max(...list.map(f => f.id)) : 0;
-        const newId = maxId + 1;
 
-        const newFunding = {
-            id: newId,
-            title,
-            category,
-            thumbnailImage,
-            targetAmount,
-            currentAmount: 0,
-            startDate,
-            endDate,
-            paymentDate,
-            expectedDeliveryDate,
-            description,
-            introImages,
-            rewards,
-            rewardSelects,
-            budget,
-            schedule,
-            team,
-            safetyInfo,
-            likeCount: 0,
-            createUser: loginUser.id,
-        };
+        const updatedList = list.map(f =>
+            f.id === Number(fundingId)
+                ? {
+                    ...f,
+                    title,
+                    category,
+                    thumbnailImage,
+                    targetAmount,
+                    startDate,
+                    endDate,
+                    paymentDate,
+                    expectedDeliveryDate,
+                    description,
+                    introImages,
+                    rewards,
+                    rewardSelects,
+                    budget,
+                    schedule,
+                    team,
+                    safetyInfo,
+                }
+                : f
+        );
 
-        
-        list.push(newFunding);
-        localStorage.setItem("fundingList", JSON.stringify(list));
+        localStorage.setItem("fundingList", JSON.stringify(updatedList));
 
-        alert("펀딩 등록 완료!");
-        navigate('/fundingDetail/' + newId);
+        alert("펀딩 수정 완료!");
+        navigate("/fundingDetail/" + fundingId);
+    };
+
+    const handleDelete = () => {
+        if (!window.confirm("정말로 이 펀딩을 삭제하시겠습니까?")) return;
+
+        const list = JSON.parse(localStorage.getItem("fundingList")) || [];
+        const newList = list.filter(f => f.id !== Number(fundingId));
+        localStorage.setItem("fundingList", JSON.stringify(newList));
+
+        alert("펀딩이 삭제되었습니다.");
+        navigate("/"); // 삭제 후 메인으로 이동
     };
 
     return (
         <div className="funding-register-container">
-            <h1>펀딩 등록</h1>
+            <h1>펀딩 수정</h1>
             {/* ======= Progress Bar ======= */}
             <div className="step-labels">
                 <span className={step === 1 ? "active" : ""}>기본 정보</span>
@@ -301,7 +341,8 @@ function FundingRegister({ loginUser }) {
 
                     <div className="button-group">
                         <button onClick={prevStep}>이전</button>
-                        <button onClick={handleSubmit}>등록</button>
+                        <button onClick={handleSubmit}>수정 완료</button>
+                        <button onClick={handleDelete} style={{ backgroundColor: "red" }}>펀딩 삭제</button>
                     </div>
                 </div>
             )}
@@ -309,4 +350,4 @@ function FundingRegister({ loginUser }) {
     );
 }
 
-export default FundingRegister;
+export default FundingEdit;

@@ -7,6 +7,7 @@ import Register from './pages/Register';
 import MainPage from './pages/MainPage';
 import FundingDetail from './pages/funding/FundingDetail';
 import FundingRegister from './pages/funding/FundingRegister';
+import FundingEdit from './pages/funding/FundingEdit';
 import CategoryPage from "./pages/CategoryPage";
 import SearchResultPage from "./pages/SearchResultPage";
 import SignUpPage from './pages/SignUpPage';
@@ -32,13 +33,14 @@ function App() {
     <div>
       <Header loginUser={loginUser} setLoginUser={setLoginUser} />
       <Routes>
-        <Route path="/" element={<MainPage />} />
+        <Route path="/" element={<MainPage loginUser={loginUser}/>} />
         <Route path="/funding" element={<FundingRegister loginUser={loginUser} />} />
         <Route path="/register" element={<Register />} />
         <Route path="/search" element={<SearchResultPage />} />
         <Route path="/category/:categoryName" element={<CategoryPage />} />
         <Route path="/login" element={<Login setLoginUser={setLoginUser} />} />
-        <Route path="/fundingDetail/:fundingId" element={<FundingDetail />} />
+        <Route path="/fundingDetail/:fundingId" element={<FundingDetail loginUser={loginUser}/>} />
+        <Route path="/fundingEdit/:fundingId" element={<FundingEdit loginUser={loginUser}/>} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/mypage" element={<MyPage loginUser={loginUser} />} />
       </Routes>
