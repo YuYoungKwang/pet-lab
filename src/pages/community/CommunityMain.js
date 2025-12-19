@@ -9,12 +9,12 @@ import "../../styles/Community.css";
 
 export default function CommunityMain() {
     const [posts, setPosts] = useState(() => {
-    const saved = localStorage.getItem("community_posts");
+    const saved = localStorage.getItem("게시글 정보");
     return saved ? JSON.parse(saved) : [];
     });
 
     useEffect(() => {
-        localStorage.setItem("community_posts", JSON.stringify(posts));
+        localStorage.setItem("게시글 정보", JSON.stringify(posts));
     }, [posts]);
 
     const createPost = ({ title, content, category }) => {
