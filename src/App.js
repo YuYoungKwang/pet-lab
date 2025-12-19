@@ -13,6 +13,7 @@ import SignUpPage from './pages/SignUpPage';
 import MyPage from './pages/MyPage';
 import fundingList from './data/fundingList';
 import { useState, useEffect } from 'react';
+import Profile from './pages/ProFile';
 
 function App() {
   const [loginUser, setLoginUser] = useState(null);
@@ -41,6 +42,7 @@ function App() {
         <Route path="/fundingDetail/:fundingId" element={<FundingDetail />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/mypage" element={<MyPage loginUser={loginUser} />} />
+        <Route path="/profile" element={<Profile loginUser={loginUser}/>} />
       </Routes>
       <Footer />
     </div>
