@@ -5,7 +5,7 @@ import CategorySidebar from "../components/common/CategorySidebar";
 import FundingSection from "../components/mainpage/FundingSection";
 import '../styles/MainPage.css';
 
-function MainPage() {
+function MainPage({loginUser}) {
     const [fundingList, setFundingList] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
     const navigate = useNavigate();

@@ -3,17 +3,30 @@ import '../../styles/FundingSection.css'
 
 function FundingSection({ title, fundingList, onLikeToggle }) {
 
-    // 정렬 기준
+    const now = new Date();
+
+    // 종료되지 않은 펀딩만
+    const activeList = fundingList.filter(
+        f => new Date(f.endDate) >= now
+    );
+
     let sortedList = [];
-    if(title === "인기 펀딩"){
-        sortedList = [...fundingList].sort((a, b) => b.likeCount - a.likeCount);
-    } else if(title === "방금 등록된 따끈따끈한 펀딩"){
-        sortedList = [...fundingList].sort((a, b) => b.id - a.id);
-    } else if(title === "마감 임박! 종료가 얼마 남지 않은 펀딩"){
-        sortedList = [...fundingList].sort((a, b) => new Date(b.endDate) - new Date(a.endDate));
+
+    if (title === "인기 펀딩") {
+        sortedList = [...activeList].sort(
+            (a, b) => b.likeCount - a.likeCount
+        );
+    } else if (title === "방금 등록된 따끈따끈한 펀딩") {
+        sortedList = [...activeList].sort(
+            (a, b) => b.id - a.id
+        );
+    } else if (title === "마감 임박! 종료가 얼마 남지 않은 펀딩") {
+        sortedList = [...activeList].sort(
+            (a, b) => new Date(a.endDate) - new Date(b.endDate)
+        );
     }
 
-    const displayedList = sortedList.slice(0, 4); // 최대 4개
+    const displayedList = sortedList.slice(0, 4);
 
     return (
         <section className="funding-section">
@@ -30,5 +43,6 @@ function FundingSection({ title, fundingList, onLikeToggle }) {
         </section>
     );
 }
+
 
 export default FundingSection;

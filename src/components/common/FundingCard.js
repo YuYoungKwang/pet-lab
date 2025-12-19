@@ -8,8 +8,12 @@ function FundingCard({ funding, onLikeToggle }) {
 
     const end = new Date(funding.endDate);
     const today = new Date();
-    const Dday = Math.ceil((end - today) / (1000 * 60 * 60 * 24));
-
+    let Dday = Math.ceil((end - today) / (1000 * 60 * 60 * 24));
+    if(Dday < 0){
+        Dday = "펀딩 종료";
+    }else{
+        Dday = "D-"+Dday;
+    }
     const progressRate = Math.min(
         100,
         Math.round((funding.currentAmount / funding.targetAmount) * 100)
@@ -39,7 +43,7 @@ function FundingCard({ funding, onLikeToggle }) {
 
             <div className="info">
                 <p className="title">{funding.title}</p>
-                <p className="meta">D-{Dday}</p>
+                <p className="meta">{Dday}</p>
                 <div className="funding-progress-bar">
                     <div
                         className="funding-progress"

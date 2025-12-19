@@ -48,6 +48,9 @@ export default function SignUpPage() {
                 addr1: form.addr1,
                 addr2: form.addr2,
             },
+            favorites: [],      // 좋아요한 펀딩 ID 배열
+            cart: [],           // 장바구니: { fundingId, quantity }
+            orders: [],         // 주문내역: { orderId, items: [{fundingId, quantity}], totalAmount, status, orderDate }
         };
 
         const users = JSON.parse(localStorage.getItem("회원정보")) || [];
