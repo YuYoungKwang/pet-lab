@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useOutletContext } from "react-router-dom";
 import { Container, Card, Table, Button, Form } from "react-bootstrap";
 
 const ITEMS_PER_PAGE = 10;
 
-export default function PostListPage({ posts }) {
+export default function PostListPage() {
     const navigate = useNavigate();
 
     const [keyword, setKeyword] = useState("");
@@ -13,8 +13,7 @@ export default function PostListPage({ posts }) {
     const [currentPage, setCurrentPage] = useState(1);
     // const [category, setCategory] = useState("free");
     const { category = "free" } = useParams();
-
-
+    const { posts = [] } = useOutletContext() || {};
 
     const filteredPosts = posts
     .filter((post) => (post.category ?? "free") === category)
@@ -26,7 +25,7 @@ export default function PostListPage({ posts }) {
         if (filter === "title") return post.title.toLowerCase().includes(lower);
         if (filter === "title_content") {
             return (
-                post.title.toLowerCase().inclusdes(lower) ||
+                post.title.toLowerCase().includes(lower) ||
                 post.content.toLowerCase().includes(lower)
             );
         }
@@ -55,7 +54,7 @@ export default function PostListPage({ posts }) {
                             size="sm"
                             variant={category === "free" ? "primary" : "outline-primary"}
                             onClick={() => {
-                                navigate("/board/free");
+                                navigate("../board/free", { replace: true });
                                 setCurrentPage(1);
                             }}
                         >
@@ -66,7 +65,7 @@ export default function PostListPage({ posts }) {
                             size="sm"
                             variant={category === "info" ? "primary" : "outline-primary"}
                             onClick={() => {
-                                navigate("/board/info");
+                                navigate("../board/info", { replace: true });
                                 setCurrentPage(1);
                             }}
                         >
@@ -77,7 +76,7 @@ export default function PostListPage({ posts }) {
                             size="sm"
                             variant={category === "qna" ? "primary" : "outline-primary"}
                             onClick={() => {
-                                navigate("/board/qna");
+                                navigate("../board/qna", { replace: true });
                                 setCurrentPage(1);
                             }}
                         >
@@ -88,7 +87,7 @@ export default function PostListPage({ posts }) {
                             size="sm"
                             variant={category === "feedback" ? "primary" : "outline-primary"}
                             onClick={() => {
-                                navigate("/board/feedback");
+                                navigate("../board/feedback", { replace: true });
                                 setCurrentPage(1);
                             }}
                         >
@@ -117,7 +116,7 @@ export default function PostListPage({ posts }) {
                                     <tr
                                         key={post.id}
                                         style={{ cursor: "pointer" }}
-                                        onClick={() => navigate(`/post/${post.id}`)}
+                                        onClick={() => navigate(`post/${post.id}`)}
                                     >
                                         <td>
                                             {(currentPage - 1) * ITEMS_PER_PAGE + idx + 1}
@@ -147,7 +146,7 @@ export default function PostListPage({ posts }) {
                     )}
 
                     <div className="d-grid">
-                        <Button onClick={() => navigate("/write")}>글쓰기</Button>
+                        <Button onClick={() => navigate("write")}>글쓰기</Button>
                     </div>
                 </Card.Body>
             </Card>

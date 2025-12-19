@@ -1,13 +1,11 @@
-import { Routes, Route } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import PostListPage from "./PostListPage";
-import PostWritePage from "./PostWritePage";
-import PostDetailPage from "./PostDetailPage";
 import "../../styles/Community.css";
 
 
 
 export default function CommunityMain() {
+    const { fundingId } = useParams();
     const [posts, setPosts] = useState(() => {
     const saved = localStorage.getItem("게시글 정보");
     return saved ? JSON.parse(saved) : [];
@@ -17,9 +15,14 @@ export default function CommunityMain() {
         localStorage.setItem("게시글 정보", JSON.stringify(posts));
     }, [posts]);
 
+    const filteredPosts = fundingId
+    ? posts.filter((p) => p.fundingId === Number(fundingId))
+    : posts;
+
     const createPost = ({ title, content, category }) => {
     const newPost = {
         id: Date.now(),
+        fundingId: Number(fundingId),
         title,
         content,
         category,
@@ -47,22 +50,14 @@ export default function CommunityMain() {
         );
     };
 
-
     return (
-        <Routes>
-            <Route path="/" element={<PostListPage posts={posts} />} />
-            <Route path="/board/:category" element={<PostListPage posts={posts} />} />
-            <Route path="/write" element={<PostWritePage onSubmit={createPost} />} />
-            <Route
-                path="/post/:id"
-                element={
-                    <PostDetailPage
-                        posts={posts}
-                        onAddComment={addComment}
-                        onView={increaseView}
-                    />
-                }
-            />
-        </Routes>
+        <div className="community-page">
+            <Outlet context={{
+                posts: filteredPosts,
+                createPost,
+                addComment,
+                increaseView
+            }} />
+        </div>
     );
 }

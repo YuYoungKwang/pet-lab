@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import { Container, Card, Form, Button, Stack } from "react-bootstrap";
 
 
@@ -9,11 +9,13 @@ export default function PostWritePage({ onSubmit }) {
     const [category, setCategory] = useState("free");
     const navigate = useNavigate();
 
+    const { createPost } = useOutletContext();
+
 
     const submit = () => {
         if (!title || !content) return;
         onSubmit({ title, content, category });
-        navigate("/");
+        navigate("..");
     };
 
 
