@@ -1,12 +1,15 @@
-import { useParams, useNavigate, useOutletContext } from "react-router-dom";
+import { useParams, useNavigate, useOutletContext, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Container, Card, Form, Button, Stack } from "react-bootstrap";
+import FundingHeader from "../../components/common/FundingHeader";
 
 
 export default function PostDetailPage() {
     const { id } = useParams();
     const navigate = useNavigate();
-    const { posts, addComment, increaseView } = useOutletContext();
+    const location = useLocation();
+    const category = location.state?.category ?? "free";
+    const { posts = [], addComment, increaseView, funding } = useOutletContext();
     const post = posts.find((p) => p.id === Number(id));
     const [comment, setComment] = useState("");
 
@@ -17,12 +20,21 @@ export default function PostDetailPage() {
     }, []);
 
 
-    if (!post) return null;
+    if (!post) {
+        return (
+            <Container className="mt-4 text-center">
+                <p>게시글을 찾을 수 없습니다.</p>
+                <Button onClick={() => navigate("../board/free")}>
+                    목록으로
+                </Button>
+            </Container>
+        );
+    }
 
 
     return (
         <Container className="community-container">
-            <h2 className="community-title">게시글</h2>
+            {funding && <FundingHeader funding={funding} />}
             <Card className="community-card">
                 <div className="detail-header">
                     <strong>{post.title}</strong>
@@ -50,7 +62,7 @@ export default function PostDetailPage() {
                             setComment("");
                             }}
                         >등록</Button>
-                        <Button size="sm" variant="outline-secondary" onClick={() => navigate("..")}>목록</Button>
+                        <Button size="sm" variant="outline-secondary" onClick={() => navigate(`../board/${category}`)}>목록</Button>
                     </Stack>
                 </div>
             </Card>

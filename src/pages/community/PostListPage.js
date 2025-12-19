@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useParams, useOutletContext } from "react-router-dom";
 import { Container, Card, Table, Button, Form } from "react-bootstrap";
+import FundingHeader from "../../components/common/FundingHeader";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -13,7 +14,7 @@ export default function PostListPage() {
     const [currentPage, setCurrentPage] = useState(1);
     // const [category, setCategory] = useState("free");
     const { category = "free" } = useParams();
-    const { posts = [] } = useOutletContext() || {};
+    const { posts = [], funding } = useOutletContext();
 
     const filteredPosts = posts
     .filter((post) => (post.category ?? "free") === category)
@@ -44,7 +45,7 @@ export default function PostListPage() {
 
     return (
         <Container className="mt-4" style={{ maxWidth: 600 }}>
-            <h3 className="text-center mb-3">커뮤니티</h3>
+            {funding && <FundingHeader funding={funding} />}
 
             <Card>
                 <Card.Body>
@@ -116,7 +117,7 @@ export default function PostListPage() {
                                     <tr
                                         key={post.id}
                                         style={{ cursor: "pointer" }}
-                                        onClick={() => navigate(`post/${post.id}`)}
+                                        onClick={() => navigate(`../post/${post.id}`, { state: { category } })}
                                     >
                                         <td>
                                             {(currentPage - 1) * ITEMS_PER_PAGE + idx + 1}
@@ -146,7 +147,7 @@ export default function PostListPage() {
                     )}
 
                     <div className="d-grid">
-                        <Button onClick={() => navigate("write")}>글쓰기</Button>
+                        <Button onClick={() => navigate("../write")}>글쓰기</Button>
                     </div>
                 </Card.Body>
             </Card>

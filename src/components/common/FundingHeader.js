@@ -1,9 +1,11 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import '../../styles/FundingDetail.css';
 
 const IMG_BASE = "/images/funding";
 
 function FundingHeader({ funding }) {
+    const navigate = useNavigate();
     const progressRate = Math.min(
         100,
         Math.round((funding.currentAmount / funding.targetAmount) * 100)
@@ -15,10 +17,16 @@ function FundingHeader({ funding }) {
                 className="funding-header-thumb"
                 src={`${IMG_BASE}/${funding.thumbnailImage}`}
                 alt="thumbnail"
+                style={{ cursor: "pointer" }}
+                onClick={() => navigate(`/fundingDetail/${funding.id}`)}
             />
 
             <div className="funding-header-info">
-                <h1>{funding.title}</h1>
+                <h1 style={{ cursor: "pointer" }}
+                    onClick={() => navigate(`/fundingDetail/${funding.id}`)}
+                >
+                {funding.title}
+                </h1>
                 <br />
                 <p>모인 금액: {funding.currentAmount.toLocaleString()}원</p>
 

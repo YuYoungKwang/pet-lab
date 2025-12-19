@@ -3,7 +3,7 @@ import { useNavigate, useOutletContext } from "react-router-dom";
 import { Container, Card, Form, Button, Stack } from "react-bootstrap";
 
 
-export default function PostWritePage({ onSubmit }) {
+export default function PostWritePage() {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [category, setCategory] = useState("free");
@@ -14,8 +14,8 @@ export default function PostWritePage({ onSubmit }) {
 
     const submit = () => {
         if (!title || !content) return;
-        onSubmit({ title, content, category });
-        navigate("..");
+        createPost({ title, content, category });
+        navigate(`../board/${category}`);
     };
 
 
@@ -49,7 +49,7 @@ export default function PostWritePage({ onSubmit }) {
                         onChange={(e) => setContent(e.target.value)}
                     />
                     <Stack direction="horizontal" gap={2} className="mt-3">
-                        <Button variant="secondary" onClick={() => navigate("/")}>취소</Button>
+                        <Button variant="secondary" onClick={() => navigate(`../board/${category}`)}>취소</Button>
                         <Button onClick={submit}>등록</Button>
                     </Stack>
                 </Form>
