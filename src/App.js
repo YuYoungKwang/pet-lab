@@ -19,6 +19,7 @@ import CommunityMain from './pages/community/CommunityMain';
 import PostDetailPage from './pages/community/PostDetailPage';
 import PostListPage from './pages/community/PostListPage';
 import PostWritePage from './pages/community/PostWritePage';
+import Board from './pages/Board';
 
 function App() {
   const [loginUser, setLoginUser] = useState(null);
@@ -55,6 +56,7 @@ function App() {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/mypage" element={<MyPage loginUser={loginUser} />} />
         <Route path="/profile" element={<Profile loginUser={loginUser}/>} />
+        <Route path="/board" element={<Board />} />
       </Routes>
       <Footer />
     </div>
