@@ -1,22 +1,13 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router";
 import FundingCard from "../components/common/FundingCard";
 import CategorySidebar from "../components/common/CategorySidebar";
-import '../styles/SearchResultPage.css';
+import '../styles/CategoryPage.css';
 
 const PAGE_SIZE = 6;
 
-function useQuery() {
-    return new URLSearchParams(useLocation().search);
-}
-
-function SearchResultPage({ loginUser }) {
+function FavoritePage({ loginUser }) {
     const [fundingList, setFundingList] = useState([]);
     const [currentUser, setCurrentUser] = useState(null);
-    const query = useQuery();
-    const initialSearchTerm = query.get("query") || "";
-    const [inputValue, setInputValue] = useState(initialSearchTerm);
-    const [searchTerm, setSearchTerm] = useState(initialSearchTerm);
     const [selectedCategory, setSelectedCategory] = useState("전체");
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -33,7 +24,7 @@ function SearchResultPage({ loginUser }) {
         setCurrentUser(me || null);
     }, [loginUser]);
 
-    // 🔹 fundingList 초기화 + favorites 기반 liked 설정
+    // 🔹 fundingList 초기화 + favorites 기반 liked 세팅
     useEffect(() => {
         const data = localStorage.getItem("fundingList");
         if (data) {
@@ -49,7 +40,6 @@ function SearchResultPage({ loginUser }) {
 
     // 🔹 좋아요 토글
     const handleLikeToggle = (id, liked) => {
-        // 1. fundingList 업데이트
         const updatedList = fundingList.map(item =>
             item.id === id
                 ? { ...item, liked, likeCount: item.likeCount + (liked ? 1 : -1) }
@@ -58,7 +48,6 @@ function SearchResultPage({ loginUser }) {
         setFundingList(updatedList);
         localStorage.setItem("fundingList", JSON.stringify(updatedList));
 
-        // 2. 회원정보 favorites 업데이트
         if (currentUser) {
             const users = JSON.parse(localStorage.getItem("회원정보")) || [];
             const updatedUsers = users.map(user => {
@@ -76,22 +65,14 @@ function SearchResultPage({ loginUser }) {
         }
     };
 
-    // 카테고리 클릭
     const handleCategoryClick = (cat) => {
         setSelectedCategory(cat);
         setCurrentPage(1);
     };
 
-    // 검색
-    const handleSearchSubmit = () => {
-        setSearchTerm(inputValue);
-        setCurrentPage(1);
-    };
-
-    // 필터링 + 페이징
-    const filteredList = fundingList.filter(item =>
-        (selectedCategory === "전체" || item.category === selectedCategory) &&
-        item.title.toLowerCase().includes(searchTerm.toLowerCase())
+    // 🔹 좋아요한 상품만 필터링 + 카테고리 적용
+    const filteredList = fundingList.filter(
+        item => item.liked && (selectedCategory === "전체" || item.category === selectedCategory)
     );
 
     const totalPages = Math.ceil(filteredList.length / PAGE_SIZE);
@@ -99,18 +80,18 @@ function SearchResultPage({ loginUser }) {
     const paginatedList = filteredList.slice(startIndex, startIndex + PAGE_SIZE);
 
     return (
-        <main className="search-page-container">
+        <main className="category-page-container">
             <CategorySidebar
                 categories={categories}
-                searchTerm={inputValue}
-                onSearchChange={setInputValue}
-                onSearchSubmit={handleSearchSubmit}
+                searchTerm=""
+                onSearchChange={() => {}}
+                onSearchSubmit={() => {}}
                 selectedCategory={selectedCategory}
                 onCategoryClick={handleCategoryClick}
             />
 
-            <div className="search-content">
-                <h2>"{searchTerm}" + {selectedCategory} 검색 결과</h2>
+            <div className="category-content">
+                <h2>좋아요한 상품</h2>
                 {paginatedList.length > 0 ? (
                     <div className="funding-grid">
                         {paginatedList.map(item => (
@@ -122,7 +103,7 @@ function SearchResultPage({ loginUser }) {
                         ))}
                     </div>
                 ) : (
-                    <p className="no-results">검색 결과가 없습니다.</p>
+                    <p className="no-results">좋아요한 상품이 없습니다.</p>
                 )}
 
                 <div className="pagination">
@@ -141,4 +122,4 @@ function SearchResultPage({ loginUser }) {
     );
 }
 
-export default SearchResultPage;
+export default FavoritePage;

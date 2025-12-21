@@ -43,7 +43,7 @@ function Profile({ onBack, onSaveSuccess }) {
                 phone2: phoneParts[1] || '',
                 phone3: phoneParts[2] || '',
                 marketing: user.marketing || '아니오',
-                avorites: user.avorites || [],      // 좋아요한 펀딩 ID 배열
+                favorites: user.avorites || [],      // 좋아요한 펀딩 ID 배열
                 cart: user.cart ||[],           // 장바구니: { fundingId, quantity }
                 orders: user.orders ||[],         // 주문내역: { orderId, items: [{fundingId, quantity}], totalAmount, status, orderDate }
             });
@@ -97,7 +97,7 @@ function Profile({ onBack, onSaveSuccess }) {
             },
             phone: `${formData.phone1}-${formData.phone2}-${formData.phone3}`,
             marketing: formData.marketing,
-            avorites: [],      // 좋아요한 펀딩 ID 배열
+            favorites: [],      // 좋아요한 펀딩 ID 배열
             cart: [],           // 장바구니: { fundingId, quantity }
             orders: [],         // 주문내역: { orderId, items: [{fundingId, quantity}], totalAmount, status, orderDate }
         };

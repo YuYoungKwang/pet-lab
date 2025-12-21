@@ -5,9 +5,10 @@ import CategorySidebar from "../components/common/CategorySidebar";
 import FundingSection from "../components/mainpage/FundingSection";
 import '../styles/MainPage.css';
 
-function MainPage({loginUser}) {
+function MainPage({ loginUser }) {
     const [fundingList, setFundingList] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
+    const [currentUser, setCurrentUser] = useState(null);
     const navigate = useNavigate();
 
     const categories = [
@@ -16,12 +17,30 @@ function MainPage({loginUser}) {
         "의류·액세서리", "식기·급식기", "IT·스마트 용품"
     ];
 
+    // 🔹 회원정보 가져오기
+    useEffect(() => {
+        const users = JSON.parse(localStorage.getItem("회원정보")) || [];
+        const me = users.find(u => u.id === loginUser?.id);
+        setCurrentUser(me || null);
+    }, [loginUser]);
+
+    // 🔹 fundingList 초기화 + currentUser favorites 기반 liked 세팅
     useEffect(() => {
         const data = localStorage.getItem("fundingList");
-        if (data) setFundingList(JSON.parse(data));
-    }, []);
+        if (data) {
+            let list = JSON.parse(data);
+            const favorites = Array.isArray(currentUser?.favorites) ? currentUser.favorites : [];
+            list = list.map(f => ({
+                ...f,
+                liked: favorites.includes(f.id)
+            }));
+            setFundingList(list);
+        }
+    }, [currentUser]);
 
+    // 🔹 좋아요 토글
     const handleLikeToggle = (id, liked) => {
+        // 1. fundingList 업데이트
         const updatedList = fundingList.map(item =>
             item.id === id
                 ? { ...item, liked, likeCount: item.likeCount + (liked ? 1 : -1) }
@@ -29,13 +48,31 @@ function MainPage({loginUser}) {
         );
         setFundingList(updatedList);
         localStorage.setItem("fundingList", JSON.stringify(updatedList));
+
+        // 2. 회원정보 업데이트
+        if (currentUser) {
+            const users = JSON.parse(localStorage.getItem("회원정보")) || [];
+            const updatedUsers = users.map(user => {
+                if (user.id === currentUser.id) {
+                    const newFavorites = liked
+                        ? [...(user.favorites || []), id]
+                        : (user.favorites || []).filter(fid => fid !== id);
+                    user.favorites = newFavorites;
+                    return { ...user, favorites: newFavorites };
+                }
+                return user;
+            });
+            localStorage.setItem("회원정보", JSON.stringify(updatedUsers));
+            setCurrentUser(updatedUsers.find(u => u.id === currentUser.id));
+        }
     };
 
+    // 카테고리 클릭
     const handleCategoryClick = (cat) => {
         navigate(`/category/${cat}`);
     };
 
-    // 🔹 검색 버튼/Enter 클릭 시 SearchResultPage로 이동
+    // 검색
     const handleSearchSubmit = (term) => {
         navigate(`/search?query=${encodeURIComponent(term)}`);
     };
@@ -48,7 +85,7 @@ function MainPage({loginUser}) {
                     categories={categories}
                     searchTerm={searchTerm}
                     onSearchChange={setSearchTerm}
-                    onSearchSubmit={handleSearchSubmit}
+                    onSearchSubmit={() => handleSearchSubmit(searchTerm)}
                     onCategoryClick={handleCategoryClick}
                 />
             </div>

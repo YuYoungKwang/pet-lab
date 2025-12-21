@@ -1,40 +1,51 @@
 import { useNavigate } from 'react-router';
-import '../../styles/FundingCard.css'
+import '../../styles/FundingCard.css';
 
 const IMG_BASE = "/images/funding";
 
 function FundingCard({ funding, onLikeToggle }) {
     const navigate = useNavigate();
 
+    // 🔹 D-day 계산
     const end = new Date(funding.endDate);
     const today = new Date();
     let Dday = Math.ceil((end - today) / (1000 * 60 * 60 * 24));
-    if(Dday < 0){
+    if (Dday < 0) {
         Dday = "펀딩 종료";
-    }else{
-        Dday = "D-"+Dday;
+    } else {
+        Dday = "D-" + Dday;
     }
+
+    // 🔹 진행률 계산
     const progressRate = Math.min(
         100,
         Math.round((funding.currentAmount / funding.targetAmount) * 100)
     );
 
+    // 🔹 좋아요 토글
     const toggleLike = (e) => {
         e.stopPropagation(); // 카드 클릭 이벤트 방지
-        if(onLikeToggle) onLikeToggle(funding.id, !funding.liked);
+        if (onLikeToggle) onLikeToggle(funding.id, !funding.liked);
     };
 
     return (
-        <div className="funding-card" onClick={()=>{ navigate("/fundingDetail/" + funding.id); }}>
+        <div
+            className="funding-card"
+            onClick={() => navigate("/fundingDetail/" + funding.id)}
+        >
             <div className="image-box">
-                <img 
+                <img
                     className="image-box"
                     src={`${IMG_BASE}/${funding.thumbnailImage}`}
                     alt="thumbnail"
                 />
-                <span 
-                    className="heart" 
-                    style={{ color: funding.liked ? "red" : "gray", cursor: "pointer", userSelect: "none"}}
+                <span
+                    className="heart"
+                    style={{
+                        color: funding.liked ? "red" : "gray",
+                        cursor: "pointer",
+                        userSelect: "none"
+                    }}
                     onClick={toggleLike}
                 >
                     ❤

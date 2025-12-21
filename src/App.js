@@ -23,7 +23,7 @@ import CartPage from './pages/CartPage';
 import Board from './pages/Board';
 import FAQ from './pages/FAQ';
 import OrderPage from './pages/OrderPage';
-
+import FavoritePage from './pages/FavoritePage';
 function App() {
   const [loginUser, setLoginUser] = useState(null);
 
@@ -45,8 +45,8 @@ function App() {
         <Route path="/" element={<MainPage loginUser={loginUser}/>} />
         <Route path="/funding" element={<FundingRegister/>} />
         <Route path="/register" element={<Register />} />
-        <Route path="/search" element={<SearchResultPage />} />
-        <Route path="/category/:categoryName" element={<CategoryPage />} />
+        <Route path="/search" element={<SearchResultPage loginUser={loginUser}/>} />
+        <Route path="/category/:categoryName" element={<CategoryPage loginUser={loginUser}/>} />
         <Route path="/login" element={<Login setLoginUser={setLoginUser} />} />
         <Route path="/fundingDetail/:fundingId/community" element={<CommunityMain />}>
           <Route index element={<Navigate to="board/free" replace />} />
@@ -63,6 +63,7 @@ function App() {
         <Route path="/faq" element={<FAQ />} />
         <Route path="/cart" element={<CartPage loginUser={loginUser} />} />
         <Route path="/order" element={<OrderPage loginUser={loginUser} />} />
+        <Route path="/wishlist" element={<FavoritePage loginUser={loginUser} />} />
       </Routes>
       <Footer />
     </div>
