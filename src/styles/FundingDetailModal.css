@@ -59,7 +59,6 @@
 /* 메인 콘텐츠 */
 .funding-main {
     flex: 2;
-    /* 사이드바와 비율 조정 */
 }
 
 /* ===== Sections ===== */
@@ -94,7 +93,6 @@
 .reward-images img {
     width: 100%;
     max-width: 800px;
-    /* 이미지 최대 폭 제한 */
     object-fit: cover;
     border-radius: 6px;
     background: #eee;
@@ -111,29 +109,36 @@
     max-height: 80vh;
     overflow-y: auto;
     background: #fafafa;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
-/* 선택된 리워드 리스트 */
+/* 선택된 리워드 요약 박스 */
 .selected-reward-summary {
     border: 1px solid #ccc;
     border-radius: 6px;
     padding: 10px;
-    margin-bottom: 15px;
     background-color: #fff8e1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
-/* 각 선택 리워드 */
+/* 선택된 리워드 각 항목 */
 .selected-reward-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
-    margin-bottom: 10px;
+    padding-bottom: 6px;
 }
 
+/* 수량 조절 */
 .quantity-control {
     display: flex;
     align-items: center;
     gap: 5px;
-    margin-top: 5px;
 }
 
 .quantity-control button {
@@ -151,27 +156,40 @@
 }
 
 /* 선택 가능한 리워드 리스트 */
-.funding-sidebar>div {
-    cursor: pointer;
+.reward-item {
     padding: 8px 5px;
-    transition: background-color 0.2s;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s, border 0.2s;
+    border: 1px solid transparent;
 }
 
-.funding-sidebar>div:hover {
+.reward-item:hover {
     background-color: #f9f9f9;
 }
 
-/* 후원하기 버튼 */
-.funding-sidebar button {
-    width: 100%;
-    
-    border: none;
-    border-radius: 8px;
-    background: #ff5757;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
+.reward-item.selected {
+    border: 1px solid #4fd1c5;
+    background-color: #e0f7f5;
 }
+
+/* 후원하기 버튼 */
+/* 사이드바 선택 수량 조절 */
+.funding-sidebar .quantity-control button {
+    padding: 6px 10px; /* 더 크게 */
+    font-size: 16px;
+    border-radius: 6px;
+    background-color: #e0f7f5;
+    border: 1px solid #4fd1c5;
+    color: #333;
+}
+
+.funding-sidebar .quantity-control span {
+    min-width: 30px;
+    text-align: center;
+    font-weight: 600;
+}
+
 
 .funding-sidebar button:hover {
     background: #ff3d3d;
@@ -203,6 +221,73 @@
     padding: 80px 0;
     font-size: 18px;
     color: #666;
+}
+
+/* ===== 모달 ===== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    width: 400px;
+    text-align: center;
+}
+
+.modal-buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.modal-buttons button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.modal-buttons .cancel-btn {
+    background: #ccc;
+}
+
+.modal-buttons button:not(.cancel-btn) {
+    background: #4fd1c5;
+    color: #fff;
+}
+
+.modal-buttons button:not(.cancel-btn):hover {
+    background: #38b2ac;
+}
+
+/* 모달 내부 선택 리워드 리스트 */
+.selected-rewards-list {
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    border: 1px solid #eee;
+    padding: 8px;
+    border-radius: 6px;
+    background-color: #fdf6e3;
+}
+
+.selected-reward-item-modal {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
 }
 
 /* ===== 페이지 우측 TOP 버튼 ===== */

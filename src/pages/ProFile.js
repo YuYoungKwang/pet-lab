@@ -42,7 +42,10 @@ function Profile({ onBack, onSaveSuccess }) {
                 phone1: phoneParts[0] || '',
                 phone2: phoneParts[1] || '',
                 phone3: phoneParts[2] || '',
-                marketing: user.marketing || '아니오'
+                marketing: user.marketing || '아니오',
+                avorites: user.avorites || [],      // 좋아요한 펀딩 ID 배열
+                cart: user.cart ||[],           // 장바구니: { fundingId, quantity }
+                orders: user.orders ||[],         // 주문내역: { orderId, items: [{fundingId, quantity}], totalAmount, status, orderDate }
             });
         }
     }, []);
@@ -54,7 +57,7 @@ function Profile({ onBack, onSaveSuccess }) {
         // 비밀번호 필드들 공백 제거
         const noSpaceNames = ['currentPassword', 'password', 'confirmPassword'];
         const finalValue = noSpaceNames.includes(name) ? value.replace(/\s/g, '') : value;
-        
+
         setFormData(prev => ({ ...prev, [name]: finalValue }));
     };
 
@@ -93,11 +96,14 @@ function Profile({ onBack, onSaveSuccess }) {
                 zipcode: formData.addr1
             },
             phone: `${formData.phone1}-${formData.phone2}-${formData.phone3}`,
-            marketing: formData.marketing
+            marketing: formData.marketing,
+            avorites: [],      // 좋아요한 펀딩 ID 배열
+            cart: [],           // 장바구니: { fundingId, quantity }
+            orders: [],         // 주문내역: { orderId, items: [{fundingId, quantity}], totalAmount, status, orderDate }
         };
 
         localStorage.setItem('loginUser', JSON.stringify(updatedUser));
-        
+
         const allUsers = JSON.parse(localStorage.getItem('회원정보') || '[]');
         const updatedList = allUsers.map(u => u.id === formData.id ? updatedUser : u);
         localStorage.setItem('회원정보', JSON.stringify(updatedList));
@@ -109,7 +115,7 @@ function Profile({ onBack, onSaveSuccess }) {
         } else if (onBack) {
             onBack();
         } else {
-            window.location.href = "/mypage"; 
+            window.location.href = "/mypage";
         }
     };
 
@@ -134,7 +140,7 @@ function Profile({ onBack, onSaveSuccess }) {
             localStorage.setItem('회원정보', JSON.stringify(remainingUsers));
             localStorage.removeItem('loginUser');
             alert("탈퇴가 완료되었습니다.");
-            window.location.href = "/"; 
+            window.location.href = "/";
         }
     };
 
@@ -151,13 +157,13 @@ function Profile({ onBack, onSaveSuccess }) {
                         <tr>
                             <th>아이디*</th>
                             <td>
-                                <input 
-                                    type="text" 
-                                    name="id" 
-                                    value={formData.id} 
-                                    readOnly 
+                                <input
+                                    type="text"
+                                    name="id"
+                                    value={formData.id}
+                                    readOnly
                                     tabIndex="-1"
-                                    className="read-only-input" 
+                                    className="read-only-input"
                                     style={{ backgroundColor: '#f5f5f5', cursor: 'not-allowed' }}
                                 />
                             </td>
@@ -166,36 +172,36 @@ function Profile({ onBack, onSaveSuccess }) {
                         <tr>
                             <th>현재 비밀번호*</th>
                             <td>
-                                <input 
-                                    type="password" 
-                                    name="currentPassword" 
-                                    value={formData.currentPassword} 
-                                    onChange={handleChange} 
-                                    placeholder="기존 비밀번호를 입력하세요" 
+                                <input
+                                    type="password"
+                                    name="currentPassword"
+                                    value={formData.currentPassword}
+                                    onChange={handleChange}
+                                    placeholder="기존 비밀번호를 입력하세요"
                                 />
                             </td>
                         </tr>
                         <tr>
                             <th>비밀번호*</th>
                             <td>
-                                <input 
-                                    type="password" 
-                                    name="password" 
-                                    value={formData.password} 
-                                    onChange={handleChange} 
-                                    placeholder="8~20자리 영문,숫자,특수문자 조합" 
+                                <input
+                                    type="password"
+                                    name="password"
+                                    value={formData.password}
+                                    onChange={handleChange}
+                                    placeholder="8~20자리 영문,숫자,특수문자 조합"
                                 />
                             </td>
                         </tr>
                         <tr>
                             <th>비밀번호 재입력*</th>
                             <td>
-                                <input 
-                                    type="password" 
-                                    name="confirmPassword" 
-                                    value={formData.confirmPassword} 
-                                    onChange={handleChange} 
-                                    placeholder="확인을 위해 한번 더 입력하세요" 
+                                <input
+                                    type="password"
+                                    name="confirmPassword"
+                                    value={formData.confirmPassword}
+                                    onChange={handleChange}
+                                    placeholder="확인을 위해 한번 더 입력하세요"
                                 />
                             </td>
                         </tr>

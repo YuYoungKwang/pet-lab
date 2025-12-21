@@ -16,11 +16,11 @@ function MyPage({ loginUser }) {
     // ];
 
     const menuItems = [
-        { id: 'order', title: 'ORDER', sub: '주문내역 조회', icon: '📜', desc: '주문내역을 확인하실 수 있습니다.',path: '/order' },
+        { id: 'order', title: 'CART', sub: '장바구니', icon: '📜', desc: '장바구니을 확인하실 수 있습니다.',path: '/cart' },
         { id: 'profile', title: 'PROFILE', sub: '회원정보', icon: '👤', desc: '개인정보를 관리하는 공간입니다.', path: '/profile'},
         { id: 'wishlist', title: 'WISHLIST', sub: '관심상품', icon: '🎁', desc: '관심상품 목록을 보여드립니다.',path: '/wishlist' },
         { id: 'board', title: 'BOARD', sub: '게시물 관리', icon: '📝', desc: '작성하신 게시물을 관리합니다.',path: '/board' },
-        { id: 'address', title: 'ADDRESS', sub: '배송 주소록 관리', icon: '🚚', desc: '배송지를 등록하고 관리합니다.',path: '/profile' },
+        { id: 'address', title: 'ORDER', sub: '주문조회', icon: '🚚', desc: '주문내역을 확인하실 수 있습니다.',path: '/order' },
         { id: 'faq', title: 'FAQ', sub: '자주 묻는 질문', icon: '🎧', desc: '고객센터 1:1문의',path: '/faq' },
     ];
 
