@@ -36,8 +36,20 @@ function FundingDetail({ loginUser }) {
     const handleSelectReward = (reward, index) => {
         setSelectedRewards(prev => {
             if (prev.find(r => r.index === index)) return prev;
-            const updated = [...prev, { ...reward, index, quantity: 1 }];
-            if (sidebarRef.current) sidebarRef.current.scrollTo({ top: 0, behavior: "smooth" });
+
+            const updated = [
+                ...prev,
+                {
+                    ...reward,
+                    index,
+                    quantity: 1,
+                    fundingId: funding.id, // ✅ fundingId 추가
+                },
+            ];
+
+            if (sidebarRef.current) {
+                sidebarRef.current.scrollTo({ top: 0, behavior: "smooth" });
+            }
             return updated;
         });
     };
@@ -61,16 +73,23 @@ function FundingDetail({ loginUser }) {
             return;
         }
 
-        // 로컬스토리지 회원정보 가져오기
         const members = JSON.parse(localStorage.getItem("회원정보")) || [];
         const memberIndex = members.findIndex(m => m.id === loginUser.id);
         if (memberIndex === -1) return alert("회원 정보를 찾을 수 없습니다.");
 
-        // 장바구니 업데이트
         selectedRewards.forEach(r => {
-            const exist = members[memberIndex].cart.find(item => item.fundingId === r.id);
+            const exist = members[memberIndex].cart.find(
+                item => item.fundingId === r.fundingId && item.rewardIndex === r.index
+            );
             if (exist) exist.quantity += r.quantity;
-            else members[memberIndex].cart.push({ fundingId: r.id, quantity: r.quantity });
+            else members[memberIndex].cart.push({
+                fundingId: r.fundingId,
+                rewardIndex: r.index,
+                title: r.title,
+                price: r.price,
+                description: r.description,
+                quantity: r.quantity,
+            });
         });
 
         localStorage.setItem("회원정보", JSON.stringify(members));
@@ -88,7 +107,6 @@ function FundingDetail({ loginUser }) {
 
         const totalAmount = selectedRewards.reduce((sum, r) => sum + r.price * r.quantity, 0);
 
-        // 1. 회원정보 업데이트
         const members = JSON.parse(localStorage.getItem("회원정보")) || [];
         const memberIndex = members.findIndex(m => m.id === loginUser.id);
         if (memberIndex === -1) return alert("회원 정보를 찾을 수 없습니다.");
@@ -96,14 +114,20 @@ function FundingDetail({ loginUser }) {
         // 주문 추가
         const newOrder = {
             orderId: `order_${Date.now()}`,
-            items: selectedRewards.map(r => ({ fundingId: r.id, quantity: r.quantity })),
+            items: selectedRewards.map(r => ({
+                fundingId: r.fundingId,
+                rewardIndex: r.index,
+                title: r.title,
+                price: r.price,
+                quantity: r.quantity
+            })),
             totalAmount,
             status: "결제완료",
             orderDate: new Date().toISOString(),
         };
         members[memberIndex].orders.push(newOrder);
 
-        // 2. 펀딩 금액 업데이트
+        // 펀딩 금액 업데이트
         const fundingList = JSON.parse(localStorage.getItem("fundingList")) || [];
         const fundingIndex = fundingList.findIndex(f => f.id === funding.id);
         if (fundingIndex !== -1) {

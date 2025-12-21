@@ -19,8 +19,10 @@ import CommunityMain from './pages/community/CommunityMain';
 import PostDetailPage from './pages/community/PostDetailPage';
 import PostListPage from './pages/community/PostListPage';
 import PostWritePage from './pages/community/PostWritePage';
+import CartPage from './pages/CartPage';
 import Board from './pages/Board';
 import FAQ from './pages/FAQ';
+import OrderPage from './pages/OrderPage';
 
 function App() {
   const [loginUser, setLoginUser] = useState(null);
@@ -59,6 +61,8 @@ function App() {
         <Route path="/profile" element={<Profile loginUser={loginUser}/>} />
         <Route path="/board" element={<Board />} />
         <Route path="/faq" element={<FAQ />} />
+        <Route path="/cart" element={<CartPage loginUser={loginUser} />} />
+        <Route path="/order" element={<OrderPage loginUser={loginUser} />} />
       </Routes>
       <Footer />
     </div>
