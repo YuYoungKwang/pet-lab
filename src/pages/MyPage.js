@@ -21,7 +21,7 @@ function MyPage({ loginUser }) {
         { id: 'wishlist', title: 'WISHLIST', sub: '관심상품', icon: '🎁', desc: '관심상품 목록을 보여드립니다.',path: '/wishlist' },
         { id: 'board', title: 'BOARD', sub: '게시물 관리', icon: '📝', desc: '작성하신 게시물을 관리합니다.',path: '/board' },
         { id: 'address', title: 'ADDRESS', sub: '배송 주소록 관리', icon: '🚚', desc: '배송지를 등록하고 관리합니다.',path: '/profile' },
-        { id: 'faq', title: 'FAQ', sub: '자주 묻는 질문', icon: '🎧', desc: '고객센터 1:1문의',path: '/board' },
+        { id: 'faq', title: 'FAQ', sub: '자주 묻는 질문', icon: '🎧', desc: '고객센터 1:1문의',path: '/faq' },
     ];
 
     return (

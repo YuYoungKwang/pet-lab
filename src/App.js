@@ -20,6 +20,7 @@ import PostDetailPage from './pages/community/PostDetailPage';
 import PostListPage from './pages/community/PostListPage';
 import PostWritePage from './pages/community/PostWritePage';
 import Board from './pages/Board';
+import FAQ from './pages/FAQ';
 
 function App() {
   const [loginUser, setLoginUser] = useState(null);
@@ -57,6 +58,7 @@ function App() {
         <Route path="/mypage" element={<MyPage loginUser={loginUser} />} />
         <Route path="/profile" element={<Profile loginUser={loginUser}/>} />
         <Route path="/board" element={<Board />} />
+        <Route path="/faq" element={<FAQ />} />
       </Routes>
       <Footer />
     </div>
