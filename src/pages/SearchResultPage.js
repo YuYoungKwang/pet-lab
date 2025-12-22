@@ -4,7 +4,7 @@ import FundingCard from "../components/common/FundingCard";
 import CategorySidebar from "../components/common/CategorySidebar";
 import '../styles/SearchResultPage.css';
 
-const PAGE_SIZE = 6;
+const PAGE_SIZE = 8;
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
@@ -26,14 +26,14 @@ function SearchResultPage({ loginUser }) {
         "의류·액세서리", "식기·급식기", "IT·스마트 용품"
     ];
 
-    // 🔹 회원정보 가져오기
+    // 회원정보 가져오기
     useEffect(() => {
         const users = JSON.parse(localStorage.getItem("회원정보")) || [];
         const me = users.find(u => u.id === loginUser?.id);
         setCurrentUser(me || null);
     }, [loginUser]);
 
-    // 🔹 fundingList 초기화 + favorites 기반 liked 설정
+    // fundingList 초기화 + favorites 기반 liked 설정
     useEffect(() => {
         const data = localStorage.getItem("fundingList");
         if (data) {
@@ -47,7 +47,7 @@ function SearchResultPage({ loginUser }) {
         }
     }, [currentUser]);
 
-    // 🔹 좋아요 토글
+    // 좋아요 토글
     const handleLikeToggle = (id, liked) => {
         // 1. fundingList 업데이트
         const updatedList = fundingList.map(item =>
@@ -100,14 +100,6 @@ function SearchResultPage({ loginUser }) {
 
     return (
         <main className="search-page-container">
-            <CategorySidebar
-                categories={categories}
-                searchTerm={inputValue}
-                onSearchChange={setInputValue}
-                onSearchSubmit={handleSearchSubmit}
-                selectedCategory={selectedCategory}
-                onCategoryClick={handleCategoryClick}
-            />
 
             <div className="search-content">
                 <h2>"{searchTerm}" + {selectedCategory} 검색 결과</h2>
@@ -137,6 +129,15 @@ function SearchResultPage({ loginUser }) {
                     ))}
                 </div>
             </div>
+
+            <CategorySidebar
+                categories={categories}
+                searchTerm={inputValue}
+                onSearchChange={setInputValue}
+                onSearchSubmit={handleSearchSubmit}
+                selectedCategory={selectedCategory}
+                onCategoryClick={handleCategoryClick}
+            />
         </main>
     );
 }

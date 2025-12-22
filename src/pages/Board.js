@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate, Link } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Container, Table, Button, ButtonGroup, Card } from "react-bootstrap";
 import FundingCard from "../components/common/FundingCard";
 import '../styles/Board.css';
 
-export default function Board() {
+export default function Board({ loginUser }) {
     const navigate = useNavigate();
     const location = useLocation();
 
-    // 1. 상태 관리
+    // 상태 관리
     const [myPosts, setMyPosts] = useState([]);
     const [myFundings, setMyFundings] = useState([]);
     const [currentUser, setCurrentUser] = useState(null);
@@ -16,34 +16,48 @@ export default function Board() {
     const [commentsList, setCommentsList] = useState([]);
     const [fundingList, setFundingList] = useState([]);
 
-    // 2. 초기 데이터 로드
+    // 초기 데이터 로드
     useEffect(() => {
-        const savedUser = localStorage.getItem("currentUser") || localStorage.getItem("loginUser");
-        const user = savedUser ? JSON.parse(savedUser) : null;
-
-        if (!user) {
+        if (!loginUser) {
             alert("로그인이 필요한 페이지입니다.");
             navigate("/login");
             return;
         }
-        setCurrentUser(user);
 
+        // 회원정보에서 현재 로그인 유저 가져오기
+        const users = JSON.parse(localStorage.getItem("회원정보")) || [];
+        const me = users.find(u => u.id === loginUser.id);
+        setCurrentUser(me || null);
+
+        // 게시글, 펀딩 불러오기
         const boardData = JSON.parse(localStorage.getItem("게시글 정보")) || [];
         const savedFundings = JSON.parse(localStorage.getItem("fundingList")) || [];
 
-        setFundingList(savedFundings);
-        setMyPosts(boardData.filter(p => p.author === user.id).reverse());
-        setMyFundings(savedFundings.filter(f => f.createUser === user.id));
+        // fundingList 초기화 후 favorites 기반 liked 세팅
+        const favorites = me?.favorites || [];
+        const updatedFundings = savedFundings.map(f => ({
+            ...f,
+            liked: favorites.includes(f.id)
+        }));
+        setFundingList(updatedFundings);
+
+        // 나의 게시글 / 나의 펀딩
+        setMyPosts(boardData.filter(p => p.author === loginUser.id).reverse());
+        setMyFundings(updatedFundings.filter(f => f.createUser === loginUser.id));
 
         // 댓글은 각 글의 comments 배열로 관리
-        setCommentsList(boardData.flatMap(post => post.comments.map(c => ({ ...c, postId: post.id, fundingId: post.fundingId }))));
+        setCommentsList(boardData.flatMap(post => post.comments.map(c => ({ ...c, postId: post.id, fundingId: post.fundingId }))).filter(p=>p.author === loginUser.id));
+        console.log(commentsList);
 
+        // 쿼리 파라미터 mode
         const queryParams = new URLSearchParams(location.search);
         const mode = queryParams.get("mode");
         if (mode) setViewMode(mode);
-    }, [location.search, navigate]);
+    }, [loginUser, location.search, navigate]);
 
+    // 좋아요 토글 & 회원정보 동기화
     const handleLikeToggle = (id, liked) => {
+        // 1. fundingList 업데이트
         const updatedList = fundingList.map(item =>
             item.id === id
                 ? { ...item, liked, likeCount: item.likeCount + (liked ? 1 : -1) }
@@ -51,6 +65,23 @@ export default function Board() {
         );
         setFundingList(updatedList);
         localStorage.setItem("fundingList", JSON.stringify(updatedList));
+
+        // 2. 회원정보 favorites 업데이트
+        if (currentUser) {
+            const users = JSON.parse(localStorage.getItem("회원정보")) || [];
+            const updatedUsers = users.map(user => {
+                if (user.id === currentUser.id) {
+                    const newFavorites = liked
+                        ? [...(user.favorites || []), id]
+                        : (user.favorites || []).filter(fid => fid !== id);
+                    user.favorites = newFavorites;
+                    return { ...user, favorites: newFavorites };
+                }
+                return user;
+            });
+            localStorage.setItem("회원정보", JSON.stringify(updatedUsers));
+            setCurrentUser(updatedUsers.find(u => u.id === currentUser.id));
+        }
     };
 
     const handlePostDelete = (id) => {
@@ -146,7 +177,7 @@ export default function Board() {
                                             variant="outline-danger"
                                             size="sm"
                                             onClick={(e) => {
-                                                e.stopPropagation(); // 클릭 이벤트 버블링 방지
+                                                e.stopPropagation(); 
                                                 handlePostDelete(post.id);
                                             }}
                                         >
@@ -190,7 +221,7 @@ export default function Board() {
                                                 variant="outline-danger"
                                                 size="sm"
                                                 onClick={(e) => {
-                                                    e.stopPropagation(); // 행 클릭 이벤트 방지
+                                                    e.stopPropagation(); 
                                                     handleCommentDelete(c.id);
                                                 }}
                                             >
@@ -205,7 +236,6 @@ export default function Board() {
                                 </tr>
                             )}
                         </tbody>
-
                     </Table>
                 </Card>
             )}

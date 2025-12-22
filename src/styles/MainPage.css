@@ -1,8 +1,14 @@
+/* 메인 컨테이너 */
 .main-container {
-    padding: 40px 120px;
+    padding: 5vw 10vw; /* 화면 비율 기준으로 padding */
+    box-sizing: border-box;
 }
 
+/* 상단 영역 */
 .top-area {
     display: flex;
-    gap: 20px;
+    gap: 2vw;            /* 화면 너비 기준 gap */
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;      /* 화면이 좁아지면 아이템이 아래로 내려감 */
 }
