@@ -4,7 +4,7 @@ import '../styles/ProFile.css';
 function Profile({ onBack, onSaveSuccess }) {
     const initialState = {
         id: '',
-        currentPassword: '', 
+        currentPassword: '',
         password: '',
         confirmPassword: '',
         name: '',
@@ -19,15 +19,20 @@ function Profile({ onBack, onSaveSuccess }) {
     };
 
     const [formData, setFormData] = useState(initialState);
-    const [dbPassword, setDbPassword] = useState(''); 
+    const [dbPassword, setDbPassword] = useState('');
     const [showModal, setShowModal] = useState(false);
     const [isConfirmed, setIsConfirmed] = useState(false);
 
     useEffect(() => {
         const loginData = localStorage.getItem('loginUser');
         if (loginData) {
-            const user = JSON.parse(loginData);
-            setDbPassword(user.password || ''); 
+            const currentUser = JSON.parse(loginData);
+            // 회원정보 불러오기
+            const members = JSON.parse(localStorage.getItem('회원정보')) || [];
+
+            // 현재 사용자 찾기
+            const user = members.find(t => t.id === currentUser.id);
+            setDbPassword(user.password || '');
 
             const phoneParts = user.phone ? user.phone.split('-') : ['', '', ''];
 
@@ -150,6 +155,8 @@ function Profile({ onBack, onSaveSuccess }) {
             window.location.href = "/";
         }
     };
+
+    console.log(formData);
 
     return (
         <div className="profile-edit-container">

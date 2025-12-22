@@ -59,7 +59,10 @@
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* funding-grid: 반응형 2~3열 그리드 */
 .funding-grid {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* 카드 최소 200px */
     gap: 20px;
+    width: 100%;
 }

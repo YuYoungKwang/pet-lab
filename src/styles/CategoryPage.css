@@ -2,7 +2,7 @@
 .category-page-container {
     display: flex;
     gap: 20px;
-    padding: 20px 100px;
+    padding: 20px 60px; /* 화면폭 고려 */
     background-color: #fff;
 }
 
@@ -19,22 +19,26 @@
     color: #333;
 }
 
+/* funding-grid: 반응형 2~3열 그리드 */
 .funding-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 20px;       /* 카드 사이 간격 */
-    padding: 0 40px; /* 좌우 여백 조금 넉넉하게 */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* 카드 최소 200px */
+    gap: 20px;
+    width: 100%;
 }
 
-/* 페이지네이션 */
+/* 페이지네이션 버튼 */
 .pagination {
-    margin-top: 20px;
     display: flex;
-    gap: 8px;
+    gap: 6px;
+    justify-content: center;
+    margin: 20px auto;
 }
 
-.pagination button {
-    padding: 6px 12px;
+.pagination .pagination-button {
+    width: 50px;
+    padding: 4px 8px;
+    font-size: 14px;
     border: 1px solid #ccc;
     background-color: #fff;
     color: #000;
@@ -43,7 +47,8 @@
     transition: all 0.2s;
 }
 
-.pagination button.active {
+.pagination .pagination-button-active {
+    width: 50px;
     background-color: #007bff;
     color: white;
     border-color: #007bff;
@@ -55,25 +60,10 @@
     border-color: #007bff;
 }
 
+/* 검색 결과 없음 */
 .no-results {
     text-align: center;
     font-size: 16px;
     color: #888;
     margin: 40px 0;
-}
-
-@media (max-width: 1024px) {
-    .funding-grid {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 16px;
-        padding: 0 20px;
-    }
-}
-
-@media (max-width: 768px) {
-    .funding-grid {
-        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-        gap: 12px;
-        padding: 0 12px;
-    }
 }

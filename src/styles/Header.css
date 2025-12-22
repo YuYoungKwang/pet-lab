@@ -1,77 +1,52 @@
-/* 헤더 전체 */
 .header-container {
     display: flex;
     justify-content: space-between;
-    align-items: center; /* 수직 중앙 정렬 */
-    margin: 0 50px;
-    height: 64px;
+    align-items: center;
+    margin: 0 5vw;
+    height: auto;
+    padding: 1vh 0;
+    /* 최소 높이 지정 */
     border-bottom: 1.5px solid #000;
     box-sizing: border-box;
-    background-color: #fff; /* 배경색 */
 }
 
-/* 로고 */
 .header-logo .logo-img {
-    height: 40px; /* 원하는 높이 */
-    width: auto;  /* 비율 유지 */
+    height: auto;
+    width: clamp(30px, 10vh, 100px);
     cursor: pointer;
+}
+
+/* 로고 컨테이너 */
+.header-logo {
+    display: flex;
+    align-items: center;
 }
 
 /* 메뉴 */
 .header-right {
     display: flex;
-    gap: 0px; /* 메뉴 간 간격 */
+    gap: 0.5vw;
+    /* 메뉴 간 간격을 화면 비율로 */
 }
 
+/* 메뉴 아이템 */
 .header-menu {
     font-weight: 700;
     font-family: Arial, sans-serif;
-    font-size: 16px;
+    font-size: 1.5vw;
+    /* 화면 너비 기준 글자 크기 */
     cursor: pointer;
-    padding: 6px 10px; /* 배경 변화용 여백 */
-    border-radius: 4px; /* 모서리 살짝 둥글게 */
+    padding: 0.3vh 0.3vw;
+    /* 화면 비율 기준 패딩 */
+    border-radius: 0.5vh;
+    /* 화면 높이 기준 둥근 모서리 */
     transition: all 0.2s ease-in-out;
 }
 
 /* 마우스 오버 효과 */
 .header-menu:hover {
-    background-color: #000; /* 검정 배경 */
-    color: #fff;            /* 흰색 글자 */
-}
-
-
-/* 반응형 - 화면 768px 이하 */
-@media screen and (max-width: 768px) {
-    .header-container {
-        padding: 0 20px;
-    }
-
-    .header-right {
-        gap: 16px;
-        font-size: 14px;
-    }
-
-    .header-logo .logo-img {
-        height: 32px;
-    }
-}
-
-/* 모바일용 - 화면 480px 이하 */
-@media screen and (max-width: 480px) {
-    .header-container {
-        flex-direction: column;
-        height: auto;
-        padding: 10px 20px;
-    }
-
-    .header-right {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 12px;
-        margin-top: 8px;
-    }
-
-    .header-logo .logo-img {
-        height: 28px;
-    }
+    background-color: #000;
+    /* 검정 배경 */
+    color: #fff;
+    /* 흰색 글자 */
 }

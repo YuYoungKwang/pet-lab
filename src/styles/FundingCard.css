@@ -1,6 +1,6 @@
 /* 카드 전체 */
 .funding-card {
-    /* width 제거: 그리드에서 자동 조절 */
+    width: 100%;
     background-color: #fff;
     border-radius: 8px;
     overflow: hidden;
