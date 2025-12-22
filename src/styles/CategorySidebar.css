@@ -40,3 +40,9 @@
     background-color: var(--color-black);
     color: var(--color-white);
 }
+
+/* Active 상태 추가 */
+.category-list li.active {
+    background-color: var(--color-black);
+    color: var(--color-white);
+}

@@ -9,7 +9,9 @@
     --color-gray: #888;
 
     --font-size-small: 14px;
-    --font-size-normal: 16px;
+
+
+    --font-size-normal: 16px; /* Updated to use this variable in menu font size */
     --font-size-large: 24px;
 }
 
@@ -48,7 +50,8 @@
 .header-menu {
     font-weight: 700;
     font-family: Arial, sans-serif;
-    font-size: 1.5vw;
+
+    font-size: var(--font-size-normal); /* 변경된 부분 */
     /* 화면 너비 기준 글자 크기 */
     cursor: pointer;
     padding: 0.3vh 0.3vw;

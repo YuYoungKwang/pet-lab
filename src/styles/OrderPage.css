@@ -1,58 +1,58 @@
 /* OrderPage.css */
 .order-page {
-    padding: 20px;
-    max-width: 900px;
-    margin: 0 auto;
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .order-card {
   border: 1px solid var(--color-light-border);
-    border-radius: 10px;
-    padding: 16px;
-    margin-bottom: 20px;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 20px;
   background-color: var(--color-white);
   box-shadow: 0 2px 5px var(--color-card-shadow);
 }
 
 .order-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
 }
 
 .order-info {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .order-img {
-    width: 80px;
-    height: 80px;
-    border-radius: 8px;
-    object-fit: cover;
-    flex-shrink: 0;
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
 }
 
 .order-text h3 {
-    margin: 0 0 4px 0;
+  margin: 0 0 4px 0;
   font-size: var(--font-size-normal);
 }
 
 .order-text p {
-    margin: 0;
+  margin: 0;
   font-size: var(--font-size-small);
   color: var(--color-comment-text);
 }
 
 .order-status {
-    margin-left: 6px;
-    font-weight: bold;
-    padding: 4px 8px;
-    border-radius: 12px;
+  margin-left: 6px;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 12px;
   font-size: var(--font-size-order-status);
-    text-align: center;
+  text-align: center;
   color: var(--color-black);
 }
 
@@ -78,26 +78,28 @@
 
 .order-items {
   border-top: 1px solid var(--color-lighter-border);
-    padding-top: 12px;
+  padding-top: 12px;
 }
 
 .order-item {
-    margin-bottom: 12px;
+  margin-bottom: 12px;
   font-size: var(--font-size-small);
   color: var(--color-dark-gray);
 }
 
 .order-total {
-    text-align: right;
-    margin-top: 12px;
+  text-align: right;
+  margin-top: 12px;
   font-size: var(--font-size-normal);
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .order-cancle-button {
-    margin-top: 28px;
-    padding: 4px 8px;
-    display: flex;
+  margin-top: 28px;
+  padding: 4px 8px;
+  display: flex;
+  color: var(--color-white);
   background-color: var(--color-delete-button);
   font-size: var(--font-size-smaller);
+  border: 0;
 }

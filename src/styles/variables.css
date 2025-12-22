@@ -1,0 +1,23 @@
+/* 색상 변수 */
+:root {
+    --color-background: #282c34;
+    --color-link: #61dafb;
+    --color-white: #fff;
+    --color-dark-gray: #333;
+    --color-blue: #007bff;
+    --color-light-gray: #ccc;
+    --color-darker-blue: #0056b3;
+    --color-gray: #888;
+    --color-submit-button: #4CAF50; /* 예제 추가 */
+    --color-black: #000;
+    --color-light-border: #e0e0e0;
+    --color-medium-gray: #606060;
+    --color-disabled-text: #A9A9A9;
+    --color-lighter-border: #d3d3d3;
+    --color-modal-overlay: rgba(0, 0, 0, 0.5);
+
+    /* 폰트 크기 변수 */
+    --font-size-small: 14px;
+    --font-size-normal: 16px;
+    --font-size-large: 24px;
+}

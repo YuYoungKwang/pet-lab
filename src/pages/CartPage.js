@@ -58,25 +58,49 @@ function CartPage({ loginUser }) {
         const memberIndex = members.findIndex(m => m.id === loginUser.id);
         if (memberIndex === -1) return;
 
-        const order = {
-            orderId: "order_" + new Date().getTime(),
-            items: cartItems.map((item) => ({
-                fundingId: item.fundingId,
-                rewardIndex: item.rewardIndex,
-                title: item.title,
-                price: item.price,
-                quantity: item.quantity
-            })),
-            totalAmount,
-            status: "결제완료",
-            orderDate: new Date().toISOString()
-        };
+        // 각각의 주문을 만들기 위한 배열
+        const orders = cartItems.reduce((acc, item) => {
+            const existingOrderIndex = acc.findIndex(order =>
+                order.items.some(orderItem => orderItem.fundingId === item.fundingId)
+            );
+
+            // 새로운 주문 생성
+            if (existingOrderIndex === -1) {
+                acc.push({
+                    orderId: "order_" + new Date().getTime(),
+                    items: [{
+                        fundingId: item.fundingId,
+                        rewardIndex: item.rewardIndex,
+                        title: item.title,
+                        price: item.price,
+                        quantity: item.quantity
+                    }],
+                    totalAmount: item.price * item.quantity,
+                    status: "결제완료",
+                    orderDate: new Date().toISOString()
+                });
+            } else {
+                // 기존 주문에 수량 추가
+                const existingOrder = acc[existingOrderIndex];
+                existingOrder.items.push({
+                    fundingId: item.fundingId,
+                    rewardIndex: item.rewardIndex,
+                    title: item.title,
+                    price: item.price,
+                    quantity: item.quantity
+                });
+                existingOrder.totalAmount += item.price * item.quantity;
+            }
+
+            return acc;
+        }, []);
 
         // 회원 주문 추가
         members[memberIndex].orders = members[memberIndex].orders || [];
-        members[memberIndex].orders.push(order);
+        members[memberIndex].orders.push(...orders);
+        localStorage.setItem("회원정보", JSON.stringify(members));
 
-        // 펀딩 currentAmount 업데이트
+        // Funding currentAmount 업데이트
         const fundingListUpdated = [...fundingList];
         cartItems.forEach(item => {
             const fundingIndex = fundingListUpdated.findIndex(f => f.id === item.fundingId);
@@ -92,10 +116,8 @@ function CartPage({ loginUser }) {
         members[memberIndex].cart = [];
         setCartItems([]);
 
-        localStorage.setItem("회원정보", JSON.stringify(members));
         alert("결제가 완료되었습니다!");
     };
-
     return (
         <div className="cart-page">
             <h1>장바구니</h1>
@@ -113,7 +135,7 @@ function CartPage({ loginUser }) {
                                 <div key={index} className="cart-item">
                                     {thumbnailImage && (
                                         <img
-                                            src={'images/funding/'+thumbnailImage}
+                                            src={'images/funding/' + thumbnailImage}
                                             alt="리워드 이미지"
                                             className="cart-item-img"
                                         />

@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
-import '../../styles/CategorySidebar.css'
+import '../../styles/CategorySidebar.css';
 
 function CategorySidebar({
     categories = [],
-    searchTerm = "",
+    searchTerm = '',
     onSearchChange = () => {},
     onSearchSubmit = () => {},
     onCategoryClick = () => {},
-    selectedCategory = ""
+    selectedCategory = '',
 }) {
     const [input, setInput] = useState(searchTerm);
 
@@ -18,7 +18,7 @@ function CategorySidebar({
 
     const handleSubmit = () => {
         onSearchSubmit(input);
-    }
+    };
 
     return (
         <aside className="category-box">
@@ -41,7 +41,7 @@ function CategorySidebar({
                     <li
                         key={c}
                         onClick={() => onCategoryClick(c)}
-                        className={c === selectedCategory ? "active" : ""}
+                        className={c === selectedCategory ? 'active' : ''} // 선택된 카테고리 강조
                     >
                         {c}
                     </li>
@@ -52,3 +52,4 @@ function CategorySidebar({
 }
 
 export default CategorySidebar;
+
