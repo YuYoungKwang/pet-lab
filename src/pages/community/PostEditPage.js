@@ -35,7 +35,8 @@ export default function PostEditPage() {
             return;
         }
 
-        updatePost(post.id, { title, content });
+        const success = updatePost(post.id, { title, content });
+        if (!success) return;
         alert("게시글이 수정되었습니다.");
         navigate(`../post/${post.id}`);
     };

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate, useParams, useOutletContext } from "react-router-dom";
 import { Container, Card, Table, Button, Form } from "react-bootstrap";
 import FundingHeader from "../../components/common/FundingHeader";
+import "../../styles/Post.css";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -103,10 +104,10 @@ export default function PostListPage() {
                     <Table hover responsive className="mb-3">
                         <thead>
                             <tr>
-                                <th style={{ width: "15%" }}>번호</th>
-                                <th>글쓴이</th>
-                                <th>제목</th>
-                                <th style={{ width: "25%" }}>작성일</th>
+                                <th style={{ width: "11%" }}>번호</th>
+                                <th style={{ width: "15%" }}>글쓴이</th>
+                                <th style={{ width: "47%" }}>제목</th>
+                                <th style={{ width: "22%" }}>작성일</th>
                             </tr>
                         </thead>
                         <tbody>

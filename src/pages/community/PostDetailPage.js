@@ -99,15 +99,17 @@ export default function PostDetailPage() {
                         return (
                             <div key={c.id} className="comment">
                                 <div className="comment-header">
-                                    <strong className="comment-author">{c.author}</strong>
-                                    <span className="comment-date">{c.date}</span>
+                                    <div className="comment-info">
+                                        <strong className="comment-author">{c.author}</strong>
+                                        <span className="comment-date">{c.date}</span>
+                                    </div>
 
                                     {/* ✅ 댓글 작성자만 삭제 가능 */}
                                     {isCommentAuthor && (
                                         <Button
                                             size="sm"
                                             variant="link"
-                                            className="text-danger"
+                                            className="comment-delete"
                                             onClick={() => {
                                                 if (!window.confirm("댓글을 삭제하시겠습니까?")) return;
                                                 deleteComment(post.id, c.id);

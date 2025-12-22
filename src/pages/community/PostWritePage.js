@@ -13,8 +13,8 @@ export default function PostWritePage() {
 
 
     const submit = () => {
-        if (!title || !content) return;
-        createPost({ title, content, category });
+        const success = createPost({ title, content, category });
+        if (!success) return;
         navigate(`../board/${category}`);
     };
 

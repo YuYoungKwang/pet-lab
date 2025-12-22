@@ -40,12 +40,25 @@ export default function CommunityMain() {
         ✏️ 게시글 수정
     ========================= */
     const updatePost = (postId, updatedData) => {
+        if (!updatedData.title?.trim()) {
+            alert("제목을 입력해주세요.");
+            return false;
+        }
+
+        if (!updatedData.content?.trim()) {
+            alert("내용을 입력해주세요.");
+            return false;
+        }
+
         setPosts(prev =>
             prev.map(p =>
                 p.id === postId ? { ...p, ...updatedData } : p
             )
         );
+
+        return true;
     };
+
 
     /* =========================
         🗑 댓글 삭제
@@ -71,40 +84,79 @@ export default function CommunityMain() {
         ? posts.filter(p => p.fundingId === Number(fundingId))
         : posts;
 
+    const ALLOWED_CATEGORIES = ["free", "info", "qna", "feedback"];
+
     const createPost = ({ title, content, category }) => {
-        if (!loginUser) return;
+        if (!loginUser) return false;
+
+        if (!title || !title.trim()) {
+            alert("제목을 입력해주세요.");
+            return false;
+        }
+
+        if (!content || !content.trim()) {
+            alert("내용을 입력해주세요.");
+            return false;
+        }
+
+        if (!ALLOWED_CATEGORIES.includes(category)) {
+            alert("올바르지 않은 카테고리입니다.");
+            return false;
+        }
+
+        if (title.length > 100) {
+            alert("제목은 100자 이내로 입력해주세요.");
+            return false;
+        }
+
+        if (content.length > 2000) {
+            alert("내용은 2000자 이내로 입력해주세요.");
+            return false;
+        }
 
         const newPost = {
             id: Date.now(),
             fundingId: Number(fundingId),
-            title,
-            content,
+            title: title.trim(),
+            content: content.trim(),
             category,
             author: loginUser.id,
             views: 0,
             comments: [],
             date: new Date().toLocaleDateString(),
         };
+
         setPosts(prev => [newPost, ...prev]);
+        return true;   // ✅ 성공
     };
 
+
     const addComment = (postId, text) => {
-        if (!loginUser) return;
-        setPosts(prev =>
-            prev.map(p =>
-                p.id === postId
-                    ? { ...p, comments: [...p.comments, {
-                                id: Date.now(),
-                                author: loginUser.id, // ⭐ 댓글 작성자
-                                text,
-                                date: new Date().toLocaleString(),
-                            },
+        if (!text || !text.trim()) {
+            alert("댓글을 입력해주세요.");
+            return;
+        }
+
+        setPosts((prev) =>
+            prev.map((p) => {
+                if (p.id !== postId) return p;
+
+                return {
+                    ...p,
+                    comments: [
+                        ...p.comments,
+                        {
+                            id: Date.now(),
+                            author: loginUser.id,
+                            text: text.trim(),
+                            date: new Date().toLocaleString(),
+                        },
                     ],
-                }
-                : p
-            )
+                };
+            })
         );
     };
+
 
     const increaseView = (postId) => {
         setPosts(prev =>
