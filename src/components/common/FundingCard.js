@@ -6,23 +6,25 @@ const IMG_BASE = "/images/funding";
 function FundingCard({ funding, onLikeToggle }) {
     const navigate = useNavigate();
 
-    // 🔹 D-day 계산
+    // D-day 계산
     const end = new Date(funding.endDate);
     const today = new Date();
     let Dday = Math.ceil((end - today) / (1000 * 60 * 60 * 24));
     if (Dday < 0) {
         Dday = "펀딩 종료";
-    } else {
+    } else if(Dday > 0){
         Dday = "D-" + Dday;
+    } else{
+        Dday = "D-day"
     }
 
-    // 🔹 진행률 계산
+    // 진행률 계산
     const progressRate = Math.min(
         100,
         Math.round((funding.currentAmount / funding.targetAmount) * 100)
     );
 
-    // 🔹 좋아요 토글
+    // 좋아요 토글
     const toggleLike = (e) => {
         e.stopPropagation(); // 카드 클릭 이벤트 방지
         if (onLikeToggle) onLikeToggle(funding.id, !funding.liked);
