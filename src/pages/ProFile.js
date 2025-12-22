@@ -4,7 +4,7 @@ import '../styles/ProFile.css';
 function Profile({ onBack, onSaveSuccess }) {
     const initialState = {
         id: '',
-        currentPassword: '', // [추가] 현재 비밀번호 입력용
+        currentPassword: '', 
         password: '',
         confirmPassword: '',
         name: '',
@@ -19,7 +19,7 @@ function Profile({ onBack, onSaveSuccess }) {
     };
 
     const [formData, setFormData] = useState(initialState);
-    const [dbPassword, setDbPassword] = useState(''); // [추가] 기존 비번 대조용
+    const [dbPassword, setDbPassword] = useState(''); 
     const [showModal, setShowModal] = useState(false);
     const [isConfirmed, setIsConfirmed] = useState(false);
 
@@ -27,7 +27,7 @@ function Profile({ onBack, onSaveSuccess }) {
         const loginData = localStorage.getItem('loginUser');
         if (loginData) {
             const user = JSON.parse(loginData);
-            setDbPassword(user.password || ''); // 로컬스토리지의 실제 비번 저장
+            setDbPassword(user.password || ''); 
 
             const phoneParts = user.phone ? user.phone.split('-') : ['', '', ''];
 
@@ -43,9 +43,9 @@ function Profile({ onBack, onSaveSuccess }) {
                 phone2: phoneParts[1] || '',
                 phone3: phoneParts[2] || '',
                 marketing: user.marketing || '아니오',
-                favorites: user.avorites || [],      // 좋아요한 펀딩 ID 배열
-                cart: user.cart ||[],           // 장바구니: { fundingId, quantity }
-                orders: user.orders ||[],         // 주문내역: { orderId, items: [{fundingId, quantity}], totalAmount, status, orderDate }
+                favorites: user.favorites || [],
+                cart: user.cart || [],
+                orders: user.orders || [],
             });
         }
     }, []);
@@ -54,7 +54,6 @@ function Profile({ onBack, onSaveSuccess }) {
         const { name, value } = e.target;
         if (name === 'id') return;
 
-        // 비밀번호 필드들 공백 제거
         const noSpaceNames = ['currentPassword', 'password', 'confirmPassword'];
         const finalValue = noSpaceNames.includes(name) ? value.replace(/\s/g, '') : value;
 
@@ -62,7 +61,6 @@ function Profile({ onBack, onSaveSuccess }) {
     };
 
     const validateFields = () => {
-        // [추가] 현재 비밀번호가 로컬스토리지 값과 일치하는지 먼저 확인
         if (formData.currentPassword !== dbPassword) {
             alert('현재 비밀번호가 일치하지 않습니다.');
             return false;
@@ -97,9 +95,9 @@ function Profile({ onBack, onSaveSuccess }) {
             },
             phone: `${formData.phone1}-${formData.phone2}-${formData.phone3}`,
             marketing: formData.marketing,
-            favorites: [],      // 좋아요한 펀딩 ID 배열
-            cart: [],           // 장바구니: { fundingId, quantity }
-            orders: [],         // 주문내역: { orderId, items: [{fundingId, quantity}], totalAmount, status, orderDate }
+            favorites: formData.favorites,
+            cart: formData.cart,
+            orders: formData.orders
         };
 
         localStorage.setItem('loginUser', JSON.stringify(updatedUser));
@@ -125,6 +123,15 @@ function Profile({ onBack, onSaveSuccess }) {
                 ...initialState,
                 id: prev.id
             }));
+        }
+    };
+
+    // [추가] 취소 버튼 클릭 시 마이페이지로 이동하는 함수
+    const handleCancel = () => {
+        if (onBack) {
+            onBack(); // 부모로부터 전달된 뒤로가기 기능이 있다면 실행
+        } else {
+            window.location.href = "/mypage"; // 없다면 마이페이지로 이동
         }
     };
 
@@ -168,7 +175,6 @@ function Profile({ onBack, onSaveSuccess }) {
                                 />
                             </td>
                         </tr>
-                        {/* [수정] 현재 비밀번호 입력 필드 추가 */}
                         <tr>
                             <th>현재 비밀번호*</th>
                             <td>
@@ -260,7 +266,8 @@ function Profile({ onBack, onSaveSuccess }) {
             <div className="main-button-group">
                 <button className="btn-save" onClick={handleSave}>입력정보등록</button>
                 <button className="btn-reset" onClick={handleReset}>다시입력</button>
-                <button className="btn-cancel" onClick={() => onBack && onBack()}>취소</button>
+                {/* [수정] handleCancel 함수를 연결함 */}
+                <button className="btn-cancel" onClick={handleCancel}>취소</button>
                 <button className="btn-leave" onClick={() => setShowModal(true)}>회원탈퇴</button>
             </div>
 
