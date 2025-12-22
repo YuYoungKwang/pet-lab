@@ -47,24 +47,33 @@
 }
 
 .order-status {
+    margin-left: 6px;
     font-weight: bold;
     padding: 4px 8px;
     border-radius: 12px;
     font-size: 12px;
     text-align: center;
-    color: #fff;
+    color: #000000;
 }
 
 .order-status.결제완료 {
-    background-color: #4caf50;
+    background: #e0f2ff;
+    color: #0077cc;
 }
 
 .order-status.배송중 {
-    background-color: #2196f3;
+    background: #fff4e5;
+    color: #ff9800;
 }
 
 .order-status.배송완료 {
-    background-color: #ff9800;
+    background: #e6f4ea;
+    color: #2e7d32;
+}
+
+.order-status.취소됨 {
+    background: #fbeaea;
+    color: #d32f2f;
 }
 
 .order-items {
@@ -83,4 +92,12 @@
     margin-top: 12px;
     font-size: 16px;
     font-weight: bold;
+}
+
+.order-cancle-button {
+    background-color: red;
+    margin-top: 28px;
+    padding: 4px 8px;
+    font-size: 13px;
+    display: flex;
 }

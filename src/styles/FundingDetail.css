@@ -111,6 +111,7 @@
     max-height: 80vh;
     overflow-y: auto;
     background: #fafafa;
+    scrollbar-width: none;
 }
 
 /* 선택된 리워드 리스트 */
