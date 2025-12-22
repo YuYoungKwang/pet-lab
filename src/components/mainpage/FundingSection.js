@@ -7,7 +7,11 @@ function FundingSection({ title, fundingList, onLikeToggle }) {
 
     // 종료되지 않은 펀딩만
     const activeList = fundingList.filter(
-        f => new Date(f.endDate) >= now
+        f => {
+            const end = new Date(f.endDate);
+            end.setHours(23, 59, 59, 999); // 오늘 끝까지
+            return end >= now;
+        }
     );
 
     let sortedList = [];
