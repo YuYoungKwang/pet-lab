@@ -23,3 +23,8 @@
     margin-top: 4px;
     font-size: 0.95rem;
 }
+
+.post-action-buttons {
+    display: flex;
+    gap: 6px;
+}

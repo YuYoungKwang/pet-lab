@@ -24,6 +24,8 @@ import Board from './pages/Board';
 import FAQ from './pages/FAQ';
 import OrderPage from './pages/OrderPage';
 import FavoritePage from './pages/FavoritePage';
+import PostEditPage from './pages/community/PostEditPage';
+
 function App() {
   const [loginUser, setLoginUser] = useState(null);
 
@@ -53,6 +55,7 @@ function App() {
           <Route path="board/:category" element={<PostListPage />} />
           <Route path="write" element={<PostWritePage />} />
           <Route path="post/:id" element={<PostDetailPage />} />
+          <Route path="board/:category/edit/:id" element={<PostEditPage />} />
         </Route>
         <Route path="/fundingDetail/:fundingId" element={<FundingDetail loginUser={loginUser}/>} />
         <Route path="/fundingEdit/:fundingId" element={<FundingEdit loginUser={loginUser}/>} />

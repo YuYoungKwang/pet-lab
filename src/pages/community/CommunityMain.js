@@ -29,6 +29,40 @@ export default function CommunityMain() {
         return saved ? JSON.parse(saved) : [];
     });
 
+    /* =========================
+        🗑 게시글 삭제
+    ========================= */
+    const deletePost = (postId) => {
+        setPosts(prev => prev.filter(p => p.id !== postId));
+    };
+
+    /* =========================
+        ✏️ 게시글 수정
+    ========================= */
+    const updatePost = (postId, updatedData) => {
+        setPosts(prev =>
+            prev.map(p =>
+                p.id === postId ? { ...p, ...updatedData } : p
+            )
+        );
+    };
+
+    /* =========================
+        🗑 댓글 삭제
+    ========================= */
+    const deleteComment = (postId, commentId) => {
+        setPosts(prev =>
+            prev.map(p =>
+                p.id === postId
+                    ? {
+                        ...p,
+                        comments: p.comments.filter(c => c.id !== commentId)
+                    }
+                    : p
+            )
+        );
+    };
+
     useEffect(() => {
         localStorage.setItem("게시글 정보", JSON.stringify(posts));
     }, [posts]);
@@ -89,6 +123,9 @@ export default function CommunityMain() {
                     createPost,
                     addComment,
                     increaseView,
+                    deletePost,
+                    updatePost,
+                    deleteComment,
                 }}
             />
         </div>
