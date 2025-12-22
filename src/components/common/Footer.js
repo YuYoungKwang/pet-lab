@@ -26,9 +26,9 @@ function Footer() {
             </div>
 
             {modalContent && (
-                <div className="modal-overlay" onClick={closeModal}>
-                    <div className="modal-content" onClick={e => e.stopPropagation()}>
-                        <button className="modal-close" onClick={closeModal}>X</button>
+                <div className="footer-modal-overlay" onClick={closeModal}>
+                    <div className="footer-modal-content" onClick={e => e.stopPropagation()}>
+                        <button className="footer-modal-close" onClick={closeModal}>X</button>
                         {modalContent === 'terms' && <Terms />}
                         {modalContent === 'privacy' && <Privacy />}
                         {modalContent === 'about' && <About />}
