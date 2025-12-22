@@ -6,12 +6,12 @@
 }
 
 .order-card {
-    border: 1px solid #ddd;
+  border: 1px solid var(--color-light-border);
     border-radius: 10px;
     padding: 16px;
     margin-bottom: 20px;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  background-color: var(--color-white);
+  box-shadow: 0 2px 5px var(--color-card-shadow);
 }
 
 .order-header {
@@ -37,13 +37,13 @@
 
 .order-text h3 {
     margin: 0 0 4px 0;
-    font-size: 16px;
+  font-size: var(--font-size-normal);
 }
 
 .order-text p {
     margin: 0;
-    font-size: 14px;
-    color: #555;
+  font-size: var(--font-size-small);
+  color: var(--color-comment-text);
 }
 
 .order-status {
@@ -51,53 +51,53 @@
     font-weight: bold;
     padding: 4px 8px;
     border-radius: 12px;
-    font-size: 12px;
+  font-size: var(--font-size-order-status);
     text-align: center;
-    color: #000000;
+  color: var(--color-black);
 }
 
 .order-status.결제완료 {
-    background: #e0f2ff;
-    color: #0077cc;
+  background: var(--color-order-status-1);
+  color: var(--color-order-status-text-1);
 }
 
 .order-status.배송중 {
-    background: #fff4e5;
-    color: #ff9800;
+  background: var(--color-order-status-2);
+  color: var(--color-order-status-text-2);
 }
 
 .order-status.배송완료 {
-    background: #e6f4ea;
-    color: #2e7d32;
+  background: var(--color-order-status-3);
+  color: var(--color-order-status-text-3);
 }
 
 .order-status.취소됨 {
-    background: #fbeaea;
-    color: #d32f2f;
+  background: var(--color-order-status-4);
+  color: var(--color-order-status-text-4);
 }
 
 .order-items {
-    border-top: 1px solid #eee;
+  border-top: 1px solid var(--color-lighter-border);
     padding-top: 12px;
 }
 
 .order-item {
     margin-bottom: 12px;
-    font-size: 14px;
-    color: #333;
+  font-size: var(--font-size-small);
+  color: var(--color-dark-gray);
 }
 
 .order-total {
     text-align: right;
     margin-top: 12px;
-    font-size: 16px;
+  font-size: var(--font-size-normal);
     font-weight: bold;
 }
 
 .order-cancle-button {
-    background-color: red;
     margin-top: 28px;
     padding: 4px 8px;
-    font-size: 13px;
     display: flex;
+  background-color: var(--color-delete-button);
+  font-size: var(--font-size-smaller);
 }

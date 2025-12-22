@@ -8,7 +8,7 @@
 /* 테이블 레이아웃 */
 .edit-table {
     width: 100%;
-    border-top: 2px solid #333;
+  border-top: 2px solid var(--color-dark-gray);
     border-collapse: collapse;
 }
 
@@ -16,214 +16,220 @@
     width: 150px;
     padding: 15px;
     text-align: left;
-    font-size: 14px;
-    border-bottom: 1px solid #080808;
-    background-color: #fff;
+  font-size: var(--font-size-small);
+  background-color: var(--color-white);
+  border-bottom: 1px solid var(--color-very-dark);
 }
 
 .edit-table td {
     padding: 13px;
-    border-bottom: 1px solid rgb(10, 10, 10);
+  border-bottom: 1px solid var(--color-very-dark);
 }
 
 .edit-table input {
     height: 40px;
-    border: 1px solid #141414;
-    border-radius: 4px;
-    padding: 0 10px;
-    box-sizing: border-box;
     width: 100%;
     max-width: 800px;
+  padding: 0 10px;
+  border: 1px solid var(--color-input-border);
+    border-radius: 4px;
+  box-sizing: border-box;
 }
 
 /* 주소 섹션 - 우편번호 버튼 크기 고정  */
 .address-group {
     display: flex;
-    flex-direction: column;
+  flex-direction: column;
     gap: 8px;
 }
 
 .address-row-top {
     display: flex;
-    align-items: center;
+  align-items: center;
     gap: 10px;
-    width: 100%;
+  width: 100%;
 }
 
 .postcode-input {
-    width: 320px !important;
-    flex: 0 0 auto;
+  width: 320px !important;
+  flex: 0 0 auto;
 }
 
 .post-btn {
-    width: 80px !important;
-    /* 버튼 가로 고정 */
-    height: 38px;
-    background: white;
-    border: 1px solid rgb(15, 14, 14);
-    color: black;
+  width: 80px !important;
+  /* 버튼 가로 고정 */
+  height: 38px;
+  background: var(--color-white);
+  border: 1px solid var(--color-input-border);
+  color: var(--color-black);
     cursor: pointer;
-    font-size: 13px;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex: 0 0 auto;
-    /* 부모 flex-grow 영향을 받지 않도록 설정 */
-    padding: 0;
-    margin: 0;
+  font-size: var(--font-size-smaller);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  /* 부모 flex-grow 영향을 받지 않도록 설정 */
+  padding: 0;
+  margin: 0;
 }
 
 .address-full {
-    width: 100%;
-    max-width: 700px !important;
+  width: 100%;
+  max-width: 700px !important;
 }
 
 /* 전화번호 및 마케팅 정렬 */
 .phone-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .phone-wrapper input {
-    width: 150px !important;
-    text-align: center;
+  width: 150px !important;
+  text-align: center;
 }
 
 .marketing-flex {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    height: 38px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  height: 38px;
 }
 
 .radio-item {
-    display: flex;
-    align-items: center;
-    gap: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
     cursor: pointer;
 }
 
-.radio-item input[type="radio"] {
-    width: 18px !important;
-    height: 18px !important;
-    margin: 0;
+.radio-item input[type='radio'] {
+  width: 18px !important;
+  height: 18px !important;
+  margin: 0;
 }
 
 /* 안내문구 디자인 */
 .info-footer-box {
-    background-color: #f7f0f0;
-    border: 1px solid #ebe3e3;
-    padding: 15px;
-    margin-top: 20px;
+  background-color: var(--color-info-box-bg);
+  border: 1px solid var(--color-info-box-border);
+  padding: 15px;
+  margin-top: 20px;
 }
 
 .info-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    font-size: 13px;
-    color: #191a17;
-    line-height: 1.8;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: var(--font-size-smaller);
+  color: var(--color-info-text);
+  line-height: 1.8;
 }
 
 .info-list li::before {
-    content: "• ";
-    margin-right: 5px;
+  content: '• ';
+  margin-right: 5px;
 }
 
 /* 하단 버튼 그룹 */
 .main-button-group {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 30px;
 }
 
 .main-button-group button {
-    padding: 12px 30px;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 15px;
-    border: none;
-    border-radius: 4px;
+  padding: 12px 30px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: var(--font-size-medium);
+  border: none;
+  border-radius: 4px;
 }
 
 .btn-save {
-    background: #333;
-    color: #fff;
+  background: var(--color-dark-gray);
+  color: var(--color-white);
 }
 
 .btn-reset {
-    background: #aaa;
-    color: #fff;
+  background: var(--color-light-gray);
+  color: var(--color-white);
 }
 
 .btn-cancel {
-    background: #fff;
-    color: #333;
-    border: 1px solid #ccc !important;
+  background: var(--color-white);
+  color: var(--color-dark-gray);
+  border: 1px solid var(--color-light-gray) !important;
 }
 
 .btn-leave {
-    background: #ff5a5a;
-    color: #fff;
+  background: var(--color-leave-button);
+  color: var(--color-white);
 }
 
 /* 모달 레이아웃 */
 .modal-overlay {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex; justify-content: center; align-items: center;
-    z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--color-modal-overlay);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
 .modal-content {
-    background: white;
-    padding: 30px;
-    border-radius: 8px;
-    width: 400px;
-    text-align: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  background: var(--color-white);
+  padding: 30px;
+  border-radius: 8px;
+  width: 400px;
+  text-align: center;
+  box-shadow: 0 4px 15px var(--color-modal-shadow);
 }
 
 .modal-warning {
-    color: #ff5a5a;
-    font-size: 13px;
-    margin-bottom: 20px;
+  color: var(--color-leave-button);
+  font-size: var(--font-size-smaller);
+  margin-bottom: 20px;
 }
 
 .modal-check-area {
-    margin: 20px 0;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
+  margin: 20px 0;
+  font-size: var(--font-size-small);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .modal-btns {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
 }
 
 .confirm-leave-btn {
-    background: #ff5a5a;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 4px;
-    cursor: pointer;
+  background: var(--color-leave-button);
+  color: var(--color-white);
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 .close-modal-btn {
-    background: gray;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 4px;
-    cursor: pointer;
+  background: var(--color-light-gray);
+  color: var(--color-white);
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
 }
+

@@ -6,7 +6,7 @@
 }
 
 .cart-page h1 {
-    font-size: 28px;
+    font-size: var(--font-size-cart-title);
     margin-bottom: 20px;
 }
 
@@ -17,14 +17,14 @@
 }
 
 .cart-item {
-    border: 1px solid #ddd;
+    border: 1px solid var(--color-light-border);
     border-radius: 8px;
     padding: 16px;
-    background-color: #fafafa;
+    background-color: var(--color-table-hover);
 }
 
 .cart-item h4 {
-    font-size: 18px;
+    font-size: var(--font-size-large);
     margin-bottom: 8px;
 }
 
@@ -41,17 +41,17 @@
 
 .quantity-control button {
     padding: 4px 10px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--color-light-gray);
     border-radius: 4px;
-    background-color: #fff;
+    background-color: var(--color-white);
     cursor: pointer;
-    color: #000;
+    color: var(--color-black);
     transition: background-color 0.2s;
 }
 
 .quantity-control button:hover {
-    background-color: #000;
-    color: white;
+    background-color: var(--color-black);
+    color: var(--color-white);
 }
 
 .quantity-control span {
@@ -68,23 +68,23 @@
 }
 
 .cart-total h3 {
-    font-size: 20px;
+    font-size: var(--font-size-cart-total);
 }
 
 .checkout-btn {
     padding: 12px 24px;
     border: none;
     border-radius: 6px;
-    background-color: #2196f3;
-    color: white;
+    background-color: var(--color-blue);
+    color: var(--color-white);
     font-weight: 600;
-    font-size: 16px;
+    font-size: var(--font-size-normal);
     cursor: pointer;
     transition: background-color 0.2s;
 }
 
 .checkout-btn:hover {
-    background-color: #1976d2;
+    background-color: var(--color-darker-blue);
 }
 
 .cart-item-img {

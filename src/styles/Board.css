@@ -7,14 +7,14 @@
 .custom-tabs .btn {
     padding: 16px;
     font-weight: 700;
-    font-size: 1.05rem;
+    font-size: var(--font-size-customtab);
     border-radius: 0;
 }
 
 /* 관리 테이블 스타일 */
 .my-activity-section .table thead th {
-    font-size: 0.85rem;
-    color: #888;
+    font-size: var(--font-size-tableheader);
+    color: var(--color-gray);
     text-transform: uppercase;
     letter-spacing: 1px;
     padding: 15px;
@@ -23,12 +23,12 @@
 /* 상세 페이지 본문 */
 .post-body-text {
     line-height: 1.9;
-    color: #333;
+    color: var(--color-dark-gray);
 }
 
 /* 댓글 영역 */
 .comment-section {
-    border: 1px solid #eee;
+    border: 1px solid var(--color-lighter-border);
 }
 
 .comments-list {
@@ -39,8 +39,8 @@
 
 /* FAQ 스타일 */
 .faq-section .accordion-button:not(.collapsed) {
-    background-color: #f8f9fa;
-    color: #000;
+    background-color: var(--color-accordion-bg);
+    color: var(--color-black);
     box-shadow: none;
 }
 

@@ -1,9 +1,9 @@
 .funding-navbar {
     position: sticky;
     top: 0;
-    background-color: #fff;
+    background-color: var(--color-white);
     z-index: 100;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--color-light-border);
 }
 
 .funding-main section {
@@ -22,25 +22,25 @@
 .funding-navbar li {
     cursor: pointer;
     font-weight: 600;
-    color: #333;
+    color: var(--color-dark-gray);
     transition: color 0.2s;
 }
 
 .funding-navbar li:hover {
-    color: #007bff;
+    color: var(--color-blue);
 }
 
 .funding-navbar li.active {
-    color: #007bff;
-    border-bottom: 2px solid #007bff;
+    color: var(--color-blue);
+    border-bottom: 2px solid var(--color-blue);
     padding-bottom: 4px;
 }
 
 /* 커뮤니티 버튼 스타일 */
 .funding-navbar li.community-btn {
     margin-left: auto; /* 오른쪽 끝으로 이동 */
-    background-color: #007bff;
-    color: #fff;
+    background-color: var(--color-blue);
+    color: var(--color-white);
     padding: 6px 12px;
     border-radius: 4px;
     font-weight: 600;
@@ -48,5 +48,6 @@
 }
 
 .funding-navbar li.community-btn:hover {
-    background-color: #0056b3;
+    background-color: var(--color-darker-blue);
 }
+

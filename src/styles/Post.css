@@ -1,15 +1,15 @@
 .comment {
     padding: 8px 0;
-    border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--color-lighter-border);
 }
 
 .comment-header {
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 0.9rem;
-    color: #555;
     width: 100%;
+  font-size: var(--font-size-comment);
+  color: var(--color-comment-text);
 }
 
 .comment-info {
@@ -21,8 +21,8 @@
 .comment-delete {
     text-align: right;
     padding: 0;
-    font-size: 0.8rem;
-    color: #dc3545;
+  font-size: var(--font-size-comment-date);
+  color: var(--color-delete-button);
 }
 
 .comment-author {
@@ -30,16 +30,18 @@
 }
 
 .comment-date {
-    font-size: 0.8rem;
-    color: #999;
+  font-size: var(--font-size-comment-date);
+  color: var(--color-medium-gray);
 }
 
 .comment-body {
     margin-top: 4px;
-    font-size: 0.95rem;
+  font-size: var(--font-size-comment-body);
 }
 
 .post-action-buttons {
     display: flex;
     gap: 6px;
 }
+
+

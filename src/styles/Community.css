@@ -20,18 +20,18 @@ padding: 20px;
 
 .community-table tr {
 cursor: pointer;
-border-bottom: 1px solid #e5e5e5;
+border-bottom: 1px solid var(--color-table-border);
 }
 
 
 .community-table tr:hover {
-background-color: #fafafa;
+background-color: var(--color-table-hover);
 }
 
 
 .community-table td.date {
 text-align: right;
-color: #888;
+color: var(--color-gray);
 }
 
 
@@ -52,13 +52,13 @@ margin-bottom: 16px;
 
 .detail-content {
 padding: 16px 0;
-border-top: 1px solid #eee;
-border-bottom: 1px solid #eee;
+border-top: 1px solid var(--color-lighter-border);
+border-bottom: 1px solid var(--color-lighter-border);
 margin-bottom: 20px;
 }
 
 
 .comment {
 padding: 6px 0;
-border-bottom: 1px solid #f1f1f1;
+border-bottom: 1px solid var(--color-comment-border);
 }

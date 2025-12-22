@@ -1,3 +1,18 @@
+:root {
+    --color-background: #282c34;
+    --color-link: #61dafb;
+    --color-white: #fff;
+    --color-dark-gray: #333;
+    --color-blue: #007bff;
+    --color-light-gray: #ccc;
+    --color-darker-blue: #0056b3;
+    --color-gray: #888;
+
+    --font-size-small: 14px;
+    --font-size-normal: 16px;
+    --font-size-large: 24px;
+}
+
 .header-container {
     display: flex;
     justify-content: space-between;
@@ -6,7 +21,7 @@
     height: auto;
     padding: 1vh 0;
     /* 최소 높이 지정 */
-    border-bottom: 1.5px solid #000;
+    border-bottom: 1.5px solid var(--color-black);
     box-sizing: border-box;
 }
 
@@ -45,8 +60,8 @@
 
 /* 마우스 오버 효과 */
 .header-menu:hover {
-    background-color: #000;
+    background-color: var(--color-black);
     /* 검정 배경 */
-    color: #fff;
+    color: var(--color-white);
     /* 흰색 글자 */
 }

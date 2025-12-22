@@ -17,7 +17,7 @@
     width: 50%;
     object-fit: cover;
     border-radius: 8px;
-    background: #eee;
+    background: var(--color-lighter-border);
 }
 
 .funding-header-info {
@@ -31,7 +31,7 @@
 
 .funding-header-info p {
     margin: 6px 0;
-    color: #333;
+    color: var(--color-dark-gray);
     font-size: 14px;
 }
 
@@ -39,7 +39,7 @@
 .funding-progress-bar {
     width: 100%;
     height: 10px;
-    background: #ddd;
+    background: var(--color-light-border);
     border-radius: 5px;
     overflow: hidden;
     margin: 8px 0;
@@ -47,7 +47,7 @@
 
 .funding-progress {
     height: 100%;
-    background: #4fd1c5;
+    background: var(--color-teal);
 }
 
 /* ===== Body Layout ===== */
@@ -69,7 +69,7 @@
 .funding-main h2 {
     font-size: 20px;
     margin-bottom: 12px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--color-lighter-border);
     padding-bottom: 6px;
 }
 
@@ -95,7 +95,7 @@
     max-width: 800px;
     object-fit: cover;
     border-radius: 6px;
-    background: #eee;
+    background: var(--color-lighter-border);
 }
 
 /* ===== Sidebar (Sticky) ===== */
@@ -103,7 +103,7 @@
     flex: 1;
     position: sticky;
     top: 76px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--color-light-border);
     border-radius: 8px;
     padding: 16px;
     max-height: 80vh;
@@ -116,10 +116,10 @@
 
 /* 선택된 리워드 요약 박스 */
 .selected-reward-summary {
-    border: 1px solid #ccc;
+    border: 1px solid var(--color-light-border);
     border-radius: 6px;
     padding: 10px;
-    background-color: #fff8e1;
+    background-color: var(--color-reward-select);
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -127,10 +127,7 @@
 
 /* 선택된 리워드 각 항목 */
 .selected-reward-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--color-lighter-border);
     padding-bottom: 6px;
 }
 
@@ -139,13 +136,14 @@
     display: flex;
     align-items: center;
     gap: 5px;
+    margin-top: 5px;
 }
 
 .quantity-control button {
     padding: 2px 6px;
     font-size: 14px;
     cursor: pointer;
-    border: 1px solid #ccc;
+    border: 1px solid var(--color-light-border);
     border-radius: 4px;
     background-color: #f0f0f0;
 }
@@ -156,40 +154,26 @@
 }
 
 /* 선택 가능한 리워드 리스트 */
-.reward-item {
-    padding: 8px 5px;
-    border-radius: 6px;
+.funding-sidebar>div {
     cursor: pointer;
-    transition: background-color 0.2s, border 0.2s;
-    border: 1px solid transparent;
+    padding: 8px 5px;
+    transition: background-color 0.2s;
 }
 
-.reward-item:hover {
+.funding-sidebar>div:hover {
     background-color: #f9f9f9;
 }
 
-.reward-item.selected {
-    border: 1px solid #4fd1c5;
-    background-color: #e0f7f5;
-}
-
 /* 후원하기 버튼 */
-/* 사이드바 선택 수량 조절 */
-.funding-sidebar .quantity-control button {
-    padding: 6px 10px; /* 더 크게 */
+.funding-sidebar button {
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    background: #ff5757;
+    color: var(--color-white);
     font-size: 16px;
-    border-radius: 6px;
-    background-color: #e0f7f5;
-    border: 1px solid #4fd1c5;
-    color: #333;
+    cursor: pointer;
 }
-
-.funding-sidebar .quantity-control span {
-    min-width: 30px;
-    text-align: center;
-    font-weight: 600;
-}
-
 
 .funding-sidebar button:hover {
     background: #ff3d3d;
@@ -204,8 +188,8 @@
 
 .edit-button-container button {
     padding: 6px 12px;
-    background-color: #2196f3;
-    color: white;
+    background-color: var(--color-blue);
+    color: var(--color-white);
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -230,7 +214,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.5);
+    background: var(--color-modal-overlay);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -238,7 +222,7 @@
 }
 
 .modal-content {
-    background: #fff;
+    background: var(--color-white);
     padding: 30px;
     border-radius: 10px;
     width: 400px;
@@ -261,12 +245,12 @@
 }
 
 .modal-buttons .cancel-btn {
-    background: #ccc;
+    background: var(--color-light-gray);
 }
 
 .modal-buttons button:not(.cancel-btn) {
-    background: #4fd1c5;
-    color: #fff;
+    background: var(--color-teal);
+    color: var(--color-white);
 }
 
 .modal-buttons button:not(.cancel-btn):hover {
@@ -278,10 +262,10 @@
     max-height: 200px;
     overflow-y: auto;
     margin-bottom: 10px;
-    border: 1px solid #eee;
+    border: 1px solid var(--color-lighter-border);
     padding: 8px;
     border-radius: 6px;
-    background-color: #fdf6e3;
+    background-color: var(--color-reward-select);
 }
 
 .selected-reward-item-modal {
@@ -299,8 +283,8 @@
     font-size: 14px;
     border: none;
     border-radius: 6px;
-    background-color: #2196f3;
-    color: white;
+    background-color: var(--color-blue);
+    color: var(--color-white);
     cursor: pointer;
     box-shadow: 0 4px 6px rgba(0,0,0,0.2);
     z-index: 999;
@@ -310,3 +294,4 @@
 .scroll-top-btn-outside:hover {
     background-color: #1976d2;
 }
+

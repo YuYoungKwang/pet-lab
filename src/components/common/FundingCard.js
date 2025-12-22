@@ -6,6 +6,9 @@ const IMG_BASE = "/images/funding";
 function FundingCard({ funding, onLikeToggle }) {
     const navigate = useNavigate();
 
+    // 로컬스토리지에서 로그인 사용자 가져오기
+    const loginUser = JSON.parse(localStorage.getItem("loginUser"));
+
     // D-day 계산
     const end = new Date(funding.endDate);
     const today = new Date();
@@ -27,6 +30,13 @@ function FundingCard({ funding, onLikeToggle }) {
     // 좋아요 토글
     const toggleLike = (e) => {
         e.stopPropagation(); // 카드 클릭 이벤트 방지
+
+        if (!loginUser) {
+            alert("로그인 후 이용해주세요!");
+            navigate("/login");
+            return;
+        }
+
         if (onLikeToggle) onLikeToggle(funding.id, !funding.liked);
     };
 

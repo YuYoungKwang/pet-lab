@@ -4,7 +4,7 @@
     margin: 30px auto;
     padding: 30px;
     font-family: 'Noto Sans KR', sans-serif;
-    color: #333;
+  color: var(--color-dark-gray);
 }
 
 /* 헤더 부분 (마이페이지 제목 및 경로) */
@@ -12,40 +12,40 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    border-bottom: 2px solid #333;
+  border-bottom: 2px solid var(--color-dark-gray);
     padding-bottom: 20px;
     margin-bottom: 40px;
 }
 
 .mypage-header h1 {
-    font-size: 32px;
+  font-size: var(--font-size-title);
     font-weight: bold;
     margin: 0;
 }
 
 .breadcrumb {
-    margin:1px;
+  margin: 1px;
     margin-bottom: 0;
-    font-size: 14px;
-    color: #666;
+  font-size: var(--font-size-small);
+  color: var(--color-menu-text);
 }
 
 /* 상단 주문 현황 섹션 */
 .order-status-box {
-    border: 1px solid #ccc;
+  border: 1px solid var(--color-light-gray);
     padding: 30px;
     margin-bottom: 50px;
 }
 
 .order-status-box h3 {
-    font-size: 18px;
+  font-size: var(--font-size-large);
     margin-bottom: 25px;
     font-weight: 500;
 }
 
 .order-status-box h3 span {
-    font-size: 14px;
-    color: #a7a4a4;
+  font-size: var(--font-size-small);
+  color: var(--color-order-date);
     margin-left: 10px;
 }
 
@@ -57,14 +57,14 @@
 
 .status-item {
     flex: 1;
-    border: 1px solid #ddd;
+  border: 1px solid var(--color-light-border);
     padding: 20px 10px;
     text-align: center;
-    background-color: #fff;
+  background-color: var(--color-white);
 }
 
 .status-label {
-    font-size: 14px;
+  font-size: var(--font-size-small);
     font-weight: bold;
     margin-bottom: 8px;
 }
@@ -82,7 +82,7 @@
 }
 
 .menu-card {
-    border: 1px solid #ddd;
+  border: 1px solid var(--color-light-border);
     padding: 40px 20px;
     text-align: center;
     display: flex;
@@ -93,7 +93,7 @@
 }
 
 .menu-card:hover {
-    border-color: #333; /* 마우스 올렸을 때 강조 */
+  border-color: var(--color-dark-gray); /* 마우스 올렸을 때 강조 */
 }
 
 .menu-icon {
@@ -103,21 +103,22 @@
 }
 
 .menu-card h4 {
-    font-size: 15px;
-    color: #666;
+  font-size: var(--font-size-medium);
+  color: var(--color-menu-text);
     margin-bottom: 5px;
     text-transform: uppercase;
 }
 
 .menu-card h5 {
-    font-size: 18px;
+  font-size: var(--font-size-large);
     font-weight: bold;
     margin-bottom: 20px;
 }
 
 .menu-card p {
-    font-size: 13px;
-    color: #999;
+  font-size: var(--font-size-smaller);
+  color: var(--color-medium-gray);
     line-height: 1.6;
     word-break: keep-all; /* 한글 단어 끊김 방지 */
 }
+

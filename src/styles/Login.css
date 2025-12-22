@@ -1,88 +1,74 @@
-.bg {
+.login-bg {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 750px;
-    background-color: white;
+  background-color: var(--color-white);
 }
 
-.board {
-    background-color: white;
-    padding: 40px 10px;
-    border-radius: 12px;
+.login-board {
     width: 450px;
+  padding: 40px 10px;
+  border-radius: 12px;
+  background-color: var(--color-white);
     box-sizing: border-box;
 }
 
-.board h3 {
+.login-title {
     margin-bottom: 24px;
-    font-size: 24px;
+  font-size: var(--font-size-large);
     text-align: center;
-    color: #333;
+  color: var(--color-dark-gray);
 }
 
-input[type="text"],
-input[type="password"] {
+.login-form {
+    width: 100%;
+}
+
+.login-input {
     width: 100%;
     padding: 15px;
-    margin-bottom: 1px;
-    border: 1px solid #ccc;
+    margin-bottom: 6px;
+  border: 1px solid var(--color-light-gray);
     border-radius: 4px;
-    font-size: 16px;
+  font-size: var(--font-size-normal);
     box-sizing: border-box;
 }
 
-.options {
+.login-options {
     display: flex;
     flex-direction: column;
-    gap: 1px;
-    margin-top: 1vh;
+    gap: 12px;
+    margin-top: 16px;
 }
 
-.options label {
-    font-size: 16px;
-    color: #555;
+.login-save-id {
+  font-size: var(--font-size-normal);
+  color: var(--color-comment-text);
 }
 
-.options a {
-    font-size: 16px;
-    color: #535151;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.options a:hover {
-    text-decoration: underline;
-}
-
-.options p {
+.login-buttons {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
 }
 
-.login-func{
-    display: flex;
-    justify-content: space-between;
-    
-}
-
-button {
+.login-btn {
     flex: 1;
     padding: 10px 0;
     border: none;
     border-radius: 6px;
-    background-color: #535151;
-    color: white;
-    font-size: 16px;
+  background-color: var(--color-submit-button);
+  color: var(--color-white);
+  font-size: var(--font-size-normal);
     cursor: pointer;
 }
 
-button.signup {
-    background-color: #535151;
+.login-btn.signup {
     margin-left: 10px;
 }
 
-button:hover {
+.login-btn:hover {
     opacity: 0.9;
 }
+

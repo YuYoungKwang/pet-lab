@@ -11,7 +11,7 @@
 
 .faq-page-container p {
     font-size: 1rem;
-    color: #6c757d;
+    color: var(--color-faq-text);
 }
 
 .accordion-item {
@@ -19,11 +19,11 @@
     border-radius: 8px;
     margin-bottom: 1rem;
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px var(--color-card-shadow-strong);
 }
 
 .accordion-header {
-    background-color: #f8f9fa;
+    background-color: var(--color-accordion-bg);
     padding: 1rem 1.5rem;
     font-weight: 600;
     font-size: 1.1rem;
@@ -32,7 +32,7 @@
 }
 
 .accordion-header:hover {
-    background-color: #e9ecef;
+    background-color: var(--color-accordion-hover);
 }
 
 .accordion-button::after {
@@ -40,9 +40,9 @@
 }
 
 .accordion-body {
-    background-color: #ffffff;
+    background-color: var(--color-white);
     padding: 1rem 1.5rem;
     font-size: 0.95rem;
-    color: #495057;
+    color: var(--color-accordion-text);
     line-height: 1.6;
 }
