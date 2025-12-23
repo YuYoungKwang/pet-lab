@@ -288,6 +288,7 @@ function FundingRegister() {
                                 next[i].description = e.target.value;
                                 setRewardSelects(next);
                             }} placeholder="리워드 설명" />
+                            <span>후원 금액</span>
                             <input type="number" value={r.price} onChange={(e) => {
                                 const next = [...rewardSelects];
                                 next[i].price = +e.target.value;
