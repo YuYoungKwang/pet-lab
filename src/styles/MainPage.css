@@ -1,15 +1,28 @@
 /* 메인 컨테이너 */
 .main-container {
-    padding: 5vw 10vw; /* 화면 비율 기준으로 padding */
+    display: flex;
+    gap: 20px;
+    padding: 2vw 5vw; /* 화면 비율 기준으로 padding */
     box-sizing: border-box;
+    align-items: flex-start;
+    flex-wrap: nowrap; /* wrap 방지 */
 }
 
-/* 상단 영역 */
-.top-area {
+
+/* 메인 콘텐츠 영역 */
+.main-content {
+    flex: 1;
     display: flex;
-    gap: 2vw;            /* 화면 너비 기준 gap */
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;      /* 화면이 좁아지면 아이템이 아래로 내려감 */
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* 오른쪽 사이드바 */
+.category-sidebar {
+    width: 250px;
+    position: sticky;
+    top: 20px; /* 화면 상단에서 거리 */
+    align-self: flex-start; /* sticky 적용 */
+    height: fit-content; /* 내용만큼 높이 */
 }
 

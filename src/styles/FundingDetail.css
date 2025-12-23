@@ -2,7 +2,7 @@
 .funding-detail-page {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 50px 20px;
+    padding: 50px 150px;
     font-family: Arial, sans-serif;
 }
 
@@ -14,13 +14,15 @@
 }
 
 .funding-header-thumb {
-    width: 50%;
+    width: 40%;
     object-fit: cover;
     border-radius: 8px;
     background: #eee;
 }
 
 .funding-header-info {
+    width: 60%;
+    margin-top: 1%;
     flex: 1;
 }
 
@@ -29,10 +31,15 @@
     margin-bottom: 12px;
 }
 
-.funding-header-info p {
+.funding-header-info-bottom p {
     margin: 6px 0;
     color: #333;
-    font-size: 14px;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.funding-header-info-bottom {
+    margin-top: 20%;
 }
 
 /* ===== Progress ===== */
@@ -52,6 +59,7 @@
 
 /* ===== Body Layout ===== */
 .funding-body {
+    width: 105%;
     display: flex;
     gap: 24px;
 }
@@ -126,18 +134,17 @@
 /* 각 선택 리워드 */
 .selected-reward-item {
     border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
     margin-bottom: 10px;
 }
 
-.quantity-control {
+.funding-sidebar .quantity-control {
     display: flex;
     align-items: center;
     gap: 5px;
     margin-top: 5px;
 }
 
-.quantity-control button {
+.funding-sidebar .quantity-control button {
     padding: 2px 6px;
     font-size: 14px;
     cursor: pointer;
@@ -146,26 +153,26 @@
     background-color: #f0f0f0;
 }
 
-.quantity-control span {
+.funding-sidebar .quantity-control span {
     min-width: 20px;
     text-align: center;
 }
 
 /* 선택 가능한 리워드 리스트 */
-.funding-sidebar>div {
+.funding-sidebar .funding-sidebar>div {
     cursor: pointer;
     padding: 8px 5px;
     transition: background-color 0.2s;
 }
 
-.funding-sidebar>div:hover {
+.funding-sidebar .funding-sidebar>div:hover {
     background-color: #f9f9f9;
 }
 
 /* 후원하기 버튼 */
 .funding-sidebar button {
     width: 100%;
-    
+    padding: 8px 5px;
     border: none;
     border-radius: 8px;
     background: #ff5757;
@@ -176,6 +183,22 @@
 
 .funding-sidebar button:hover {
     background: #ff3d3d;
+}
+
+.funding-sidebar h2 {
+    font-size: 25px;
+}
+
+.funding-sidebar h4 {
+    font-size: 15px;
+}
+
+.funding-sidebar h5 {
+    font-size: 14px;
+}
+
+.funding-sidebar p {
+    font-size: 13px;
 }
 
 /* 편집 버튼 */
@@ -218,11 +241,99 @@
     background-color: #2196f3;
     color: white;
     cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     z-index: 999;
     transition: background-color 0.2s;
 }
 
 .scroll-top-btn-outside:hover {
     background-color: #1976d2;
+}
+
+/* 썸네일 */
+.funding-header__thumb {
+    width: 420px;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+/* 제목 */
+.funding-header__title {
+    font-size: 26px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* 요약 영역 */
+.funding-header__summary {
+    display: flex;
+    gap: 40px;
+    margin-top: 35px;
+}
+
+.funding-header__summary-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.funding-header__label {
+    font-size: 13px;
+    color: #777;
+    margin-bottom: 4px;
+}
+
+.funding-header__value {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.funding-header__value--amount {
+    color: #ff4d4f;
+}
+
+/* 진행률 바 */
+.funding-header__progress-bar {
+    margin-top: 12px;
+    height: 8px;
+    background: #e5e7eb;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.funding-header__progress {
+    height: 100%;
+    background: #ff4d4f;
+    transition: width 0.3s ease;
+}
+
+/* 상태 표시 */
+.funding-header__status {
+    margin-top: 14px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.funding-header__status--ongoing {
+    background: #eef2ff;
+    color: #4f46e5;
+}
+
+.funding-header__status--success {
+    background: #ecfdf5;
+    color: #059669;
+}
+
+.funding-header__status--fail {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+/* 하단 메타 */
+.funding-header__meta {
+    margin-top: 14px;
+    font-size: 14px;
+    color: #555;
 }

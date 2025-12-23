@@ -6,7 +6,7 @@ function FundingRegister() {
     const navigate = useNavigate();
     const loginUser = JSON.parse(localStorage.getItem("loginUser"));
     useEffect(() => {
-        
+
         if (!loginUser) {
             navigate("/login", { replace: true });
         }
@@ -47,7 +47,9 @@ function FundingRegister() {
     const [team, setTeam] = useState({ description: "", images: [] });
     const [safetyInfo, setSafetyInfo] = useState({ policy: "" });
 
-    
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
 
     /* ======= 단계별 유효성 체크 ======= */
     const validateStep = (step) => {
@@ -58,6 +60,40 @@ function FundingRegister() {
                 if (!thumbnailImage) { alert("대표 이미지를 선택해주세요."); return false; }
                 if (targetAmount <= 0) { alert("목표 금액을 입력해주세요."); return false; }
                 if (!startDate || !endDate) { alert("펀딩 시작/종료일을 입력해주세요."); return false; }
+                
+                
+
+                const start = new Date(startDate);
+                const end = new Date(endDate);
+
+                if (start < today) {
+                    alert("펀딩 시작일은 오늘 이후여야 합니다.");
+                    return false;
+                }
+
+                if (start >= end) {
+                    alert("펀딩 종료일은 시작일 이후여야 합니다.");
+                    return false;
+                }
+
+                if (!paymentDate || !expectedDeliveryDate) {
+                    alert("결제일과 배송 예정일을 입력해주세요.");
+                    return false;
+                }
+
+                const payment = new Date(paymentDate);
+                const delivery = new Date(expectedDeliveryDate);
+
+                if (payment < end) {
+                    alert("결제일은 펀딩 종료일 이후여야 합니다.");
+                    return false;
+                }
+
+                if (delivery <= payment) {
+                    alert("배송 예정일은 결제일 이후여야 합니다.");
+                    return false;
+                }
+
                 return true;
             case 2:
                 if (!description.trim() && !introImages) { alert("프로젝트 설명을 입력해주세요."); return false; }
@@ -123,7 +159,7 @@ function FundingRegister() {
             createUser: loginUser.id,
         };
 
-        
+
         list.push(newFunding);
         localStorage.setItem("fundingList", JSON.stringify(list));
 
@@ -170,13 +206,13 @@ function FundingRegister() {
                     <h4>목표 금액</h4>
                     <input type="number" value={targetAmount} onChange={(e) => setTargetAmount(+e.target.value)} placeholder="목표 금액" />
                     <h4>펀딩 시작일</h4>
-                    <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+                    <input type="date" value={startDate} min={today} onChange={(e) => setStartDate(e.target.value)} />
                     <h4>펀딩 종료일</h4>
-                    <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+                    <input type="date" value={endDate} min={startDate} onChange={(e) => setEndDate(e.target.value)} />
                     <h4>결제일</h4>
-                    <input type="date" value={paymentDate} onChange={(e) => setPaymentDate(e.target.value)} />
+                    <input type="date" value={paymentDate} min={endDate} onChange={(e) => setPaymentDate(e.target.value)} />
                     <h4>배송 예정일</h4>
-                    <input type="date" value={expectedDeliveryDate} onChange={(e) => setExpectedDeliveryDate(e.target.value)} />
+                    <input type="date" value={expectedDeliveryDate} min={paymentDate} onChange={(e) => setExpectedDeliveryDate(e.target.value)} />
 
                     <div className="button-group">
                         <button onClick={nextStep}>다음</button>

@@ -3,7 +3,7 @@ import FundingCard from "../components/common/FundingCard";
 import CategorySidebar from "../components/common/CategorySidebar";
 import '../styles/CategoryPage.css';
 
-const PAGE_SIZE = 6;
+const PAGE_SIZE = 8;
 
 function FavoritePage({ loginUser }) {
     const [fundingList, setFundingList] = useState([]);
@@ -81,14 +81,7 @@ function FavoritePage({ loginUser }) {
 
     return (
         <main className="category-page-container">
-            <CategorySidebar
-                categories={categories}
-                searchTerm=""
-                onSearchChange={() => {}}
-                onSearchSubmit={() => {}}
-                selectedCategory={selectedCategory}
-                onCategoryClick={handleCategoryClick}
-            />
+            
 
             <div className="category-content">
                 <h2>좋아요한 상품</h2>
@@ -110,7 +103,7 @@ function FavoritePage({ loginUser }) {
                     {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
                         <button
                             key={page}
-                            className={page === currentPage ? "active" : ""}
+                            className={page === currentPage ? "pagination-button-active" : "pagination-button"}
                             onClick={() => setCurrentPage(page)}
                         >
                             {page}
@@ -118,6 +111,15 @@ function FavoritePage({ loginUser }) {
                     ))}
                 </div>
             </div>
+
+            <CategorySidebar
+                categories={categories}
+                searchTerm=""
+                onSearchChange={() => {}}
+                onSearchSubmit={() => {}}
+                selectedCategory={selectedCategory}
+                onCategoryClick={handleCategoryClick}
+            />
         </main>
     );
 }

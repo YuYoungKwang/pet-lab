@@ -15,16 +15,15 @@ function FundingCard({ funding, onLikeToggle }) {
     let Dday = Math.ceil((end - today) / (1000 * 60 * 60 * 24));
     if (Dday < 0) {
         Dday = "펀딩 종료";
-    } else if(Dday > 0){
+    } else if (Dday > 0) {
         Dday = "D-" + Dday;
-    } else{
+    } else {
         Dday = "D-day"
     }
 
-    // 진행률 계산
-    const progressRate = Math.min(
-        100,
-        Math.round((funding.currentAmount / funding.targetAmount) * 100)
+    // 진행률 (텍스트는 100% 이상도 표시)
+    const progressRate = Math.round(
+        (funding.currentAmount / funding.targetAmount) * 100
     );
 
     // 좋아요 토글

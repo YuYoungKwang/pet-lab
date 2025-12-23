@@ -48,7 +48,7 @@ export default function PostListPage() {
     );
 
     return (
-        <Container className="mt-4" style={{ maxWidth: 600 }}>
+        <Container className="mt-4" style={{ padding: '0 150px' }}>
             {funding && <FundingHeader funding={funding} />}
 
             <Card>
@@ -145,6 +145,7 @@ export default function PostListPage() {
                                     size="sm"
                                     variant={currentPage === i + 1 ? "primary" : "outline-primary"}
                                     onClick={() => setCurrentPage(i + 1)}
+                                    style={{width : "50px"}}
                                 >
                                     {i + 1}
                                 </Button>
@@ -152,7 +153,7 @@ export default function PostListPage() {
                         </div>
                     )}
 
-                    <div className="d-grid">
+                    <div className="d-grid" style={{ justifyContent : "right"}}>
                         <Button
                             onClick={() => {
                                 if (!isLogin) {
@@ -162,6 +163,7 @@ export default function PostListPage() {
                                 }
                                 navigate("../write");
                             }}
+                            style={{padding : "5px 10px"}}
                         >
                             글쓰기
                         </Button>

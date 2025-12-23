@@ -1,63 +1,90 @@
 .search-page-container {
-    display: flex;
-    gap: 20px;
-    padding: 20px 100px;
+  display: flex;
+  gap: 20px;
+  padding: 20px 60px;
   background-color: var(--color-white);
 }
 
 .search-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .search-content h2 {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
   font-size: var(--font-size-large);
   color: var(--color-dark-gray);
 }
 
-.pagination {
-    margin-top: 20px;
-    display: flex;
-    gap: 8px;
+/* funding-grid: 반응형 2~3열 그리드 */
+.funding-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* 카드 최소 200px */
+    gap: 20px;
+    width: 100%;
 }
 
-.pagination button.active {
-  background-color: var(--color-blue);
-  color: var(--color-white);
-  border-color: var(--color-blue);
+/* 페이지네이션 버튼 */
+.pagination {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    margin: 20px auto;
+}
+
+.pagination .pagination-button {
+    width: 50px;
+    height: 31px;
+    padding: 4px 8px;
+    font-size: var(--font-size-small);
+    border: 1px solid var(--color-light-gray);
+    background-color: var(--color-white);
+    color: var(--color-black);
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.pagination .pagination-button-active {
+    width: 50px;
+    height: 31px;
+    background-color: var(--color-blue);
+    color: var(--color-white);
+    border-color: var(--color-blue);
+    border: 0;
+    border-radius: 4px;
 }
 
 .pagination button:hover {
-  background-color: var(--color-blue);
-  color: var(--color-white);
-  border-color: var(--color-blue);
+    background-color: var(--color-blue);
+    color: var(--color-white);
+    border-color: var(--color-blue);
 }
 
 .search-box {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 20px;
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
 }
 
 .search-box input {
-    flex: 1;
-    padding: 8px 10px;
+  flex: 1;
+  padding: 8px 10px;
   border: 1px solid var(--color-light-gray);
-    border-radius: 4px;
-    outline: none;
+  border-radius: 4px;
+  outline: none;
   font-size: var(--font-size-small);
 }
 
 .search-box button {
-    padding: 8px 14px;
-    border: none;
+  padding: 8px 14px;
+  border: none;
   background-color: var(--color-blue);
   color: var(--color-white);
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
 
 .search-box button:hover {
@@ -65,24 +92,24 @@
 }
 
 .no-results {
-    text-align: center;
+  text-align: center;
   font-size: var(--font-size-normal);
   color: var(--color-gray);
-    margin: 40px 0;
+  margin: 40px 0;
 }
 
 @media (max-width: 1024px) {
-    .funding-grid {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 16px;
-        padding: 0 20px;
-    }
+  .funding-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    padding: 0 20px;
+  }
 }
 
 @media (max-width: 768px) {
-    .funding-grid {
-        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-        gap: 12px;
-        padding: 0 12px;
-    }
+  .funding-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+    padding: 0 12px;
+  }
 }

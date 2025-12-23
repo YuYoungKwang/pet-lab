@@ -33,7 +33,7 @@ function CategorySidebar({
                 }}
                 onKeyDown={e => e.key === 'Enter' && handleSubmit()}
             />
-            <button onClick={handleSubmit}>검색</button>
+            <button className='search-button' onClick={handleSubmit}>검색</button>
 
             {/* 카테고리 목록 */}
             <ul className="category-list">

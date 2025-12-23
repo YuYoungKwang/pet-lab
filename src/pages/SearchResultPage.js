@@ -4,7 +4,7 @@ import FundingCard from "../components/common/FundingCard";
 import CategorySidebar from "../components/common/CategorySidebar";
 import '../styles/SearchResultPage.css';
 
-const PAGE_SIZE = 8;
+const PAGE_SIZE =8;
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
@@ -121,7 +121,7 @@ function SearchResultPage({ loginUser }) {
                     {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
                         <button
                             key={page}
-                            className={page === currentPage ? "active" : ""}
+                            className={page === currentPage ? "pagination-button-active" : "pagination-button"}
                             onClick={() => setCurrentPage(page)}
                         >
                             {page}

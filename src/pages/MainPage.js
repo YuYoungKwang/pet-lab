@@ -26,13 +26,12 @@ function MainPage({ loginUser }) {
 
     // fundingList 초기화 + currentUser favorites 기반 liked 세팅
     useEffect(() => {
+        if (!currentUser) return;
         const data = localStorage.getItem("fundingList");
         if (data) {
-            let list = JSON.parse(data);
-            const favorites = Array.isArray(currentUser?.favorites) ? currentUser.favorites : [];
-            list = list.map(f => ({
+            const list = JSON.parse(data).map(f => ({
                 ...f,
-                liked: favorites.includes(f.id)
+                liked: (currentUser.favorites || []).includes(f.id)
             }));
             setFundingList(list);
         }
@@ -40,16 +39,16 @@ function MainPage({ loginUser }) {
 
     // 좋아요 토글
     const handleLikeToggle = (id, liked) => {
-        // 1. fundingList 업데이트
-        const updatedList = fundingList.map(item =>
-            item.id === id
-                ? { ...item, liked, likeCount: item.likeCount + (liked ? 1 : -1) }
-                : item
-        );
+        const updatedList = fundingList.map(item => {
+            if (item.id === id) {
+                const diff = liked ? 1 : -1;
+                return { ...item, liked, likeCount: (item.likeCount || 0) + diff };
+            }
+            return item;
+        });
         setFundingList(updatedList);
         localStorage.setItem("fundingList", JSON.stringify(updatedList));
 
-        // 2. 회원정보 업데이트
         if (currentUser) {
             const users = JSON.parse(localStorage.getItem("회원정보")) || [];
             const updatedUsers = users.map(user => {
@@ -67,44 +66,45 @@ function MainPage({ loginUser }) {
         }
     };
 
-    // 카테고리 클릭
     const handleCategoryClick = (cat) => {
         navigate(`/category/${cat}`);
     };
 
-    // 검색
     const handleSearchSubmit = (term) => {
+        if (!term.trim()) return;
         navigate(`/search?query=${encodeURIComponent(term)}`);
     };
 
     return (
         <main className="main-container">
-            <div className="top-area">
-                <BannerSlider />
-                <CategorySidebar
-                    categories={categories}
-                    searchTerm={searchTerm}
-                    onSearchChange={setSearchTerm}
-                    onSearchSubmit={() => handleSearchSubmit(searchTerm)}
-                    onCategoryClick={handleCategoryClick}
+
+            <div className="main-content">
+                <FundingSection
+                    title="인기 펀딩"
+                    fundingList={[...fundingList].sort((a, b) => b.likeCount - a.likeCount)}
+                    onLikeToggle={handleLikeToggle}
+                />
+                <FundingSection
+                    title="방금 등록된 따끈따끈한 펀딩"
+                    fundingList={[...fundingList].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))}
+                    onLikeToggle={handleLikeToggle}
+                />
+                <FundingSection
+                    title="마감 임박! 종료가 얼마 남지 않은 펀딩"
+                    fundingList={[...fundingList].sort((a, b) => new Date(a.endDate) - new Date(b.endDate))}
+                    onLikeToggle={handleLikeToggle}
                 />
             </div>
-
-            <FundingSection
-                title="인기 펀딩"
-                fundingList={fundingList}
-                onLikeToggle={handleLikeToggle}
+            <div className="category-sidebar">
+            <CategorySidebar
+                
+                categories={categories}
+                searchTerm={searchTerm}
+                onSearchChange={setSearchTerm}
+                onSearchSubmit={() => handleSearchSubmit(searchTerm)}
+                onCategoryClick={handleCategoryClick}
             />
-            <FundingSection
-                title="방금 등록된 따끈따끈한 펀딩"
-                fundingList={fundingList}
-                onLikeToggle={handleLikeToggle}
-            />
-            <FundingSection
-                title="마감 임박! 종료가 얼마 남지 않은 펀딩"
-                fundingList={fundingList}
-                onLikeToggle={handleLikeToggle}
-            />
+            </div>
         </main>
     );
 }

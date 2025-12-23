@@ -135,7 +135,7 @@ export default function PostDetailPage() {
                         disabled={!isLogin}
                         onChange={(e) => setComment(e.target.value)}
                     />
-                    <Stack direction="horizontal" gap={2} className="mt-2">
+                    <Stack direction="horizontal" gap={2} className="mt-2" style={{justifyContent : "space-between"}}>
                         <Button
                             size="sm"
                             onClick={() => {
