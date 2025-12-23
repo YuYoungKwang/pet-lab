@@ -26,12 +26,11 @@ function MainPage({ loginUser }) {
 
     // fundingList 초기화 + currentUser favorites 기반 liked 세팅
     useEffect(() => {
-        if (!currentUser) return;
         const data = localStorage.getItem("fundingList");
         if (data) {
             const list = JSON.parse(data).map(f => ({
                 ...f,
-                liked: (currentUser.favorites || []).includes(f.id)
+                liked: currentUser ? (currentUser.favorites || []).includes(f.id) : false
             }));
             setFundingList(list);
         }
@@ -96,14 +95,14 @@ function MainPage({ loginUser }) {
                 />
             </div>
             <div className="category-sidebar">
-            <CategorySidebar
-                
-                categories={categories}
-                searchTerm={searchTerm}
-                onSearchChange={setSearchTerm}
-                onSearchSubmit={() => handleSearchSubmit(searchTerm)}
-                onCategoryClick={handleCategoryClick}
-            />
+                <CategorySidebar
+
+                    categories={categories}
+                    searchTerm={searchTerm}
+                    onSearchChange={setSearchTerm}
+                    onSearchSubmit={() => handleSearchSubmit(searchTerm)}
+                    onCategoryClick={handleCategoryClick}
+                />
             </div>
         </main>
     );

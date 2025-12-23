@@ -1,111 +1,116 @@
-import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useLocation, useNavigate, Navigate } from "react-router-dom";
 import { Container, Table, Button, ButtonGroup, Card } from "react-bootstrap";
 import FundingCard from "../components/common/FundingCard";
 import '../styles/Board.css';
 
-export default function Board({ loginUser }) {
-    const navigate = useNavigate();
+function Board() {
     const location = useLocation();
+    const navigate = useNavigate();
 
-    // 상태 관리
-    const [myPosts, setMyPosts] = useState([]);
-    const [myFundings, setMyFundings] = useState([]);
+    // 로딩 상태 추가 (초기값 true)
+    const [isLoading, setIsLoading] = useState(true);
     const [currentUser, setCurrentUser] = useState(null);
     const [viewMode, setViewMode] = useState("funding");
+    const [myPosts, setMyPosts] = useState([]);
+    const [myFundings, setMyFundings] = useState([]);
     const [commentsList, setCommentsList] = useState([]);
     const [fundingList, setFundingList] = useState([]);
 
-    // 초기 데이터 로드
     useEffect(() => {
-        if (!loginUser) {
-            alert("로그인이 필요한 페이지입니다.");
-            navigate("/login");
+        // 1. 로그인 유저 정보 가져오기
+        const storedUser = JSON.parse(localStorage.getItem("loginUser"));
+        
+        if (!storedUser) {
+            setIsLoading(false); // 로그인 정보 없으면 로딩 종료 (아래에서 리다이렉트 처리됨)
             return;
         }
 
-        // 회원정보에서 현재 로그인 유저 가져오기
         const users = JSON.parse(localStorage.getItem("회원정보")) || [];
-        const me = users.find(u => u.id === loginUser.id);
-        setCurrentUser(me || null);
+        const me = users.find(u => u.id === storedUser.id) || null;
+        setCurrentUser(me);
 
-        // 게시글, 펀딩 불러오기
+        // 2. 게시글 및 펀딩 데이터 로드
         const boardData = JSON.parse(localStorage.getItem("게시글 정보")) || [];
         const savedFundings = JSON.parse(localStorage.getItem("fundingList")) || [];
 
-        // fundingList 초기화 후 favorites 기반 liked 세팅
-        const favorites = me?.favorites || [];
+        // fundingList 초기화 + liked 세팅
         const updatedFundings = savedFundings.map(f => ({
             ...f,
-            liked: favorites.includes(f.id)
+            liked: me?.favorites?.includes(f.id) || false
         }));
         setFundingList(updatedFundings);
 
-        // 나의 게시글 / 나의 펀딩
-        setMyPosts(boardData.filter(p => p.author === loginUser.id).reverse());
-        setMyFundings(updatedFundings.filter(f => f.createUser === loginUser.id));
+        // 나의 게시글 / 나의 펀딩 필터링
+        setMyPosts(boardData.filter(p => p.author === storedUser.id).reverse());
+        setMyFundings(updatedFundings.filter(f => f.createUser === storedUser.id));
 
-        // 댓글은 각 글의 comments 배열로 관리
-        setCommentsList(boardData.flatMap(post => post.comments.map(c => ({ ...c, postId: post.id, fundingId: post.fundingId }))).filter(p=>p.author === loginUser.id));
-        console.log(commentsList);
+        // 댓글 초기화 (안전한 처리를 위해 옵셔널 체이닝 ?. 및 기본값 [] 추가)
+        const userComments = boardData.flatMap(post =>
+            (post.comments || []).map(c => ({ ...c, postId: post.id, fundingId: post.fundingId }))
+        ).filter(c => c.author === storedUser.id);
+        setCommentsList(userComments);
 
-        // 쿼리 파라미터 mode
-        const queryParams = new URLSearchParams(location.search);
-        const mode = queryParams.get("mode");
+        // 쿼리 파라미터 체크
+        const mode = new URLSearchParams(location.search).get("mode");
         if (mode) setViewMode(mode);
-    }, [loginUser, location.search, navigate]);
 
-    // 좋아요 토글 & 회원정보 동기화
+        // 모든 데이터 로드가 완료되면 로딩 상태 해제
+        setIsLoading(false);
+    }, [location.search]);
+
+    // --- 이벤트 핸들러 (기존과 동일) ---
     const handleLikeToggle = (id, liked) => {
-        // 1. fundingList 업데이트
-        const updatedList = fundingList.map(item =>
-            item.id === id
-                ? { ...item, liked, likeCount: item.likeCount + (liked ? 1 : -1) }
-                : item
+        const updatedList = fundingList.map(f =>
+            f.id === id ? { ...f, liked, likeCount: f.likeCount + (liked ? 1 : -1) } : f
         );
         setFundingList(updatedList);
         localStorage.setItem("fundingList", JSON.stringify(updatedList));
 
-        // 2. 회원정보 favorites 업데이트
-        if (currentUser) {
-            const users = JSON.parse(localStorage.getItem("회원정보")) || [];
-            const updatedUsers = users.map(user => {
-                if (user.id === currentUser.id) {
-                    const newFavorites = liked
-                        ? [...(user.favorites || []), id]
-                        : (user.favorites || []).filter(fid => fid !== id);
-                    user.favorites = newFavorites;
-                    return { ...user, favorites: newFavorites };
-                }
-                return user;
-            });
-            localStorage.setItem("회원정보", JSON.stringify(updatedUsers));
-            setCurrentUser(updatedUsers.find(u => u.id === currentUser.id));
-        }
+        const users = JSON.parse(localStorage.getItem("회원정보")) || [];
+        const updatedUsers = users.map(user => {
+            if (user.id === currentUser.id) {
+                const newFavorites = liked
+                    ? [...(user.favorites || []), id]
+                    : (user.favorites || []).filter(fid => fid !== id);
+                return { ...user, favorites: newFavorites };
+            }
+            return user;
+        });
+        localStorage.setItem("회원정보", JSON.stringify(updatedUsers));
+        setCurrentUser(updatedUsers.find(u => u.id === currentUser.id));
     };
 
     const handlePostDelete = (id) => {
-        if (window.confirm("게시글을 삭제하시겠습니까?")) {
-            const allPosts = JSON.parse(localStorage.getItem("게시글 정보")) || [];
-            localStorage.setItem("게시글 정보", JSON.stringify(allPosts.filter(p => p.id !== id)));
-            window.location.reload();
-        }
+        if (!window.confirm("게시글을 삭제하시겠습니까?")) return;
+        const allPosts = JSON.parse(localStorage.getItem("게시글 정보")) || [];
+        const updatedPosts = allPosts.filter(p => p.id !== id);
+        localStorage.setItem("게시글 정보", JSON.stringify(updatedPosts));
+        setMyPosts(prev => prev.filter(p => p.id !== id));
     };
 
     const handleCommentDelete = (commentId) => {
-        if (window.confirm("댓글을 삭제하시겠습니까?")) {
-            const updatedComments = commentsList.filter(c => c.id !== commentId);
-            setCommentsList(updatedComments);
-
-            // 로컬스토리지 업데이트
-            const allPosts = JSON.parse(localStorage.getItem("게시글 정보")) || [];
-            const updatedPosts = allPosts.map(post => ({
-                ...post,
-                comments: post.comments.filter(c => c.id !== commentId)
-            }));
-            localStorage.setItem("게시글 정보", JSON.stringify(updatedPosts));
-        }
+        if (!window.confirm("댓글을 삭제하시겠습니까?")) return;
+        setCommentsList(prev => prev.filter(c => c.id !== commentId));
+        const allPosts = JSON.parse(localStorage.getItem("게시글 정보")) || [];
+        const updatedPosts = allPosts.map(post => ({
+            ...post,
+            comments: (post.comments || []).filter(c => c.id !== commentId)
+        }));
+        localStorage.setItem("게시글 정보", JSON.stringify(updatedPosts));
     };
+
+    // --- 렌더링 조건부 처리 ---
+
+    // 1. 데이터를 읽어오는 중일 때 (깜빡임 방지)
+    if (isLoading) {
+        return <Container className="mt-5 text-center"><h4>로딩 중...</h4></Container>;
+    }
+
+    // 2. 로딩이 끝났는데 유저가 없는 경우 리다이렉트
+    if (!currentUser) {
+        return <Navigate to="/login" replace />;
+    }
 
     return (
         <Container className="board-page-container mt-5">
@@ -177,12 +182,10 @@ export default function Board({ loginUser }) {
                                             variant="outline-danger"
                                             size="sm"
                                             onClick={(e) => {
-                                                e.stopPropagation(); 
+                                                e.stopPropagation();
                                                 handlePostDelete(post.id);
                                             }}
-                                        >
-                                            삭제
-                                        </Button>
+                                        >삭제</Button>
                                     </td>
                                 </tr>
                             )) : (
@@ -193,7 +196,6 @@ export default function Board({ loginUser }) {
                         </tbody>
                     </Table>
 
-                    {/* 댓글 영역 */}
                     <h5 className="mt-5 fw-bold">댓글</h5>
                     <Table hover borderless className="mb-0 text-center">
                         <thead className="bg-light border-bottom">
@@ -221,12 +223,10 @@ export default function Board({ loginUser }) {
                                                 variant="outline-danger"
                                                 size="sm"
                                                 onClick={(e) => {
-                                                    e.stopPropagation(); 
+                                                    e.stopPropagation();
                                                     handleCommentDelete(c.id);
                                                 }}
-                                            >
-                                                삭제
-                                            </Button>
+                                            >삭제</Button>
                                         )}
                                     </td>
                                 </tr>
@@ -242,3 +242,4 @@ export default function Board({ loginUser }) {
         </Container>
     );
 }
+export default Board;
