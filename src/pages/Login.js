@@ -44,7 +44,7 @@ function Login({ setLoginUser }) {
         localStorage.setItem("loginUser", JSON.stringify(user));
         setLoginUser(user);
         alert("로그인 성공!");
-        navigate("/mypage");
+        navigate("/");
     };
 
     return (
