@@ -113,7 +113,7 @@ export default function PostListPage() {
                         <tbody>
                             {pagedPosts.length === 0 ? (
                                 <tr>
-                                    <td colSpan={3} className="text-center text-muted">
+                                    <td colSpan={4} className="text-center text-muted">
                                         검색 결과가 없습니다
                                     </td>
                                 </tr>
