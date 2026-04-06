@@ -1,6 +1,5 @@
 import React from "react";
-import { Navigate, useNavigate, Routes, Route, Link } from "react-router-dom";
-import Profile from "./ProFile";
+import { Navigate, useNavigate } from "react-router-dom";
 import '../styles/MyPage.css';
 
 function MyPage({ loginUser }) {

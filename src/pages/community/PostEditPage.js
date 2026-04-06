@@ -3,12 +3,13 @@ import { useState, useEffect } from "react";
 import { Container, Card, Form, Button, Stack } from "react-bootstrap";
 
 export default function PostEditPage() {
-    const { id, category } = useParams();
+    const { id } = useParams();
     const navigate = useNavigate();
     const { posts, updatePost } = useOutletContext();
 
     const post = posts.find(p => p.id === Number(id));
     const loginUser = JSON.parse(localStorage.getItem("loginUser"));
+    const loginUserId = loginUser?.id;
 
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
@@ -17,7 +18,7 @@ export default function PostEditPage() {
         if (!post) return;
 
         // 🔐 권한 체크
-        if (loginUser?.id !== post.author) {
+        if (loginUserId !== post.author) {
             alert("수정 권한이 없습니다.");
             navigate(-1);
             return;
@@ -25,7 +26,7 @@ export default function PostEditPage() {
 
         setTitle(post.title);
         setContent(post.content);
-    }, [post]);
+    }, [post, loginUserId, navigate]);
 
     if (!post) return <p>게시글을 찾을 수 없습니다.</p>;
 

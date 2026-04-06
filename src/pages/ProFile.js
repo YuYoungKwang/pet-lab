@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../styles/ProFile.css';
 
 function Profile({ onBack, onSaveSuccess }) {
-    const initialState = {
+    const initialState = React.useMemo(() => ({
         id: '',
         currentPassword: '',
         password: '',
@@ -16,7 +16,7 @@ function Profile({ onBack, onSaveSuccess }) {
         phone2: '',
         phone3: '',
         marketing: '아니오'
-    };
+    }), []);
 
     const [formData, setFormData] = useState(initialState);
     const [dbPassword, setDbPassword] = useState('');
@@ -53,7 +53,7 @@ function Profile({ onBack, onSaveSuccess }) {
                 orders: user.orders || [],
             });
         }
-    }, []);
+    }, [initialState]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;

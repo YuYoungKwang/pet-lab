@@ -19,7 +19,7 @@ export default function CommunityMain() {
     }, [fundingId]);
 
     
-    const [loginUser, setLoginUser] = useState(() => {
+    const [loginUser] = useState(() => {
         const saved = localStorage.getItem("loginUser");
         return saved ? JSON.parse(saved) : null;
     }); // 로그인 정보

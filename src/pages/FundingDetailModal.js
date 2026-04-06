@@ -1,4 +1,3 @@
-import { useState } from "react";
 import '../styles/FundingDetailModal.css'
 function FundingDetailModal({ visible, onClose, onAddToCart, onDirectPayment, selectedRewards }) {
     if (!visible) return null;

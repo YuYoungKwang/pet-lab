@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
-import BannerSlider from "../components/mainpage/BannerSlider";
 import CategorySidebar from "../components/common/CategorySidebar";
 import FundingSection from "../components/mainpage/FundingSection";
 import '../styles/MainPage.css';

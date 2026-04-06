@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Accordion, Card } from "react-bootstrap";
+import { Container, Accordion } from "react-bootstrap";
 import '../styles/FAQ.css';
 
 export default function FAQ() {

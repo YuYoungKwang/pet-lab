@@ -11,7 +11,7 @@ function FundingRegister() {
             navigate("/login", { replace: true });
         }
 
-    }, [navigate]);
+    }, [loginUser, navigate]);
 
 
 
