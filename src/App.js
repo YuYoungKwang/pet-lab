@@ -1,61 +1,74 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import MainPage from './pages/MainPage';
-import FundingDetail from './pages/funding/FundingDetail';
-import FundingRegister from './pages/funding/FundingRegister';
-import FundingEdit from './pages/funding/FundingEdit';
-import CategoryPage from "./pages/CategoryPage";
-import SearchResultPage from "./pages/SearchResultPage";
-import SignUpPage from './pages/SignUpPage';
-import MyPage from './pages/MyPage';
 import fundingList from './data/fundingList';
 import postList from './data/postList';
-import { useState, useEffect } from 'react';
+import Board from './pages/Board';
+import CartPage from './pages/CartPage';
+import CategoryPage from './pages/CategoryPage';
+import FavoritePage from './pages/FavoritePage';
+import FAQ from './pages/FAQ';
+import Login from './pages/Login';
+import MainPage from './pages/MainPage';
+import MyPage from './pages/MyPage';
+import OrderPage from './pages/OrderPage';
 import Profile from './pages/ProFile';
+import Register from './pages/Register';
+import SearchResultPage from './pages/SearchResultPage';
+import SignUpPage from './pages/SignUpPage';
 import CommunityMain from './pages/community/CommunityMain';
 import PostDetailPage from './pages/community/PostDetailPage';
+import PostEditPage from './pages/community/PostEditPage';
 import PostListPage from './pages/community/PostListPage';
 import PostWritePage from './pages/community/PostWritePage';
-import CartPage from './pages/CartPage';
-import Board from './pages/Board';
-import FAQ from './pages/FAQ';
-import OrderPage from './pages/OrderPage';
-import FavoritePage from './pages/FavoritePage';
-import PostEditPage from './pages/community/PostEditPage';
+import FundingDetail from './pages/funding/FundingDetail';
+import FundingEdit from './pages/funding/FundingEdit';
+import FundingRegister from './pages/funding/FundingRegister';
+
+const FUNDING_STORAGE_KEY = 'fundingList';
+const POST_STORAGE_KEY = '寃뚯떆湲 ?뺣낫';
+const DATA_SEED_VERSION_KEY = 'petLabDataSeedVersion';
+const DATA_SEED_VERSION = '2026-04-06';
+
+function buildSeedPosts() {
+  const repeatedPosts = [];
+
+  for (let i = 0; i < postList.length; i++) {
+    for (let j = 0; j < 7; j++) {
+      repeatedPosts.push({
+        ...postList[i],
+        fundingId: (j % 7) + 1,
+      });
+    }
+  }
+
+  return repeatedPosts;
+}
+
+function syncSeedData() {
+  localStorage.setItem(FUNDING_STORAGE_KEY, JSON.stringify(fundingList));
+  localStorage.setItem(POST_STORAGE_KEY, JSON.stringify(buildSeedPosts()));
+  localStorage.setItem(DATA_SEED_VERSION_KEY, DATA_SEED_VERSION);
+}
 
 function App() {
   const [loginUser, setLoginUser] = useState(null);
 
   useEffect(() => {
-    // 로그인 유지
-    const storedUser = localStorage.getItem("loginUser");
-    if (storedUser) setLoginUser(JSON.parse(storedUser));
+    const storedUser = localStorage.getItem('loginUser');
 
-    // 펀딩 리스트 초기화
-    if (!localStorage.getItem("fundingList")) {
-      localStorage.setItem("fundingList", JSON.stringify(fundingList));
+    if (storedUser) {
+      setLoginUser(JSON.parse(storedUser));
     }
 
-    // 게시글 리스트 초기화
-    if (!localStorage.getItem("게시글 정보")) {
-      const repeatedPosts = [];
+    const hasFundingSeed = localStorage.getItem(FUNDING_STORAGE_KEY);
+    const hasPostSeed = localStorage.getItem(POST_STORAGE_KEY);
+    const currentSeedVersion = localStorage.getItem(DATA_SEED_VERSION_KEY);
 
-      // postList: 80개의 기본 데이터
-      for (let i = 0; i < postList.length; i++) {
-        for (let j = 0; j < 7; j++) { // 각 게시글 8번 반복
-          const post = {
-            ...postList[i],
-            fundingId: (j % 7) + 1  // fundingId 1~7 반복
-          };
-          repeatedPosts.push(post);
-        }
-      }
-
-      localStorage.setItem("게시글 정보", JSON.stringify(repeatedPosts));
+    if (!hasFundingSeed || !hasPostSeed || currentSeedVersion !== DATA_SEED_VERSION) {
+      syncSeedData();
     }
   }, []);
 
@@ -81,7 +94,7 @@ function App() {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/mypage" element={<MyPage loginUser={loginUser} />} />
         <Route path="/profile" element={<Profile loginUser={loginUser} />} />
-        <Route path="/board" element={<Board/>} />
+        <Route path="/board" element={<Board />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/cart" element={<CartPage loginUser={loginUser} />} />
         <Route path="/order" element={<OrderPage loginUser={loginUser} />} />
@@ -93,4 +106,3 @@ function App() {
 }
 
 export default App;
-

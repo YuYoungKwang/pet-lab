@@ -52,7 +52,11 @@ function Register() {
     return (
         <div className="register-container">
             <div className="register-header-section">
-                <img src="/images/register.img.png" alt="icon" className="top-icon" />
+                <img
+                    src={`${process.env.PUBLIC_URL}/images/register.img.png`}
+                    alt="icon"
+                    className="top-icon"
+                />
                 <h1 className="main-title">회원가입하신 후 다양한 혜택을 만나보세요!</h1>
                 <p className="sub-description">회원가입 약관을 자세히 읽어 보시고 동의하시면 회원가입을 진행해주세요.</p>
             </div>

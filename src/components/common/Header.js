@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 
 function Header({ loginUser, setLoginUser }) {
     const navigate = useNavigate();
-    const logoPath = "/images/logo_petLab.png";
+    const logoPath = `${process.env.PUBLIC_URL}/images/logo_petLab.png`;
 
     const handleLogout = () => {
         localStorage.removeItem("loginUser");

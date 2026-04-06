@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/FundingDetail.css";
 
-const IMG_BASE = "/images/funding";
+const IMG_BASE = `${process.env.PUBLIC_URL}/images/funding`;
 
 function FundingHeader({ funding }) {
     const navigate = useNavigate();

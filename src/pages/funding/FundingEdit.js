@@ -201,7 +201,10 @@ function FundingEdit({ loginUser }) {
                     <br />
                     {thumbnailImage && (
                         <div className="image-preview">
-                            <img src={`/images/funding/${thumbnailImage}`} alt={thumbnailImage} />
+                            <img
+                                src={`${process.env.PUBLIC_URL}/images/funding/${thumbnailImage}`}
+                                alt={thumbnailImage}
+                            />
                             <button onClick={() => setThumbnailImage("")}>X</button>
                         </div>
                     )}
@@ -239,7 +242,10 @@ function FundingEdit({ loginUser }) {
                     <div className="image-list">
                         {introImages.map((img, i) => (
                             <div key={i} className="image-preview">
-                                <img src={`/images/funding/${img}`} alt={img} />
+                                <img
+                                    src={`${process.env.PUBLIC_URL}/images/funding/${img}`}
+                                    alt={img}
+                                />
                                 <button onClick={() => setIntroImages(prev => prev.filter((_, idx) => idx !== i))}>X</button>
                             </div>
                         ))}
@@ -271,7 +277,10 @@ function FundingEdit({ loginUser }) {
                     <div className="image-list">
                         {rewards.images.map((img, i) => (
                             <div key={i} className="image-preview">
-                                <img src={`/images/funding/${img}`} alt={img} />
+                                <img
+                                    src={`${process.env.PUBLIC_URL}/images/funding/${img}`}
+                                    alt={img}
+                                />
                                 <button onClick={() => setRewards((p) => ({ ...p, images: p.images.filter((_, idx) => idx !== i) }))}>X</button>
                             </div>
                         ))}
@@ -330,7 +339,10 @@ function FundingEdit({ loginUser }) {
                     <div className="image-list">
                         {team.images.map((img, i) => (
                             <div key={i} className="image-preview">
-                                <img src={`/images/funding/${img}`} alt={img} />
+                                <img
+                                    src={`${process.env.PUBLIC_URL}/images/funding/${img}`}
+                                    alt={img}
+                                />
                                 <button onClick={() => setTeam(p => ({ ...p, images: p.images.filter((_, idx) => idx !== i) }))}>X</button>
                             </div>
                         ))}

@@ -45,7 +45,7 @@ function OrderPage({ loginUser }) {
                 return {
                     ...item,
                     status,
-                    image: "/images/funding/" + funding.thumbnailImage
+                    image: `${process.env.PUBLIC_URL}/images/funding/${funding.thumbnailImage}`
                 };
             });
 

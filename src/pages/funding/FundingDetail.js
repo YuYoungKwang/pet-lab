@@ -5,7 +5,7 @@ import FundingNavbar from "../../components/funding/FundingNavbar";
 import FundingDetailModal from "../FundingDetailModal";
 import "../../styles/FundingDetail.css";
 
-const IMG_BASE = "/images/funding";
+const IMG_BASE = `${process.env.PUBLIC_URL}/images/funding`;
 
 function FundingDetail({ loginUser }) {
     const navigate = useNavigate();

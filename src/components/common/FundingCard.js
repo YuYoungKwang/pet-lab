@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router';
 import '../../styles/FundingCard.css';
 
-const IMG_BASE = "/images/funding";
+const IMG_BASE = `${process.env.PUBLIC_URL}/images/funding`;
 
 function FundingCard({ funding, onLikeToggle }) {
     const navigate = useNavigate();
